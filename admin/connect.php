@@ -10,7 +10,7 @@
    try {
        $con = new PDO($dsn , $user , $pass , $option);
        $con->setAttribute(PDO::ATTR_ERRMODE , PDO::ERRMODE_EXCEPTION); // to activation  method the exception to handel Error
-       echo 'You are connected Wellcome to Databse';
+     
    }
 
    catch(PDOException $e) {
