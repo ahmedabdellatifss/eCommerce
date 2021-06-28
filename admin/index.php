@@ -1,11 +1,10 @@
 <?php 
      session_start();
+     $noNavbar = '';
      if(isset($_SESSION['Username'])) {
        header('location: dashboard.php'); // Redirect To Dashboard Page
      }
      include 'init.php';
-     include $tpl . 'header.php';
-     include 'includes/languages/arabic.php';
    
      // Check if the user coming from HTTP Post Requst
      if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -27,6 +26,7 @@
       $_SESSION['Username'] = $username; // Register Session Name 
       header('location: dashboard.php'); // Redirect To Dashboard Page
       exit();
+
       
      }
       

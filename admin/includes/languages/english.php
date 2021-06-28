@@ -5,8 +5,18 @@ function lang($phrase) {
 
     static $lang = array(
 
-        'MESSAGE' => 'Welcome',
-        'ADMIN'   => 'Administrator'
+      // Dashboard page
+        'HOME_ADMIN'     => 'Home',
+        'MY_Name'        => 'Ahmed',
+        'Sections'       => 'Categories',
+        'Edit_Profile'   => 'Edit Profile',
+        'Settings'       => 'Settings',
+        'Logout'         => 'Logout',
+        'ITEMS'          => 'Items',
+        'MEMBERS'        => 'Members',
+        'STATISTICS'     => 'Statistics',
+        'LOGS'           => 'Logs',
+
 
 
       );
