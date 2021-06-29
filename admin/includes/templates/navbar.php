@@ -26,7 +26,7 @@
           <ul class="dropdown-menu">
             <li><a href="#"><?php echo lang('Edit_Profile') ?></a></li>
             <li><a href="#"><?php echo lang('Settings') ?></a></li>
-            <li><a href="#"><?php echo lang('Logout') ?></a></li>
+            <li><a href="logout.php"><?php echo lang('Logout') ?></a></li>
           </ul>
         </li>
       </ul>
