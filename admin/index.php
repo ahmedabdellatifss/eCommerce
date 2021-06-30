@@ -18,16 +18,29 @@
       
       // check if the User Exist in Database
 
-      $stmt = $con->prepare("SELECT Username , Password FROM users WHERE Username = ? AND Password = ? AND GroupID = 1");
+      $stmt = $con->prepare("SELECT
+                                   UserID, Username , Password
+                             FROM 
+                                 users 
+                            WHERE 
+                                 Username = ?  
+                            AND
+                                Password = ? 
+                            AND 
+                               GroupID = 1
+                            LIMIT 1");
+
       $stmt->execute(array($username , $hashePass));
+      $row = $stmt->fetch();
       $count = $stmt->rowCount(); // rowCount it's count how many rows he is find 
 
      // If $count > 0 this mean the Database Contain Record About this Username
      
      if($count > 0) {
        
-      $_SESSION['Username'] = $username; // Register Session Name 
-      header('location: dashboard.php'); // Redirect To Dashboard Page
+      $_SESSION['Username'] = $username;      // Register Session Name 
+      $_SESSION['ID']  = $row['UserID'];      // Register Session ID
+      header('location: dashboard.php');      // Redirect To Dashboard Page
       exit();
 
       

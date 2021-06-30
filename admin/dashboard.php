@@ -6,7 +6,9 @@
       $pageTitle = 'Dashboard';
 
         include 'init.php';
-          echo 'Welcome';
+        
+        print_r($_SESSION);
+        
         include  $tpl . 'footer.php';
 
     }else{
