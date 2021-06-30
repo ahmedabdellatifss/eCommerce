@@ -1,9 +1,12 @@
 <?php 
      session_start();
-     $noNavbar = '';
+     $noNavbar  = '';
+     $pageTitle = 'Login';
+
      if(isset($_SESSION['Username'])) {
        header('location: dashboard.php'); // Redirect To Dashboard Page
      }
+     
      include 'init.php';
    
      // Check if the user coming from HTTP Post Requst
