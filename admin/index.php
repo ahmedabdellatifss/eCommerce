@@ -25,10 +25,10 @@
                             WHERE 
                                  Username = ?  
                             AND
-                                Password = ? 
+                                Password  = ? 
                             AND 
-                               GroupID = 1
-                            LIMIT 1");
+                               GroupID    = 1
+                            LIMIT 1");  // (limit 1) => means, I need one result
 
       $stmt->execute(array($username , $hashePass));
       $row = $stmt->fetch();

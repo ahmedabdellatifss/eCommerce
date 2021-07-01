@@ -7,7 +7,7 @@ function lang($phrase) {
 
       'HOME_ADMIN'     => 'الرئيسه',
       'MY_Name'        => 'احمد',
-      'Sections'     => 'الفئات',
+      'Sections'       => 'الفئات',
       'Edit_Profile'   => 'تعديل الصفحه الشخصيه',
       'Settings'       => 'الاعدادات',
       'Logout'         => 'تسجيل الخروج',
@@ -15,7 +15,12 @@ function lang($phrase) {
       'MEMBERS'        => 'الاعضاء',
       'STATISTICS'     => 'الاحصائيات',
       'LOGS'           => 'سجلات',
- 
+      'EDIT_MEMBER'    => "تحرير الاعضاء",
+      'USERNAME'       => 'اسم المستخدم',
+      'PASSWORD'       => 'الرقم السري',
+      'EMAIL'          => 'البريد الالكتروني',
+      'FULL_NAME'      => 'الاسم كامل',
+      'SAVE'           => 'حفط',
 
 
       );

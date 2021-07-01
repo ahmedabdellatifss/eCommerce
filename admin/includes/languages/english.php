@@ -16,6 +16,12 @@ function lang($phrase) {
         'MEMBERS'        => 'Members',
         'STATISTICS'     => 'Statistics',
         'LOGS'           => 'Logs',
+        'EDIT_MEMBER'    => 'Edit Member',
+        'USERNAME'       => 'Username',
+        'PASSWORD'       => 'Password',
+        'EMAIL'          => 'Email',
+        'FULL_NAME'      => 'Full Name',
+        'SAVE'           => 'Save',
 
 
 
