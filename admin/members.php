@@ -23,60 +23,82 @@
 
         // Mange page
 
-       }elseif ($do == 'Edit') {  // Edit Page?>
+       }elseif ($do == 'Edit') {  // Edit Page
+         // Check if Get Request userid is Numeric & Get the integer value of it
+        // Detect the user Id is number
+       $userid = isset($_GET['userid']) && is_numeric($_GET['userid']) ? intval($_GET['userid']) : 0 ;    // intval = intger value
+       
+       // Select All Data Depend on this ID
 
-        <h1 class="text-center"><?php echo lang('EDIT_MEMBER') ?></h1>
-         
-        <div class="container">
-            <form action="" class="form-horizontal">
-                <!-- Start UserName Field -->
-                <div class="form-group form-group-lg">
-                    <label for="" class='col-sm-2 control-label'><?php echo lang('USERNAME') ?></label>
-                    <div class="col-sm-10 col-md-4">
-                        <input type="text" class="form-control" name='username' autocomplete="off"/>
+      $stmt = $con->prepare("SELECT * FROM  users  WHERE  UserID = ?  LIMIT 1");  // (limit 1) => means, I need one result
+
+      // Execute Query
+      $stmt->execute(array($userid));
+      // Fetch The data
+      $row = $stmt->fetch();
+       // the Row Count
+      $count = $stmt->rowCount();
+      // If there is such id disply the form
+      if ($count > 0) {  ?>
+
+            <h1 class="text-center"><?php echo lang('EDIT_MEMBER') ?></h1>
+            <div class="container">
+                <form action="" class="form-horizontal">
+                    <!-- Start UserName Field -->
+                    <div class="form-group form-group-lg">
+                        <label for="" class='col-sm-2 control-label'><?php echo lang('USERNAME') ?></label>
+                        <div class="col-sm-10 col-md-6">
+                            <input type="text" class="form-control" name='username' value = "<?php echo $row['Username'] ?>" autocomplete="off"/>
+                        </div>
                     </div>
-                </div>
-                <!-- End UserName Field -->
-                <!-- Start Password Field -->
-                <div class="form-group form-group-lg">
-                    <label for="" class='col-sm-2 control-label'><?php echo lang('PASSWORD') ?></label>
-                    <div class="col-sm-10 col-md-4">
-                        <input type="password" class="form-control" name='password' autocomplete="new-pas"/>
+                    <!-- End UserName Field -->
+
+                    <!-- Start Password Field -->
+                    <div class="form-group form-group-lg">
+                        <label for="" class='col-sm-2 control-label'><?php echo lang('PASSWORD') ?></label>
+                        <div class="col-sm-10 col-md-6">
+                            <input type="password" class="form-control" name='password' autocomplete="new-pas"/>
+                        </div>
                     </div>
-                </div>
-                <!-- End Password Field -->
-                <!-- Start Email Field -->
-                <div class="form-group form-group-lg">
-                    <label for="" class='col-sm-2 control-label'><?php echo lang('EMAIL') ?></label>
-                    <div class="col-sm-10 col-md-4">
-                        <input type="email" class="form-control" name='email' />
+                    <!-- End Password Field -->
+
+                    <!-- Start Email Field -->
+                    <div class="form-group form-group-lg">
+                        <label for="" class='col-sm-2 control-label'><?php echo lang('EMAIL') ?></label>
+                        <div class="col-sm-10 col-md-6">
+                            <input type="email" class="form-control" name='email' value = "<?php echo $row['Email'] ?>" />
+                        </div>
                     </div>
-                </div>
-                <!-- End Email Field -->
-                <!-- Start Full Name Field -->
-                <div class="form-group form-group-lg">
-                    <label for="" class='col-sm-2 control-label'><?php echo lang('FULL_NAME') ?></label>
-                    <div class="col-sm-10 col-md-4">
-                        <input type="text" class="form-control" name='full' />
+                    <!-- End Email Field -->
+
+                    <!-- Start Full Name Field -->
+                    <div class="form-group form-group-lg">
+                        <label for="" class='col-sm-2 control-label'><?php echo lang('FULL_NAME') ?></label>
+                        <div class="col-sm-10 col-md-6">
+                            <input type="text" class="form-control" name='full' value = "<?php echo $row['FullName'] ?>"/>
+                        </div>
                     </div>
-                </div>
-                <!-- End Full Name Field -->
-                <!-- Start submit Field -->
-                <div class="form-group form-group-lg">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <input type="submit" class="btn btn-primary btn-lg" value="<?php echo lang('SAVE') ?>" />
+                    <!-- End Full Name Field -->
+
+                    <!-- Start submit Field -->
+                    <div class="form-group form-group-lg">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <input type="submit" class="btn btn-primary btn-lg" value="<?php echo lang('SAVE') ?>" />
+                        </div>
                     </div>
-                </div>
-                <!-- End submit Field -->
-            </form>
-        </div>
+                    <!-- End submit Field -->
+                </form>
+            </div>
       
-
-      <?php }
+      <?php
+          // If There's No such Id Show Erro Message
+          } else {
+            echo 'Theres No Such ID';
+          }
+     }
        include  $tpl . 'footer.php';
 
    }else{
-
        //  echo 'You are Not authorized to view this page';
         header('location: index.php');
         exit();
