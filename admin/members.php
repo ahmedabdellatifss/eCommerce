@@ -111,16 +111,35 @@
             $name   = $_POST['full'];
 
             // Password Trick 
+            //condition ? True : False;
 
-            $pass = '';
+            $pass = (empty($_POST['newpassword'])) ?  $_POST['oldpassword'] : sha1($_POST['newpassword']) ;
 
-            if (empty($_POST['newpassword']))  {
+            // Validate The Form 
 
-                $pass = $_POST['oldpassword'];
+            $formErrors = array();
 
-            }else {
-                $pass = sha1($_POST['newpassword']);
+            if (strlen($user) < 4) {
+                $formErrors[] = 'Username cant be less than 4 characters';
             }
+            if (strlen($user) > 20 ) {
+                $formErrors[] = 'Username cant be More than 20 characters';
+            }
+
+            if (empty($user)) {
+                $formErrors[] = 'UserName Cant be Empty' ;
+            }
+            if (empty($name)) {
+                $formErrors[] = 'Full Name  Cant be Empty' ;
+            }
+            if (empty($email)) {
+                $formErrors[] = 'Email Cant be Empty' ;
+            }
+
+            foreach($formErrors as $error){
+                echo $error . '<br />' ;
+            }
+
 
           // Update the database with this info
 
