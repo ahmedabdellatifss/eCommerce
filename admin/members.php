@@ -58,7 +58,8 @@
                         <div class="form-group form-group-lg">
                             <label for="" class='col-sm-2 control-label'><?php echo lang('PASSWORD') ?></label>
                             <div class="col-sm-10 col-md-6">
-                                <input type="password" class="form-control" name='password' autocomplete="new-pas"/>
+                                <input type="hidden"  name='oldpassword' value="<?php echo $row['Password'] ?>" />
+                                <input type="password" class="form-control" name='newpassword' autocomplete="new-pas"/>
                             </div>
                         </div>
                         <!-- End Password Field -->
@@ -109,10 +110,22 @@
             $email  = $_POST['email'];
             $name   = $_POST['full'];
 
+            // Password Trick 
+
+            $pass = '';
+
+            if (empty($_POST['newpassword']))  {
+
+                $pass = $_POST['oldpassword'];
+
+            }else {
+                $pass = sha1($_POST['newpassword']);
+            }
+
           // Update the database with this info
 
-          $stmt = $con->prepare("UPDATE users SET Username = ? , Email = ? , FullName = ? WHERE UserID = ?");
-          $stmt->execute(array($user , $email , $name , $id));
+          $stmt = $con->prepare("UPDATE users SET Username = ? , Email = ? , FullName = ? , Password = ?WHERE UserID = ?");
+          $stmt->execute(array($user , $email , $name , $pass , $id));
 
           // Echo Success Message
 
