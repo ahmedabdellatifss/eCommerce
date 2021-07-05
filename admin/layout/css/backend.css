@@ -5,7 +5,13 @@ body {
     background-color:  #F4f4f4;
     font-size: 16px;
 }
-
+.asterisk{
+    font-size: 30px;
+    position : absolute;
+    right: 28px;
+    top :8px;
+    color: red;
+}
 /*End  Main Rules */
 
 /* Start login Form  */
@@ -67,7 +73,9 @@ body {
      color: #FFF;
      background-color: #8e44ad;
  }
-
+.form-control {
+    position : relative;
+}
   /* End Bootstrap Edits */
 
   /* Start Members page  */
