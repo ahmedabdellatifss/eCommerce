@@ -36,7 +36,7 @@
                         <div class="form-group form-group-lg">
                             <label for="" class='col-sm-2 control-label'><?php echo lang('USERNAME') ?></label>
                             <div class="col-sm-10 col-md-6">
-                                <input type="text" class="form-control" name='username' autocomplete="off" required="required"  placeholder="Username to login into shop"/>
+                                <input type="text" class="form-control" name='username' autocomplete="off" required='required'  placeholder="Username to login into shop"/>
                             </div>
                         </div>
                         <!-- End UserName Field -->
@@ -45,7 +45,8 @@
                         <div class="form-group form-group-lg">
                             <label for="" class='col-sm-2 control-label'><?php echo lang('PASSWORD') ?></label>
                             <div class="col-sm-10 col-md-6">
-                                <input type="password" class="form-control" name='password' autocomplete="new-pas" required="required" placeholder="Password Must be hard & complex"/>
+                                <input type="password" class="password form-control" name='password' autocomplete="new-pas" required='required' placeholder="Password Must be hard & complex"/>
+                                <i class='show-pass fa fa-eye fa-2x'></i>
                             </div>
                         </div>
                         <!-- End Password Field -->
@@ -54,7 +55,7 @@
                         <div class="form-group form-group-lg">
                             <label for="" class='col-sm-2 control-label'><?php echo lang('EMAIL') ?></label>
                             <div class="col-sm-10 col-md-6">
-                                <input type="email" class="form-control" name='email' required="required"  placeholder="Email must be valid"/>
+                                <input type="email" class="form-control" name='email'  required='required' placeholder="Email must be valid"/>
                             </div>
                         </div>
                         <!-- End Email Field -->
@@ -63,7 +64,7 @@
                         <div class="form-group form-group-lg">
                             <label for="" class='col-sm-2 control-label'><?php echo lang('FULL_NAME') ?></label>
                             <div class="col-sm-10 col-md-6">
-                                <input type="text" class="form-control" name='full' required="required"  placeholder="Full Name appear in your profil page"/>
+                                <input type="text" class="form-control" name='full' required='required'  placeholder="Full Name appear in your profil page"/>
                             </div>
                         </div>
                         <!-- End Full Name Field -->
@@ -86,7 +87,68 @@
         // Insert Member Page 
         // the data will come from Add page to insert page to insert it in the database
 
-        echo $_POST['username'] . $_POST['password'] . $_POST['email'] . $_POST['full'] ;
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            echo "<h1 class ='text-center'>Update Member</h1>";
+            echo "<div class='container'>";
+
+            // Get variables from  the Form
+
+            $user   = $_POST['username'];
+            $pass   = $_POST['password'];
+            $email  = $_POST['email'];
+            $name   = $_POST['full'];
+
+            $hashPass = sha1($_POST['password']);
+
+            // Validate The Form 
+
+            $formErrors = array();
+
+            if (strlen($user) < 4) {
+                $formErrors[] = 'Username cant be less than <strorng>4 characters</strong>';
+            }
+            if (strlen($user) > 20 ) {
+                $formErrors[] = 'Username cant be More than <strorng>20 characters</strong>';
+            }
+
+            if (empty($user)) {
+                $formErrors[] = 'UserName Cant be <strorng>Empty</strong>' ;
+            }
+            if (empty($pass)) {
+                $formErrors[] = 'Password Cant be <strorng>Empty</strong>' ;
+            }
+            if (empty($name)) {
+                $formErrors[] = 'Full Name  Cant be <strorng>Empty</strong>' ;
+            }
+            if (empty($email)) {
+                $formErrors[] = 'Email Cant be<strorng>Empty</strong>' ;
+            }
+
+            // Loop INTO Errors Array And Echo it 
+            foreach($formErrors as $error){
+                echo '<div class="alert alert-danger">' . $error . '</div>';
+            }
+
+            // Check if ther's no error proceed the upadate operation 
+            if (empty($formErrors)) {
+
+                // Insert User Info in  the database 
+
+                
+
+                // Echo Success Message
+
+                echo "<div class='alert alert-success'>" .  $stmt->rowCount() . ' - Record Inserted </div>';
+
+            }
+
+        }else{
+            echo 'Sorry You Cant Browse this page Directly';
+        }
+
+        echo '</div>';
+        
       
 
     }elseif ($do == 'Edit') {  // Edit Page
@@ -187,25 +249,25 @@
             $formErrors = array();
 
             if (strlen($user) < 4) {
-                $formErrors[] = '<div class="alert alert-danger">Username cant be less than <strorng>4 characters</strong></div>';
+                $formErrors[] = 'Username cant be less than <strorng>4 characters</strong>';
             }
             if (strlen($user) > 20 ) {
-                $formErrors[] = '<div class="alert alert-danger">Username cant be More than <strorng>20 characters</strong></div>';
+                $formErrors[] = 'Username cant be More than <strorng>20 characters</strong>';
             }
 
             if (empty($user)) {
-                $formErrors[] = '<div class="alert alert-danger">UserName Cant be <strorng>Empty</strong></div>' ;
+                $formErrors[] = 'UserName Cant be <strorng>Empty</strong>' ;
             }
             if (empty($name)) {
-                $formErrors[] = '<div class="alert alert-danger">Full Name  Cant be <strorng>Empty</strong></div>' ;
+                $formErrors[] = 'Full Name  Cant be <strorng>Empty</strong>' ;
             }
             if (empty($email)) {
-                $formErrors[] = '<div class="alert alert-danger">Email Cant be<strorng>Empty</strong></div>' ;
+                $formErrors[] = 'Email Cant be<strorng>Empty</strong>' ;
             }
 
             // Loop INTO Errors Array And Echo it 
             foreach($formErrors as $error){
-                echo $error ;
+                echo '<div class="alert alert-danger">' . $error . '</div>';
             }
 
             // Check if ther's no error proceed the upadate operation 

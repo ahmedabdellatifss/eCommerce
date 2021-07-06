@@ -25,4 +25,18 @@ $(function () {
         }
     }); 
 
+    // Convert Password field to text field on hover
+
+    var passField = $('.password');
+
+    $('.show-pass').hover(function () {
+
+        passField.att('type', 'text');
+
+    },function () {
+   
+        passField.att('type', 'pass');
+
+    });
+
 });
