@@ -22,6 +22,7 @@ function lang($phrase) {
         'EMAIL'          => 'Email',
         'FULL_NAME'      => 'Full Name',
         'SAVE'           => 'Save',
+        'ADD_MEMBER'     => 'Add New Member',
 
 
 

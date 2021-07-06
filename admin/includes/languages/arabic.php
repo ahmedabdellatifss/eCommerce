@@ -21,6 +21,7 @@ function lang($phrase) {
       'EMAIL'          => 'البريد الالكتروني',
       'FULL_NAME'      => 'الاسم كامل',
       'SAVE'           => 'حفط',
+      'ADD_MEMBER'     => 'أضافه عضو جديد',
 
 
       );
