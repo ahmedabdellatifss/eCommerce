@@ -31,11 +31,11 @@ $(function () {
 
     $('.show-pass').hover(function () {
 
-        passField.att('type', 'text');
+        passField.attr('type', 'text');
 
-    },function () {
-   
-        passField.att('type', 'pass');
+    }, function () {
+    
+        passField.attr('type', 'password');
 
     });
 

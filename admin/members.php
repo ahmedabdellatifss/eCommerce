@@ -135,7 +135,16 @@
 
                 // Insert User Info in  the database 
 
-                
+                $stmt = $con->prepare("INSERT INTO 
+                                                users( Username , Password , Email ,  FullName) 
+                                                VALUES(:zuser   , :zpass ,    :zmail , :zname ) "); // this values to send to database
+                $stmt->execute(array(
+                    // Key  => value
+                    'zuser' => $user,
+                    'zpass' => $hashPass,
+                    'zmail' => $email,
+                    'zname' => $name,
+                ));                                
 
                 // Echo Success Message
 
