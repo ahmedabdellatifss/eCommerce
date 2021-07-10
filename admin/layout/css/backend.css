@@ -93,4 +93,10 @@ body {
       right: -30px;
   }
 
+  .main-table tr:first-child td { /* You Can use T-head */
+      background-color: #333;
+      color: #FFF;
+      
+  }
+
   /* End Members page  */

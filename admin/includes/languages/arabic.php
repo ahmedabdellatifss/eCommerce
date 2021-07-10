@@ -22,6 +22,7 @@ function lang($phrase) {
       'FULL_NAME'      => 'الاسم كامل',
       'SAVE'           => 'حفط',
       'ADD_MEMBER'     => 'أضافه عضو جديد',
+      'Manage_Member'  => 'أدارة الأعضاء',
 
 
       );

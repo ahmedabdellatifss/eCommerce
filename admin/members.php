@@ -19,15 +19,81 @@
 
        // Start Mange Page 
 
-       if ($do == 'Manage') {
+       if ($do == 'Manage') {  // Mange page  ?>
 
-        // Mange page
+        <h1 class="text-center"><?php echo lang('Manage_Member') ?></h1>
+        <div class="container">
+               <div class="table-responsive">
+               <table class="main-table text-center table table-bordered">
+                    <tr>
+                        <td>#ID</td>
+                        <td>Username</td>
+                        <td>Email</td>
+                        <td>Full Name</td>
+                        <td>Registerd Date</td>
+                        <td>Control</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="#" class="btn btn-success">Edit</a>
+                            <a href="#" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="#" class="btn btn-success">Edit</a>
+                            <a href="#" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="#" class="btn btn-success">Edit</a>
+                            <a href="#" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="#" class="btn btn-success">Edit</a>
+                            <a href="#" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="#" class="btn btn-success">Edit</a>
+                            <a href="#" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+               </table>
+               </div>
+               <a href="members.php?do=Add" class="btn btn-primary"> <i class="fa fa-plus" ></i> Add New Member</a>
+        </div>
 
-        echo 'wellcom to Manage Members Page <br ?>';
-
-        echo '<a href="members.php?do=Add">Add New Member</a>';
-
-       }elseif($do == 'Add'){  // Add Members Page ?>
+  <?php }elseif($do == 'Add'){  // Add Members Page ?>
 
            <h1 class="text-center"><?php echo lang('ADD_MEMBER') ?></h1>
                 <div class="container">
