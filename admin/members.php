@@ -19,7 +19,16 @@
 
        // Start Mange Page 
 
-       if ($do == 'Manage') {  // Mange page  ?>
+       if ($do == 'Manage') {  // Mange page 
+
+       // Select All Users Except Admin
+       $stmt = $con->prepare("SELECT * FROM users WHERE GroupID != 1");
+       $stmt->execute();
+
+       // Assign to Variable 
+       $rows = $stmt->fetchAll();
+       
+       ?>
 
         <h1 class="text-center"><?php echo lang('Manage_Member') ?></h1>
         <div class="container">
@@ -33,61 +42,27 @@
                         <td>Registerd Date</td>
                         <td>Control</td>
                     </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="#" class="btn btn-success">Edit</a>
-                            <a href="#" class="btn btn-danger">Delete</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="#" class="btn btn-success">Edit</a>
-                            <a href="#" class="btn btn-danger">Delete</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="#" class="btn btn-success">Edit</a>
-                            <a href="#" class="btn btn-danger">Delete</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="#" class="btn btn-success">Edit</a>
-                            <a href="#" class="btn btn-danger">Delete</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="#" class="btn btn-success">Edit</a>
-                            <a href="#" class="btn btn-danger">Delete</a>
-                        </td>
-                    </tr>
+
+                    <?php 
+
+                        foreach($rows as $row) {
+
+                            echo "<tr>";
+                                echo "<td>" . $row['UserID'] . "</td>";
+                                echo "<td>" . $row['Username'] . "</td>";
+                                echo "<td>" . $row['Email'] . "</td>";
+                                echo "<td>" . $row['FullName'] . "</td>";
+                                echo "<td></td>";
+                                echo "<td> 
+                                      <a href='members.php?do=Edit&userid=" . $row['UserID'] ."' class='btn btn-success'>Edit</a> 
+                                      <a href='#' class='btn btn-danger'>Delete</a> 
+                                     </td>";
+                                
+                            echo "</tr>";
+                        }
+
+                    ?>
+
                </table>
                </div>
                <a href="members.php?do=Add" class="btn btn-primary"> <i class="fa fa-plus" ></i> Add New Member</a>

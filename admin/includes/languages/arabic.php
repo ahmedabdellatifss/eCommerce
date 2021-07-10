@@ -23,6 +23,7 @@ function lang($phrase) {
       'SAVE'           => 'حفط',
       'ADD_MEMBER'     => 'أضافه عضو جديد',
       'Manage_Member'  => 'أدارة الأعضاء',
+      
 
 
       );
