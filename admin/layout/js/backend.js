@@ -39,4 +39,11 @@ $(function () {
 
     });
 
-});
+    // confirmation Message on Button delete in Member page
+
+    $('.confirm').click(function (){
+
+        return confirm('Are you sure?');
+    });
+
+}); 

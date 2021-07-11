@@ -55,7 +55,7 @@
                                 echo "<td></td>";
                                 echo "<td> 
                                       <a href='members.php?do=Edit&userid=" . $row['UserID'] ."' class='btn btn-success'>Edit</a> 
-                                      <a href='#' class='btn btn-danger'>Delete</a> 
+                                      <a href='members.php?do=Delete&userid=" . $row['UserID'] ."' class='btn btn-danger confirm'>Delete</a> 
                                      </td>";
                                 
                             echo "</tr>";
@@ -329,7 +329,6 @@
                 $stmt->execute(array($user , $email , $name , $pass , $id));
 
                 // Echo Success Message
-
                 echo "<div class='alert alert-success'>" .  $stmt->rowCount() . ' - Record Updated </div>';
 
             }
@@ -341,6 +340,45 @@
         echo '</div>';
 
 
+     }elseif($do == 'Delete'){ // Delete Member Page
+ 
+            echo "<h1 class ='text-center'>Delete Member</h1>";
+            echo "<div class='container'>";
+
+                // Check if Get Request userid is Numeric & Get the integer value of it
+                // Detect the user Id is number
+                $userid = isset($_GET['userid']) && is_numeric($_GET['userid']) ? intval($_GET['userid']) : 0 ;    // intval = intger value dh rkom el3do
+            
+                // Select All Data Depend on this ID
+        
+                $stmt = $con->prepare("SELECT * FROM  users  WHERE  UserID = ?  LIMIT 1");  // (limit 1) => means, I need one result
+                                                                        // ? this mean userid witch come from Get-request
+                // Execute Query
+                $stmt->execute(array($userid));
+
+                // the Row Count
+                $count = $stmt->rowCount();
+                // If there is such id disply the form
+                if ($stmt->rowCount() > 0) {  
+
+                    $stmt = $con->prepare('DELETE FROM users WHERE UserID = :Zuserid');
+
+                    $stmt->bindParam(":Zuserid" , $userid);
+
+                    $stmt->execute();
+
+                    // Echo Success Message
+                    echo "<div class='alert alert-success'>" .  $stmt->rowCount() . ' - Record Deleted </div>';
+
+
+                }else{
+    
+                echo 'This Id is not Exist';
+
+                }   
+
+            echo '</div>';
+    
      }
        include  $tpl . 'footer.php';
 
