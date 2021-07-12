@@ -21,6 +21,7 @@
 
        if ($do == 'Manage') {  // Mange page 
 
+
        // Select All Users Except Admin
        $stmt = $con->prepare("SELECT * FROM users WHERE GroupID != 1");
        $stmt->execute();
@@ -174,22 +175,33 @@
                 // Check if ther's no error proceed the upadate operation 
                 if (empty($formErrors)) {
 
-                    // Insert User Info in  the database 
+                    // Check if user Exist in Database
 
-                    $stmt = $con->prepare("INSERT INTO 
-                                                    users( Username , Password , Email ,  FullName) 
-                                                    VALUES(:zuser   , :zpass ,    :zmail , :zname ) "); // this values to send to database
-                    $stmt->execute(array(
+                    $check = checkItem("Username" , "users" , $user);
+
+                    if ($check == 1){
+
+                        echo 'sorry this user is exist';
+
+                    }else{
+
+                        // Insert User Info in  the database 
+
+                        $stmt = $con->prepare("INSERT INTO 
+                        users( Username , Password , Email ,  FullName) 
+                        VALUES(:zuser   , :zpass ,    :zmail , :zname ) "); // this values to send to database
+                        $stmt->execute(array(
                         // Key  => value
                         'zuser' => $user,
                         'zpass' => $hashPass,
                         'zmail' => $email,
                         'zname' => $name,
-                    ));                                
+                        ));                                
 
-                    // Echo Success Message
+                        // Echo Success Message
 
-                    echo "<div class='alert alert-success'>" .  $stmt->rowCount() . ' - Record Inserted </div>';
+                        echo "<div class='alert alert-success'>" .  $stmt->rowCount() . ' - Record Inserted </div>';
+                    }
 
                 }
 
