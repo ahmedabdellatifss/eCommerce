@@ -130,72 +130,76 @@
 
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            echo "<h1 class ='text-center'>Update Member</h1>";
-            echo "<div class='container'>";
+                echo "<h1 class ='text-center'>Update Member</h1>";
+                echo "<div class='container'>";
 
-            // Get variables from  the Form
+                // Get variables from  the Form
 
-            $user   = $_POST['username'];
-            $pass   = $_POST['password'];
-            $email  = $_POST['email'];
-            $name   = $_POST['full'];
+                $user   = $_POST['username'];
+                $pass   = $_POST['password'];
+                $email  = $_POST['email'];
+                $name   = $_POST['full'];
 
-            $hashPass = sha1($_POST['password']);
+                $hashPass = sha1($_POST['password']);
 
-            // Validate The Form 
+                // Validate The Form 
 
-            $formErrors = array();
+                $formErrors = array();
 
-            if (strlen($user) < 4) {
-                $formErrors[] = 'Username cant be less than <strorng>4 characters</strong>';
+                if (strlen($user) < 4) {
+                    $formErrors[] = 'Username cant be less than <strorng>4 characters</strong>';
+                }
+                if (strlen($user) > 20 ) {
+                    $formErrors[] = 'Username cant be More than <strorng>20 characters</strong>';
+                }
+
+                if (empty($user)) {
+                    $formErrors[] = 'UserName Cant be <strorng>Empty</strong>' ;
+                }
+                if (empty($pass)) {
+                    $formErrors[] = 'Password Cant be <strorng>Empty</strong>' ;
+                }
+                if (empty($name)) {
+                    $formErrors[] = 'Full Name  Cant be <strorng>Empty</strong>' ;
+                }
+                if (empty($email)) {
+                    $formErrors[] = 'Email Cant be<strorng>Empty</strong>' ;
+                }
+
+                // Loop INTO Errors Array And Echo it 
+                foreach($formErrors as $error){
+                    echo '<div class="alert alert-danger">' . $error . '</div>';
+                }
+
+                // Check if ther's no error proceed the upadate operation 
+                if (empty($formErrors)) {
+
+                    // Insert User Info in  the database 
+
+                    $stmt = $con->prepare("INSERT INTO 
+                                                    users( Username , Password , Email ,  FullName) 
+                                                    VALUES(:zuser   , :zpass ,    :zmail , :zname ) "); // this values to send to database
+                    $stmt->execute(array(
+                        // Key  => value
+                        'zuser' => $user,
+                        'zpass' => $hashPass,
+                        'zmail' => $email,
+                        'zname' => $name,
+                    ));                                
+
+                    // Echo Success Message
+
+                    echo "<div class='alert alert-success'>" .  $stmt->rowCount() . ' - Record Inserted </div>';
+
+                }
+
+            }else{
+
+                $errorMsgIns = 'Sorry You Cant Browse this page Directly';
+
+                redirectHome( $errorMsgIns , 6 ); // This function from function.php
+
             }
-            if (strlen($user) > 20 ) {
-                $formErrors[] = 'Username cant be More than <strorng>20 characters</strong>';
-            }
-
-            if (empty($user)) {
-                $formErrors[] = 'UserName Cant be <strorng>Empty</strong>' ;
-            }
-            if (empty($pass)) {
-                $formErrors[] = 'Password Cant be <strorng>Empty</strong>' ;
-            }
-            if (empty($name)) {
-                $formErrors[] = 'Full Name  Cant be <strorng>Empty</strong>' ;
-            }
-            if (empty($email)) {
-                $formErrors[] = 'Email Cant be<strorng>Empty</strong>' ;
-            }
-
-            // Loop INTO Errors Array And Echo it 
-            foreach($formErrors as $error){
-                echo '<div class="alert alert-danger">' . $error . '</div>';
-            }
-
-            // Check if ther's no error proceed the upadate operation 
-            if (empty($formErrors)) {
-
-                // Insert User Info in  the database 
-
-                $stmt = $con->prepare("INSERT INTO 
-                                                users( Username , Password , Email ,  FullName) 
-                                                VALUES(:zuser   , :zpass ,    :zmail , :zname ) "); // this values to send to database
-                $stmt->execute(array(
-                    // Key  => value
-                    'zuser' => $user,
-                    'zpass' => $hashPass,
-                    'zmail' => $email,
-                    'zname' => $name,
-                ));                                
-
-                // Echo Success Message
-
-                echo "<div class='alert alert-success'>" .  $stmt->rowCount() . ' - Record Inserted </div>';
-
-            }
-
-        }else{
-            echo 'Sorry You Cant Browse this page Directly';
-        }
 
         echo '</div>';
         
