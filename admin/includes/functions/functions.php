@@ -25,19 +25,51 @@
      * this Function Accept Parameters
      * the parameter is $errorMsg = echo the erro message 
      *                  $seconds  = seconds before redirecting
+     * 
+     *  Home Redirect Function   V2.0
+     * $theMsg = echo the message [ maybe | Errore | success | Warrning ]
+     * $url = THe link you want to redirect to it 
+     * $seconds  = seconds before redirecting
+     * 
      */
 
-    function redirectHome($errorMsg , $seconds = 3 ){
+    function redirectHome($theMsg , $url = null , $seconds = 3 ){
+
+        if ($url === null) {
+
+            $url = 'index.php';
+
+            $link = 'Homepage';
+
+        }else {
+
+            //  $url = isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] !== '' ?  $url = $_SERVER['HTTP_REFERER'] : 'index.php';
+
+            if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] !== '') { // If he is set and not empty because if he the first page this mean he didn't have any referrer page and will cause error
+
+                $url = $_SERVER['HTTP_REFERER'];  /* Referer this http Requset witch  you come from or the last page*/
+                $link = 'Previous Page';
+
+            }else {
+
+                $url = 'index.php';
+                $link = 'Homepage';
+            }
+
+            
+            
+
+        }
         
         echo "<div class='container'>";
 
-        echo "<div class='alert alert-danger'> $errorMsg </div>";
-
-        echo "<div class='alert alert-info'>You will be redirected to HomePage after :  $seconds  Seconds. </div>";
+        echo $theMsg ;
+ 
+        echo "<div class='alert alert-info'>You will be redirected to $link after :  $seconds  Seconds. </div>";
 
         echo "</div>";
 
-        header("refresh: $seconds;url=index.php");
+        header("refresh: $seconds;url=$url");
 
         exit();
      }

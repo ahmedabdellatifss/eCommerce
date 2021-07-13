@@ -207,9 +207,10 @@
 
             }else{
 
-                $errorMsgIns = 'Sorry You Cant Browse this page Directly';
+                $errorMsgIns = '<div class = "alert alert-danger">Sorry You Cant Browse this page Directly</div>';
 
-                redirectHome( $errorMsgIns , 6 ); // This function from function.php
+                redirectHome( $errorMsgIns , 'back'); // This function from function.php
+                                            // 'back' mean I'm not left the $url empty this means he will redirect to the last page as function said
 
             }
 
@@ -345,7 +346,9 @@
                 $stmt->execute(array($user , $email , $name , $pass , $id));
 
                 // Echo Success Message
-                echo "<div class='alert alert-success'>" .  $stmt->rowCount() . ' - Record Updated </div>';
+                $theMsg = "<div class='alert alert-success'>" .  $stmt->rowCount() . ' - Record Updated </div>';
+
+                redirectHome( $theMsg , 'back' , 4);
 
             }
 
