@@ -200,12 +200,17 @@
 
                         // Echo Success Message
 
-                        echo "<div class='alert alert-success'>" .  $stmt->rowCount() . ' - Record Inserted </div>';
+                        $theMsg = "<div class='alert alert-success'>" .  $stmt->rowCount() . ' - Record Inserted </div>';
+
+                        redirectHome($theMsg , 'back');
+
                     }
 
                 }
 
             }else{
+
+                
 
                 $errorMsgIns = '<div class = "alert alert-danger">Sorry You Cant Browse this page Directly</div>';
 
@@ -288,10 +293,16 @@
                 </div>
         
         <?php
+
             // If There's No such Id Show Erro Message
+
             } else {
-                echo 'Theres No Such ID';
+
+                $theMsg = 'Theres No Such ID';
+                redirectHome($theMsg);
+
             }
+
      }elseif($do == 'Update'){  // Update Page
 
         echo "<h1 class ='text-center'>Update Member</h1>";
@@ -353,7 +364,11 @@
             }
 
         }else{
-            echo 'Sorry You Cant Browse this page Directly';
+
+            $theMsg = "<div class='alert alert-danger'>Sorry You Cant Browse this page Directly </div>";
+
+            redirectHome($theMsg);
+
         }
 
         echo '</div>';
@@ -387,12 +402,16 @@
                     $stmt->execute();
 
                     // Echo Success Message
-                    echo "<div class='alert alert-success'>" .  $stmt->rowCount() . ' - Record Deleted </div>';
+                    $theMsg = "<div class='alert alert-success'>" .  $stmt->rowCount() . ' - Record Deleted </div>';
+
+                    redirectHome($theMsg);
 
 
                 }else{
     
-                echo 'This Id is not Exist';
+                    $theMsg = "<div class='alert alert-danger'>This Id is not Exist </div>";
+
+                    redirectHome($theMsg);
 
                 }   
 
