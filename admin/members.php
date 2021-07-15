@@ -51,7 +51,7 @@
                             echo "<tr>";
                                 echo "<td>" . $row['UserID'] . "</td>";
                                 echo "<td>" . $row['Username'] . "</td>";
-                                echo "<td>" . $row['Email'] . "</td>";
+                                echo "<td>" . $row['Email'] . "</td>";   
                                 echo "<td>" . $row['FullName'] . "</td>";
                                 echo "<td>" . $row['Date'] . "</td>";
                                 echo "<td> 
@@ -181,7 +181,9 @@
 
                     if ($check == 1){
 
-                        echo 'sorry this user is exist';
+                        $theMsg = '<div class="alert alert-danger">sorry this user is exist</div>';
+
+                        redirectHome($theMsg , 'back');
 
                     }else{
 
@@ -384,16 +386,11 @@
                 $userid = isset($_GET['userid']) && is_numeric($_GET['userid']) ? intval($_GET['userid']) : 0 ;    // intval = intger value dh rkom el3do
             
                 // Select All Data Depend on this ID
-        
-                $stmt = $con->prepare("SELECT * FROM  users  WHERE  UserID = ?  LIMIT 1");  // (limit 1) => means, I need one result
-                                                                        // ? this mean userid witch come from Get-request
-                // Execute Query
-                $stmt->execute(array($userid));
+                                                        
+                $check = checkItem('userid' , 'users' , $userid);  // this is function from function.php file
 
-                // the Row Count
-                $count = $stmt->rowCount();
                 // If there is such id disply the form
-                if ($stmt->rowCount() > 0) {  
+                if ($check > 0) {  
 
                     $stmt = $con->prepare('DELETE FROM users WHERE UserID = :Zuserid');
 
