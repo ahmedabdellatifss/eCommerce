@@ -95,3 +95,22 @@
         return $count;
 
       }
+
+      /**
+       **  Count Number or Items Function v1.0
+       **  Function To Count Number of Items Rows
+       **   $item = the item to count  
+       **   $table = the table to choose From
+       */
+
+       function countItems($item , $table) {
+
+        global $con; /** we use global to allow use $con inside the function  */
+
+        $stmt2 = $con->prepare("SELECT COUNT($item) FROM $table");
+
+        $stmt2->execute();
+
+        return $stmt2->fetchColumn();
+
+       }

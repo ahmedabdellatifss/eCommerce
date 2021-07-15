@@ -8,6 +8,7 @@
         include 'init.php';
         
         // Start Dashboard page
+
         ?>
         <div class="home-stats">
             <div class="container text-center">
@@ -16,7 +17,7 @@
                     <div class="col-md-3">
                         <div class="stat">
                             Total Members
-                            <span>200</span>
+                            <span><?php echo countItems('UserID' , 'users') ?></span>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -43,7 +44,7 @@
         <div class="latest">
             <div class="container">
                 <div class="row">
-                    <div class="conl-sm-6">
+                    <div class="col-sm-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <i class="fa fa-users">Latest Registerd Users</i>
@@ -53,7 +54,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="conl-sm-6">
+                    <div class="col-sm-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <i class="fa fa-tag">Latest Items </i>
