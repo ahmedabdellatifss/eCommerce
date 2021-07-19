@@ -23,7 +23,7 @@
                     <div class="col-md-3">
                         <div class="stat st-pending">
                             pending Members
-                            <span>25</span>
+                            <span><a href="members.php?do=Manage&page=pending">24</a></span>
                         </div>
                     </div>
                     <div class="col-md-3">
