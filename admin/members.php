@@ -190,8 +190,8 @@
                         // Insert User Info in  the database 
 
                         $stmt = $con->prepare("INSERT INTO 
-                        users( Username , Password , Email ,  FullName , Date ) 
-                        VALUES(:zuser   , :zpass ,    :zmail , :zname , now()) "); // this values to send to database
+                        users( Username , Password , Email ,  FullName , RegStatus , Date ) 
+                        VALUES(:zuser   , :zpass ,    :zmail , :zname , 1 ,now()) "); // this values to send to database
                         $stmt->execute(array(
                         // Key  => value
                         'zuser' => $user,

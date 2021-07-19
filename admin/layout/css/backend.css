@@ -81,16 +81,36 @@ body {
   /* Start Dashboard Page */
   .home-stats .stat{
       background-color: #EEE;
-      border: 1px solid #CCC;
+      border-radius: 9px;
       padding: 20px;
       font-size: 15px;
+      color: white;
   }
 
+  .home-stats .stat a {
+      color: white;
+  }
+  .home-stats .stat a:hover {
+      text-decoration: none;
+  }
   .home-stats .stat span {
       display: block;
-      font-size: 50px;
+      font-size: 60px;
   }
 
+  .home-stats .st-members {
+      background-color: #2980b9;
+  }
+
+  .home-stats .st-pending {
+    background-color: #EE5A24;
+ }
+ .home-stats .st-item {
+    background-color: #d35400;
+}
+.home-stats .st-comments {
+    background-color: #9b59b6;
+}
   .latest {
       margin-top: 30px;
   }
