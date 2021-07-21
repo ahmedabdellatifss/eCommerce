@@ -105,7 +105,7 @@
 
        function countItems($item , $table) {
 
-        global $con; /** we use global to allow use $con inside the function  */
+        global $con; /** we use global to allow us use $con inside the function  */
 
         $stmt2 = $con->prepare("SELECT COUNT($item) FROM $table");
 
@@ -113,4 +113,29 @@
 
         return $stmt2->fetchColumn();
 
-       }
+        }
+
+        /**
+         ** Get Latest Records Function v1.0
+         ** Function To Get Latest Items From Database such as [ users , items , Comments] 
+         ** $select = Field to select 
+         ** $table = the table to choose from
+         ** $limit = Number of Records you need 
+         ** $order = what you need to order by such as( UserID , categoriID , ...) 
+         ** DESC = descending
+         ** ASC  = tsa3odian
+         */
+
+         function getLatest($select , $table , $order , $limit = 5 ) {
+
+            global $con ;
+
+            $getStmt = $con->prepare("SELECT $select FROM $table ORDER BY $order DESC  LIMIT $limit");
+
+            $getStmt->execute();
+
+            $rows = $getStmt->fetchAll();
+
+            return $rows;
+
+         }

@@ -10,6 +10,7 @@
         // Start Dashboard page
 
         ?>
+        
         <div class="home-stats">
             <div class="container text-center">
                 <h1>Dashboard Page </h1>
@@ -48,11 +49,19 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="panel panel-default">
+                            <?php $latestUsers = 5;?>
                             <div class="panel-heading">
-                                <i class="fa fa-users">Latest Registerd Users</i>
+                                <i class="fa fa-users"></i>Latest <?php echo $latestUsers ?> Registerd Users
                             </div>
                             <div class="panel-body">
-                                Test
+                                <?php          // getlatest this is function from functions.php  #45                   
+                                    $theLatest = getLatest("*" , "users" , "UserID" , $latestUsers);
+
+                                    foreach ($theLatest as $user) {
+                                        
+                                        echo $user['Username'] . '<br>';
+                                    }
+                                    ?>
                             </div>
                         </div>
                     </div>
