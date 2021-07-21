@@ -9,6 +9,12 @@
         
         // Start Dashboard page
 
+        $latestUsers = 5; // Number of Latest Users'
+
+                        // getlatest this is function from functions.php  #45 
+        $theLatest = getLatest("*" , "users" , "UserID" , $latestUsers); // Latest Users Array
+
+
         ?>
         
         <div class="home-stats">
@@ -49,19 +55,27 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="panel panel-default">
-                            <?php $latestUsers = 5;?>
                             <div class="panel-heading">
                                 <i class="fa fa-users"></i>Latest <?php echo $latestUsers ?> Registerd Users
                             </div>
                             <div class="panel-body">
-                                <?php          // getlatest this is function from functions.php  #45                   
-                                    $theLatest = getLatest("*" , "users" , "UserID" , $latestUsers);
-
-                                    foreach ($theLatest as $user) {
-                                        
-                                        echo $user['Username'] . '<br>';
-                                    }
+                                <ul class="list-unstyled latest-users">
+                                    <?php                            
+                                        foreach ($theLatest as $user) { 
+                                            echo '<li>' ;
+                                                echo $user['Username'] ;
+                                                echo '<a href="members.php?do=Edit&userid=' . $user['UserID'] . '">';
+                                                    echo '<span class="btn btn-success pull-right">' ;
+                                                        echo '<i class="fa fa-edit"></i> Edit';
+                                                            if ($user['RegStatus'] == 0) {
+                                                                echo "<a href='members.php?do=Activate&userid=" . $user['UserID'] ."' class='btn btn-info activate pull-right'><i class='fa fa-close'></i>Activate</a> ";
+                                                            }
+                                                    echo '</span>';
+                                                echo '</a>';
+                                            echo '</li>';
+                                        }
                                     ?>
+                                </ul>
                             </div>
                         </div>
                     </div>
