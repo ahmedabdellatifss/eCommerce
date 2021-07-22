@@ -1,4 +1,8 @@
 <?php 
+
+  
+    ob_start();  // Output Buffering Start #47
+
     session_start();
 
     if(isset($_SESSION['Username'])) {
@@ -102,6 +106,12 @@
     }else{
 
         //  echo 'You are Not authorized to view this page';
-         header('location: index.php');
-         exit();
-     }
+
+        header('location: index.php');
+            exit();
+
+        }
+
+        ob_end_flush();
+
+?>
