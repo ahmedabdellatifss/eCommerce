@@ -23,6 +23,13 @@ function lang($phrase) {
       'SAVE'           => 'حفط',
       'ADD_MEMBER'     => 'أضافه عضو جديد',
       'Manage_Member'  => 'أدارة الأعضاء',
+      'ADD_CATEGORIES' => 'أضافه قسم جديد',
+      'NAME'           => 'الأسم',
+      'DESCRIPTION'    => 'الوصف',
+      'ORDERING'       => 'الترتيب',
+      'VISIBLE'        => 'الظهور',
+      'COMMENTING'     => 'السماح بالتعليقات',
+      'ADS'            => 'السماح بلأعلانات',
       
 
 

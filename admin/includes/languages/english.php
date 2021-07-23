@@ -24,6 +24,13 @@ function lang($phrase) {
         'SAVE'           => 'Save',
         'ADD_MEMBER'     => 'Add New Member',
         'Manage_Member'  => 'Manage Member',
+        'ADD_CATEGORIES' => 'Add New Categories',
+        'NAME'           => 'Name',
+        'DESCRIPTION'    => 'Description',
+        'ORDERING'       => 'Ordering',
+        'VISIBLE'        => 'Visible',
+        'COMMENTING'     => 'Allow Commenting',
+        'ADS'            => 'Allow Ads',
         
 
 
