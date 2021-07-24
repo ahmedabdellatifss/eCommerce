@@ -7,6 +7,8 @@
     ===========================================================================
     */
 
+    ob_start();  // Output Buffering Start #47
+
     session_start();
 
     $pageTitle = 'Members';
@@ -64,9 +66,9 @@
                                         <a href='members.php?do=Edit&userid=" . $row['UserID'] ."' class='btn btn-success'><i class='fa fa-edit'></i>Edit</a> 
                                         <a href='members.php?do=Delete&userid=" . $row['UserID'] ."' class='btn btn-danger confirm'><i class='fa fa-close'></i>Delete</a> ";
 
-                                            if ($row['RegStatus'] == 0) {
-                                                echo "<a href='members.php?do=Activate&userid=" . $row['UserID'] ."' class='btn btn-info activate'><i class='fa fa-close'></i>Activate</a> ";
-                                            }
+                                        if ($row['RegStatus'] == 0) {
+                                            echo "<a href='members.php?do=Activate&userid=" . $row['UserID'] ."' class='btn btn-info activate'><i class='fa fa-close'></i>Activate</a> ";
+                                        }
 
                                   echo  "</td>";
                                 
@@ -142,7 +144,7 @@
 
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-                echo "<h1 class ='text-center'>Update Member</h1>";
+                echo "<h1 class ='text-center'>Insert Member</h1>";
                 echo "<div class='container'>";
 
                 // Get variables from  the Form
@@ -469,3 +471,7 @@
         header('location: index.php');
         exit();
     }
+
+    ob_end_flush();
+
+?>

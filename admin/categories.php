@@ -33,7 +33,7 @@
                         <div class="form-group form-group-lg">
                             <label for="" class='col-sm-2 control-label'><?php echo lang('NAME') ?></label>
                             <div class="col-sm-10 col-md-6">
-                                <input type="text" class="form-control" name='username' autocomplete="off"
+                                <input type="text" class="form-control" name='name' autocomplete="off"
                                  required='required'  placeholder="Name of the Category"/>
                             </div>
                         </div>
@@ -78,11 +78,11 @@
                             <label for="" class='col-sm-2 control-label'><?php echo lang('COMMENTING') ?></label>
                             <div class="col-sm-10 col-md-6">
                                 <div>
-                                    <input id="com-yes" type="radio" name="visibility" value="0" checked />
+                                    <input id="com-yes" type="radio" name="commenting" value="0" checked />
                                     <label for="com-yes">Yes</label>
                                 </div>
                                 <div>
-                                    <input id="com-no" type="radio" name="visibility" value="1"  />
+                                    <input id="com-no" type="radio" name="commenting" value="1"  />
                                     <label for="com-no">No</label>
                                 </div>
                             </div>
@@ -118,6 +118,70 @@
 <?php 
         }elseif ($do == 'Insert') {
 
+
+                if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+                    echo "<h1 class ='text-center'>Insert Category</h1>";
+                    echo "<div class='container'>";
+
+                    // Get variables from  the Form
+
+                    $name      = $_POST['name'];
+                    $desc      = $_POST['description'];
+                    $order     = $_POST['ordering'];
+                    $visible   = $_POST['visibility'];
+                    $comment   = $_POST['commenting'];
+                    $ads       = $_POST['ads'];
+
+                    // Check if Category Exist in Database
+
+                    $check = checkItem("Name" , "categories" , $name);
+
+                    if ($check == 1){
+
+                        $theMsg = '<div class="alert alert-danger">sorry this categories is exist</div>';
+
+                        redirectHome($theMsg , 'back');
+
+                    }else{
+
+                        // Insert categories Info in  the database 
+
+                        $stmt = $con->prepare("INSERT INTO 
+
+                                        categories( Name , Description , Ordering ,  Visibility , Allow_Comment , Allow_Ads ) 
+
+                        VALUES(:zname   , :zdesc , :zorder , :zvisible , :zcomment , :zads) "); // this values to send to database
+
+                        $stmt->execute(array(
+                        // Key  => value
+                        'zname' => $name,
+                        'zdesc' => $desc,
+                        'zorder' => $order,
+                        'zvisible' => $visible,
+                        'zcomment' => $comment,
+                        'zads' => $ads,
+                        ));                                
+
+                        // Echo Success Message
+
+                        $theMsg = "<div class='alert alert-success'>" .  $stmt->rowCount() . ' - Record Inserted </div>';
+
+                        redirectHome($theMsg , 'back');
+
+                    }
+
+                }else{
+
+                    $errorMsgIns = '<div class = "alert alert-danger">Sorry You Cant Browse this page Directly</div>';
+
+                    redirectHome( $errorMsgIns , 'back'); // This function from function.php
+                                                // 'back' mean I'm not left the $url empty this means he will redirect to the last page as function said
+
+                }
+
+            echo '</div>';
+                
 
         }elseif ($do == 'Edit') {
 
