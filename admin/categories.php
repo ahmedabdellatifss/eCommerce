@@ -22,7 +22,32 @@
 
         if ($do == 'Manage') {  // Mange page 
 
-            echo 'Wellcome';
+            $stmt = $con->prepare("SELECT * FROM categories");
+
+            $stmt->execute();
+
+            $cats = $stmt->fetchAll(); ?>
+
+                <h1 class="text-center">Mange Categories</h1>
+                <div class="container">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Mange Categories</div>
+                            <div class="panel-body">
+                                <?php 
+                                    foreach($cats as $cat ){
+                                        echo $cat['Name'] . '<br />';
+                                        echo $cat['Description'] . '<br />';
+                                        echo 'Ordering Is: ' . $cat['Ordering'] . '<br />';
+                                        echo 'Visibility IS: ' . $cat['Visibility'] . '<br />';
+                                        echo 'Allow Comment Is: ' . $cat['Allow_Comment'] . '<br />';
+                                        echo 'Allow Ads Is: ' . $cat['Allow_Ads'] . '<br />';
+                                    }
+                                ?>
+                            </div>
+                    </div>
+                </div>
+
+            <?php
 
         }elseif ($do == 'Add') { ?>
 
