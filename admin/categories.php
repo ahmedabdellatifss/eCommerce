@@ -29,18 +29,20 @@
             $cats = $stmt->fetchAll(); ?>
 
                 <h1 class="text-center">Mange Categories</h1>
-                <div class="container">
+                <div class="container categories">
                     <div class="panel panel-default">
                         <div class="panel-heading">Mange Categories</div>
                             <div class="panel-body">
                                 <?php 
                                     foreach($cats as $cat ){
-                                        echo $cat['Name'] . '<br />';
-                                        echo $cat['Description'] . '<br />';
-                                        echo 'Ordering Is: ' . $cat['Ordering'] . '<br />';
-                                        echo 'Visibility IS: ' . $cat['Visibility'] . '<br />';
-                                        echo 'Allow Comment Is: ' . $cat['Allow_Comment'] . '<br />';
-                                        echo 'Allow Ads Is: ' . $cat['Allow_Ads'] . '<br />';
+                                        echo "<div class='cat'>";
+                                            echo "<h3>" . $cat['Name'] . '</h3>';
+                                            echo "<p>"; if($cat['Description'] == '') { echo 'This Is has no description';} else { echo $cat['Description'];}  echo '<br />';
+                                                if($cat['Visibility'] == 1 ){ echo '<span class="visibility">Hidden</span>'; }
+                                                if($cat['Allow_Comment'] == 1 ){ echo '<span class="commenting">Comment Disabled</span>'; }
+                                                if($cat['Allow_Ads'] == 1 ){ echo '<span class="advertises">Ads Disabled</span>'; }
+                                        echo "</div>";
+                                        echo "<hr />";
                                     }
                                 ?>
                             </div>
@@ -59,7 +61,7 @@
                             <label for="" class='col-sm-2 control-label'><?php echo lang('NAME') ?></label>
                             <div class="col-sm-10 col-md-6">
                                 <input type="text" class="form-control" name='name' autocomplete="off"
-                                 required='required'  placeholder="Name of the Category"/>
+                                    required='required'  placeholder="Name of the Category" />
                             </div>
                         </div>
                         <!-- End Name Field -->
