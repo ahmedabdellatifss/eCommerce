@@ -36,6 +36,10 @@
                                 <?php 
                                     foreach($cats as $cat ){
                                         echo "<div class='cat'>";
+                                            echo "<div class='hidden-buttons'>";
+                                                echo "<a href='#' class='btn btn-xs btn-primary'><i class='fa fa-edit'></i>Edit</a>";
+                                                echo "<a href='#' class='btn btn-xs btn-danger'><i class='fa fa-close'></i>Delete</a>";
+                                            echo "</div>";
                                             echo "<h3>" . $cat['Name'] . '</h3>';
                                             echo "<p>"; if($cat['Description'] == '') { echo 'This Is has no description';} else { echo $cat['Description'];}  echo '<br />';
                                                 if($cat['Visibility'] == 1 ){ echo '<span class="visibility">Hidden</span>'; }
