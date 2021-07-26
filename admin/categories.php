@@ -22,7 +22,17 @@
 
         if ($do == 'Manage') {  // Mange page 
 
-            $stmt = $con->prepare("SELECT * FROM categories");
+            $sort = 'ASC';
+
+            $sort_array = array('ASC' , 'DESC');
+            
+            if( isset($_GET['sort']) && in_array($_GET['sort'] , $sort_array)) {
+
+                $sort = $_GET['sort'];
+
+            }
+
+            $stmt = $con->prepare("SELECT * FROM categories ORDER BY Ordering $sort");
 
             $stmt->execute();
 
@@ -31,7 +41,14 @@
                 <h1 class="text-center">Mange Categories</h1>
                 <div class="container categories">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Mange Categories</div>
+                        <div class="panel-heading">
+                            Mange Categories
+                            <div class="ordering pull-right">
+                                Ordering:
+                                <a class="<?php if ($sort == 'ASC') { echo 'active'; } ?>" href="?sort=ASC">ASC</a> | 
+                                <a class="<?php if ($sort == 'DESC') { echo 'active'; } ?>" href="?sort=DESC">DESC</a>
+                            </div>
+                        </div>
                             <div class="panel-body">
                                 <?php 
                                     foreach($cats as $cat ){
