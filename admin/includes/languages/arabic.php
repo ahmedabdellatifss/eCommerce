@@ -30,6 +30,8 @@ function lang($phrase) {
       'VISIBLE'        => 'الظهور',
       'COMMENTING'     => 'السماح بالتعليقات',
       'ADS'            => 'السماح بلأعلانات',
+      'EDIT_CATEGORIES' =>'تحرير الاقسام',
+      'SAVE_CATEGORY'  => 'حفط',
       
 
 

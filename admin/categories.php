@@ -54,7 +54,7 @@
                                     foreach($cats as $cat ){
                                         echo "<div class='cat'>";
                                             echo "<div class='hidden-buttons'>";
-                                                echo "<a href='#' class='btn btn-xs btn-primary'><i class='fa fa-edit'></i>Edit</a>";
+                                                echo "<a href='categories.php?do=Edit&catId=" . $cat['ID'] . "' class='btn btn-xs btn-primary'><i class='fa fa-edit'></i>Edit</a>";
                                                 echo "<a href='#' class='btn btn-xs btn-danger'><i class='fa fa-close'></i>Delete</a>";
                                             echo "</div>";
                                             echo "<h3>" . $cat['Name'] . '</h3>';
@@ -233,6 +233,125 @@
 
         }elseif ($do == 'Edit') {
 
+            // Check if Get Request catId is Numeric & Get the integer value of it
+            // Detect the categories Id is number
+            $catId = isset($_GET['catId']) && is_numeric($_GET['catId']) ? intval($_GET['catId']) : 0 ;    // intval = intger value
+        
+            // Select All Data Depend on this ID
+    
+            $stmt = $con->prepare("SELECT * FROM  categories  WHERE  ID = ? ");
+            // Execute Query
+            $stmt->execute(array($catId));
+            // Fetch The data
+            $cat = $stmt->fetch();
+            // the Row Count
+            $count = $stmt->rowCount();
+            // If there is such id disply the form
+            if ($count > 0) {  ?>
+    
+                <h1 class="text-center"><?php echo lang('EDIT_CATEGORIES') ?></h1>
+                <div class="container">
+                    <form action="?do=Update" class="form-horizontal" method="POST">
+                    <input type="hidden" name="catid" value="<?php echo $catId ?>"
+                        <!-- Start Name Field -->
+                        <div class="form-group form-group-lg">
+                            <label for="" class='col-sm-2 control-label'><?php echo lang('NAME') ?></label>
+                            <div class="col-sm-10 col-md-6">
+                                <input type="text" class="form-control" name='name' value="<?php echo $cat['Name'] ?>"
+                                    required='required'  placeholder="Name of the Category" />
+                            </div>
+                        </div>
+                        <!-- End Name Field -->
+
+                        <!-- Start Description Field -->
+                        <div class="form-group form-group-lg">
+                            <label for="" class='col-sm-2 control-label'><?php echo lang('DESCRIPTION') ?></label>
+                            <div class="col-sm-10 col-md-6">
+                                <input type="text" class="form-control" name='description'
+                                    placeholder="Describe The Category" value="<?php echo $cat['Description'] ?>" />
+                            </div>
+                        </div>
+                        <!-- End Description Field -->
+
+                        <!-- Start Ordering Field -->
+                        <div class="form-group form-group-lg">
+                            <label for="" class='col-sm-2 control-label'><?php echo lang('ORDERING') ?></label>
+                            <div class="col-sm-10 col-md-6">
+                                <input type="text" class="form-control" name='ordering' 
+                                placeholder="Number To Arrange The Categories" value="<?php echo $cat['Ordering'] ?>"/>
+                            </div>
+                        </div>
+                        <!-- End Ordering Field -->
+
+                        <!-- Start Visible Field -->
+                        <div class="form-group form-group-lg">
+                            <label for="" class='col-sm-2 control-label'><?php echo lang('VISIBLE') ?></label>
+                            <div class="col-sm-10 col-md-6">
+                                <div>
+                                    <input id="visible-yes" type="radio" name="visibility" value="0" <?php if($cat['Visibility'] == 0) { echo 'checked'; } ?> />
+                                    <label for="visible-yes">Yes</label>
+                                </div>
+                                <div>
+                                    <input id="visible-no" type="radio" name="visibility" value="1"  <?php if($cat['Visibility'] == 1) { echo 'checked'; } ?>/>
+                                    <label for="visible-no">No</label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Visible Field -->
+
+                        <!-- Start Commenting Field -->
+                        <div class="form-group form-group-lg">
+                            <label for="" class='col-sm-2 control-label'><?php echo lang('COMMENTING') ?></label>
+                            <div class="col-sm-10 col-md-6">
+                                <div>
+                                    <input id="com-yes" type="radio" name="commenting" value="0" <?php if($cat['Allow_Comment'] == 0) { echo 'checked'; } ?> />
+                                    <label for="com-yes">Yes</label>
+                                </div>
+                                <div>
+                                    <input id="com-no" type="radio" name="commenting" value="1"  <?php if($cat['Allow_Comment'] == 1) { echo 'checked'; } ?>/>
+                                    <label for="com-no">No</label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Commenting Field -->
+
+                        <!-- Start Ads Field -->
+                        <div class="form-group form-group-lg">
+                            <label for="" class='col-sm-2 control-label'><?php echo lang('ADS') ?></label>
+                            <div class="col-sm-10 col-md-6">
+                                <div>
+                                    <input id="Ads-yes" type="radio" name="ads" value="0"   <?php if($cat['Allow_Ads'] == 0) { echo 'checked'; } ?> />
+                                    <label for="Ads-yes">Yes</label>
+                                </div>
+                                <div>
+                                    <input id="Ads-no" type="radio" name="ads" value="1"  <?php if($cat['Allow_Ads'] == 1) { echo 'checked'; } ?> />
+                                    <label for="Ads-no">No</label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Ads Field -->
+
+                        <!-- Start submit Field -->
+                        <div class="form-group form-group-lg">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <input type="submit" class="btn btn-primary btn-lg" value="<?php echo lang('SAVE_CATEGORY') ?>" />
+                            </div>
+                        </div>
+                        <!-- End submit Field -->
+                    </form>
+                </div>
+
+            
+            <?php
+    
+                // If There's No such Id Show Erro Message
+    
+                } else {
+    
+                    $theMsg = 'Theres No Such ID';
+                    redirectHome($theMsg);
+    
+                }
 
         }elseif ($do == 'Update') {
 

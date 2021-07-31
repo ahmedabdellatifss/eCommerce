@@ -31,6 +31,8 @@ function lang($phrase) {
         'VISIBLE'        => 'Visible',
         'COMMENTING'     => 'Allow Commenting',
         'ADS'            => 'Allow Ads',
+        'EDIT_CATEGORIES' =>'Edit New Categories',
+        'SAVE_CATEGORY'  => 'Save',
         
 
 
