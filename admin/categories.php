@@ -156,7 +156,7 @@
                         <!-- Start submit Field -->
                         <div class="form-group form-group-lg">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <input type="submit" class="btn btn-primary btn-lg" value="<?php echo lang('ADD_MEMBER') ?>" />
+                                <input type="submit" class="btn btn-primary btn-lg" value="<?php echo lang('ADD_CATEGORIES') ?>" />
                             </div>
                         </div>
                         <!-- End submit Field -->
@@ -355,6 +355,53 @@
 
         }elseif ($do == 'Update') {
 
+            echo "<h1 class ='text-center'>Update Category</h1>";
+            echo "<div class='container'>";
+    
+            if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    
+                // Get variables from  the Form
+    
+                $id        = $_POST['catid'];
+                $name      = $_POST['name'];
+                $desc      = $_POST['description'];
+                $order     = $_POST['ordering'];
+                
+                $visibl   = $_POST['visibility'];
+                $comment     = $_POST['commenting'];
+                $ads     = $_POST['ads'];
+
+                // Update the database with this info
+
+                $stmt = $con->prepare("UPDATE 
+                                            categories 
+                                        SET 
+                                            Name = ?, 
+                                            Description = ?,
+                                            Ordering = ?, 
+                                            Visibility = ?,
+                                            Allow_Comment =?,
+                                            Allow_Ads = ?
+                                        WHERE 
+                                            ID = ?");
+
+                $stmt->execute(array($name , $desc , $order , $visibl , $comment ,$ads , $id));
+
+                // Echo Success Message
+                $theMsg = "<div class='alert alert-success'>" .  $stmt->rowCount() . ' - Record Updated </div>';
+
+                redirectHome( $theMsg , 'back' , 4);
+    
+            }else{
+    
+                $theMsg = "<div class='alert alert-danger'>Sorry You Cant Browse this page Directly </div>";
+    
+                redirectHome($theMsg);
+    
+            }
+    
+            echo '</div>';
+       
     
         }elseif ($do == 'Delete') {
 
