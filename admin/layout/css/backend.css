@@ -251,4 +251,10 @@ body {
     margin-right: 6px;
     border-radius: 6px;
   }
+
+  .categories .add-category {
+    margin-top: -10px;
+    margin-bottom: 30px;
+      
+  }
   /* End Categories page  */

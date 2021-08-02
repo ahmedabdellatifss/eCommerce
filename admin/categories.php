@@ -55,7 +55,7 @@
                                         echo "<div class='cat'>";
                                             echo "<div class='hidden-buttons'>";
                                                 echo "<a href='categories.php?do=Edit&catId=" . $cat['ID'] . "' class='btn btn-xs btn-primary'><i class='fa fa-edit'></i>Edit</a>";
-                                                echo "<a href='#' class='btn btn-xs btn-danger'><i class='fa fa-close'></i>Delete</a>";
+                                                echo "<a href='categories.php?do=Delete&catId=" . $cat['ID'] . "' class='confirm btn btn-xs btn-danger'><i class='fa fa-close'></i>Delete</a>";
                                             echo "</div>";
                                             echo "<h3>" . $cat['Name'] . '</h3>';
                                             echo "<p>"; if($cat['Description'] == '') { echo 'This Is has no description';} else { echo $cat['Description'];}  echo '<br />';
@@ -68,6 +68,7 @@
                                 ?>
                             </div>
                     </div>
+                    <a class="add-category btn btn-primary" href="categories.php?do=Add"><i class="fa fa-plus" ></i>Add New Category</a>
                 </div>
 
             <?php
@@ -404,7 +405,42 @@
        
     
         }elseif ($do == 'Delete') {
+            echo "<h1 class ='text-center'>Delete Categories</h1>";
+            echo "<div class='container'>";
 
+                // Check if Get Request catid is Numeric & Get the integer value of it
+                // Detect the user Id is number
+                $catid = isset($_GET['catId']) && is_numeric($_GET['catId']) ? intval($_GET['catId']) : 0 ;    // intval = intger value dh rkom el3do
+            
+                // Select All Data Depend on this ID
+                                                        
+                $check = checkItem('ID' , 'categories' , $catid);  // this is function from function.php file
+
+                // If there is such id disply the form
+                if ($check > 0) {  
+
+                    $stmt = $con->prepare('DELETE FROM categories WHERE ID = :Zid');
+
+                    $stmt->bindParam(":Zid" , $catid);
+
+                    $stmt->execute();
+
+                    // Echo Success Message
+                    $theMsg = "<div class='alert alert-success'>" .  $stmt->rowCount() . ' - Record Deleted </div>';
+
+                    redirectHome($theMsg , 'back');
+
+
+                }else{
+    
+                    $theMsg = "<div class='alert alert-danger'>This Id is not Exist </div>";
+
+                    redirectHome($theMsg);
+
+                }   
+
+            echo '</div>';
+    
 
         }     
 
