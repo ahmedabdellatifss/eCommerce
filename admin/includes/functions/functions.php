@@ -77,7 +77,7 @@
      /**
       ** Check items Function  V1.0
       ** Function to check item in database  [ Function Accept Parameters ]
-      ** $select = the item to Select  [ Example: user, or item, or category ]
+      ** $select = the item to Select from table in database  [ Example: user, or item, or category ]
       ** $from = The table to select from [ Example: users , items , categories ]
       ** $value = The value of select or the item which I select based on [ Example: Osama , box , electronics]
       */

@@ -184,19 +184,24 @@ body {
   .categories .panel-body {
       padding: 0;
   }
-  .categories .ordering a {
+  .categories .option a {
       color: #888;
       text-decoration: none;
   }
+  .categories .option span {
+    color: #888;
+    cursor: pointer;
 
-  .categories .ordering .active {
+}
+
+  .categories .option .active {
     color: #f00;
     
 }
 
 .categories hr {
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
   .categories .cat  {
       padding:15px;
@@ -227,6 +232,15 @@ body {
 
   .categories .cat:last-of-type ~ hr {
       display: none;
+  }
+
+  .categories .cat h3 {
+      margin: 0;
+      cursor: pointer;
+  }
+
+  .categories .cat .full-view p {
+      margin: 10px 0
   }
 
   .categories  .cat .visibility {
