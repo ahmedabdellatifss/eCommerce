@@ -22,9 +22,9 @@
 
         if ($do == 'Manage') {  // Mange page 
 
-            $sort = 'ASC';
+            $sort = 'asc';
 
-            $sort_array = array('ASC' , 'DESC');
+            $sort_array = array('asc' , 'desc');
             
             if( isset($_GET['sort']) && in_array($_GET['sort'] , $sort_array)) {
 
@@ -42,14 +42,14 @@
                 <div class="container categories">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Mange Categories
+                            <i class="fa fa-edit"></i>Mange Categories
                             <div class="option pull-right">
-                                Ordering:
-                                <a class="<?php if ($sort == 'ASC') { echo 'active'; } ?>" href="?sort=ASC">ASC</a> | 
-                                <a class="<?php if ($sort == 'DESC') { echo 'active'; } ?>" href="?sort=DESC">DESC</a>
-                                View: 
+                            <i class ="fa fa-sort"></i>Ordering: [
+                                <a class="<?php if ($sort == 'asc') { echo 'active'; } ?>" href="?sort=asc">Asc</a> | 
+                                <a class="<?php if ($sort == 'desc') { echo 'active'; } ?>" href="?sort=desc">Desc</a> ]
+                                <i class ="fa fa-eye"></i>View: [
                                 <span class="active" data-view="full">Full</span> |
-                                <span data-view="classic">Classic</span>
+                                <span data-view="classic">Classic</span> ]
                             </div>
                         </div>
                             <div class="panel-body">
@@ -63,9 +63,9 @@
                                             echo "<h3>" . $cat['Name'] . '</h3>';
                                             echo "<div class='full-view'>";
                                                 echo "<p>"; if($cat['Description'] == '') { echo 'This Is has no description';} else { echo $cat['Description'];}  echo '<br />';
-                                                if($cat['Visibility'] == 1 ){ echo '<span class="visibility">Hidden</span>'; }
-                                                if($cat['Allow_Comment'] == 1 ){ echo '<span class="commenting">Comment Disabled</span>'; }
-                                                if($cat['Allow_Ads'] == 1 ){ echo '<span class="advertises">Ads Disabled</span>'; }
+                                                if($cat['Visibility'] == 1 ){ echo '<span class="visibility"><i class ="fa fa-eye"></i> Hidden</span>'; }
+                                                if($cat['Allow_Comment'] == 1 ){ echo '<span class="commenting"><i class ="fa fa-close"></i>Comment Disabled</span>'; }
+                                                if($cat['Allow_Ads'] == 1 ){ echo '<span class="advertises"><i class ="fa fa-close"></i>Ads Disabled</span>'; }
                                             echo "</div>";    
                                         echo "</div>";
                                         echo "<hr />";
