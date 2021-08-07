@@ -33,9 +33,13 @@ function lang($phrase) {
         'ADS'            => 'Allow Ads',
         'EDIT_CATEGORIES' =>'Edit New Categories',
         'SAVE_CATEGORY'  => 'Save',
+        'ADD_ITEM'       => 'Add New Item',
+        'ADD_BUTTON'     => 'Add Item',
+        'PRICE'          => 'Price',
+        'COUNTRY'        => 'Country',
+        'STATUS'         => 'Status',
+        'RATING'         => 'Rating',
         
-
-
 
       );
 

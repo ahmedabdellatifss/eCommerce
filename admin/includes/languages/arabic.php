@@ -32,7 +32,12 @@ function lang($phrase) {
       'ADS'            => 'السماح بلأعلانات',
       'EDIT_CATEGORIES' =>'تحرير الاقسام',
       'SAVE_CATEGORY'  => 'حفط',
-      
+      'ADD_ITEM'       => 'أضافه عنصر جديد',
+      'ADD_BUTTON'     => 'أضافه العنصر ',
+      'PRICE'          => 'السعر',
+      'COUNTRY'        => 'المنشاء',
+      'STATUS'         => 'الحاله',      
+      'STATUS'         => 'التقييم',      
 
 
       );
