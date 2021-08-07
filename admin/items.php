@@ -85,7 +85,7 @@
                     <div class="form-group form-group-lg">
                         <label for="" class='col-sm-2 control-label'><?php echo lang('STATUS') ?></label>
                         <div class="col-sm-10 col-md-6">
-                            <select class="form-control" name="status">
+                            <select name="status">
                                 <option value="0">...</option>
                                 <option value="1">New</option>
                                 <option value="2">Like New</option>
