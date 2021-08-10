@@ -96,6 +96,52 @@
                     </div>
                     <!-- End Status Field -->
 
+                    <!-- Start Members Field -->
+                    <div class="form-group form-group-lg">
+                        <label for="" class='col-sm-2 control-label'><?php echo lang('MEMBER') ?></label>
+                        <div class="col-sm-10 col-md-6">
+                            <select name="member">
+                                <option value="0">...</option>
+                                <?php 
+
+                                    $stmt = $con->prepare("SELECT * FROM users");
+                                    $stmt->execute();
+                                    $users = $stmt->fetchAll();
+                                    foreach ($users as $user) {
+                                    
+                                        echo "<option value='" . $user['UserID'] . "'>" . $user['Username'] . "</option>";
+                                    
+                                    }
+
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- End Status Field -->
+
+                    <!-- Start Categories Field -->
+                    <div class="form-group form-group-lg">
+                        <label for="" class='col-sm-2 control-label'><?php echo lang('CATEGORY') ?></label>
+                        <div class="col-sm-10 col-md-6">
+                            <select name="category">
+                                <option value="0">...</option>
+                                <?php 
+
+                                    $stmt2 = $con->prepare("SELECT * FROM categories");
+                                    $stmt2->execute();
+                                    $cats = $stmt2->fetchAll();
+                                    foreach ($cats as $cat) {
+                                    
+                                        echo "<option value='" . $cat['ID'] . "'>" . $cat['Name'] . "</option>";
+                                    
+                                    }
+
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- End Status Field -->
+
                     <!-- Start submit Field -->
                     <div class="form-group form-group-lg">
                         <div class="col-sm-offset-2 col-sm-10">

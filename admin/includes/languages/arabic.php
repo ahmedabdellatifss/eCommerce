@@ -38,6 +38,8 @@ function lang($phrase) {
       'COUNTRY'        => 'المنشاء',
       'STATUS'         => 'الحاله',      
       'STATUS'         => 'التقييم',      
+      'MEMBER'         => 'العضو', 
+      'CATEGORY'       => 'الفئه',     
 
 
       );

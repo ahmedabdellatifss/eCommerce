@@ -39,6 +39,8 @@ function lang($phrase) {
         'COUNTRY'        => 'Country',
         'STATUS'         => 'Status',
         'RATING'         => 'Rating',
+        'MEMBER'         => 'Member',
+        'CATEGORY'       => 'Category',
         
 
       );
