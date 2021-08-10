@@ -36,7 +36,7 @@
                             <input type="text"
                                 class="form-control"
                                 name='name'
-                                required='required'
+ 
                                     placeholder="Name of the Item" />
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                             <input type="text"
                                 class="form-control"
                                 name='description'
-                                required='required' 
+ 
                                 placeholder="Description of the Item" />
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                             <input type="text"
                                 class="form-control"
                                 name='price'
-                                required='required'
+
                                 placeholder="Price of the Item" />
                         </div>
                     </div>
@@ -74,8 +74,8 @@
                         <div class="col-sm-10 col-md-6">
                             <input type="text"
                                 class="form-control"
-                                name='price'
-                                required='required'
+                                name='country'
+
                                 placeholder="Country of Made" />
                         </div>
                     </div>
@@ -110,8 +110,87 @@
 
 <?php 
 
-        }elseif ($do == 'Insert') {
+    }elseif ($do == 'Insert') {
 
+           // Insert Member Page 
+            // the data will come from Add page to insert page to insert it in the database
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            echo "<h1 class ='text-center'>Insert Member</h1>";
+            echo "<div class='container'>";
+
+            // Get variables from  the Form
+
+            $name     = $_POST['name'];
+            $desc     = $_POST['description'];
+            $price    = $_POST['price'];
+            $country  = $_POST['country'];
+            $status   = $_POST['status'];
+
+            // Validate The Form 
+
+            $formErrors = array();
+
+            if (empty($name)) {
+                $formErrors[] = 'Name can\'t be  <strorng>Empty</strong>';
+            }
+            if (empty($desc)) {
+                $formErrors[] = 'Description can\'t be  <strorng>Empty</strong>';
+            }
+
+            if (empty($price)) {
+                $formErrors[] = 'Price can\'t be  <strorng>Empty</strong>';
+            }
+            if (empty($country)) {
+                $formErrors[] = 'Country can\'t be  <strorng>Empty</strong>';
+            }
+            if ( $status == 0 ) {
+                $formErrors[] = 'You Must Be Choose The Status <strorng>Status</strong>';
+            }
+        
+            // Loop INTO Errors Array And Echo it 
+            foreach($formErrors as $error){
+                echo '<div class="alert alert-danger">' . $error . '</div>';
+            }
+
+            // Check if ther's no error proceed the upadate operation 
+            if (empty($formErrors)) {
+
+                    // Insert Items Info in  the database 
+
+                    $stmt = $con->prepare("INSERT INTO 
+                    items( Name , Description , Price ,  Country_Made , Status , Add_Date ) 
+                    VALUES(:zname   , :zdesc ,    :zprice , :zcountry , :zstatus ,now()) "); // this values to send to database
+                                                                                            // now() Not need to bind becuose it is by default in mysql 
+                    $stmt->execute(array(
+                    // Key  => value
+                    'zname'    => $name,
+                    'zdesc'    => $desc,
+                    'zprice'   => $price,
+                    'zcountry' => $country,
+                    'zstatus'  => $status,
+                    ));                                
+
+                    // Echo Success Message
+
+                    $theMsg = "<div class='alert alert-success'>" .  $stmt->rowCount() . ' - Record Inserted </div>';
+
+                    redirectHome($theMsg , 'back');
+            }
+
+        }else{
+
+            
+
+            $errorMsgIns = '<div class = "alert alert-danger">Sorry You Cant Browse this page Directly</div>';
+
+            redirectHome( $errorMsgIns); // This function from function.php
+
+        }
+
+    echo '</div>';
+    
 
         }elseif ($do == 'Edit') {
 

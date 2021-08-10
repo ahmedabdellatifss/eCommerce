@@ -229,15 +229,13 @@
 
                 $errorMsgIns = '<div class = "alert alert-danger">Sorry You Cant Browse this page Directly</div>';
 
-                redirectHome( $errorMsgIns , 'back'); // This function from function.php
-                                            // 'back' mean I'm not left the $url empty this means he will redirect to the last page as function said
+                redirectHome( $errorMsgIns); // This function from function.php
 
             }
 
         echo '</div>';
         
-      
-
+    
     }elseif ($do == 'Edit') {  // Edit Page
             // Check if Get Request userid is Numeric & Get the integer value of it
             // Detect the user Id is number
