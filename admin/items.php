@@ -36,7 +36,7 @@
                             <input type="text"
                                 class="form-control"
                                 name='name'
- 
+                                required='required'
                                     placeholder="Name of the Item" />
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                             <input type="text"
                                 class="form-control"
                                 name='description'
- 
+                                required='required'
                                 placeholder="Description of the Item" />
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                             <input type="text"
                                 class="form-control"
                                 name='price'
-
+                                required='required'
                                 placeholder="Price of the Item" />
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                             <input type="text"
                                 class="form-control"
                                 name='country'
-
+                                required='required'
                                 placeholder="Country of Made" />
                         </div>
                     </div>
@@ -173,6 +173,8 @@
             $price    = $_POST['price'];
             $country  = $_POST['country'];
             $status   = $_POST['status'];
+            $member   = $_POST['member'];
+            $cat      = $_POST['category'];
 
             // Validate The Form 
 
@@ -194,6 +196,12 @@
             if ( $status == 0 ) {
                 $formErrors[] = 'You Must Be Choose The Status <strorng>Status</strong>';
             }
+            if ( $member == 0 ) {
+                $formErrors[] = 'You Must Be Choose The Status <strorng>Member</strong>';
+            }
+            if ( $cat == 0 ) {
+                $formErrors[] = 'You Must Be Choose The Status <strorng>Category</strong>';
+            }
         
             // Loop INTO Errors Array And Echo it 
             foreach($formErrors as $error){
@@ -206,8 +214,8 @@
                     // Insert Items Info in  the database 
 
                     $stmt = $con->prepare("INSERT INTO 
-                    items( Name , Description , Price ,  Country_Made , Status , Add_Date ) 
-                    VALUES(:zname   , :zdesc ,    :zprice , :zcountry , :zstatus ,now()) "); // this values to send to database
+                    items( Name , Description , Price ,  Country_Made , Status , Add_Date , Cat_ID , Member_ID ) 
+                    VALUES(:zname   , :zdesc ,    :zprice , :zcountry , :zstatus ,now() , :zcat , :zmember )"); // this values to send to database
                                                                                             // now() Not need to bind becuose it is by default in mysql 
                     $stmt->execute(array(
                     // Key  => value
@@ -216,6 +224,8 @@
                     'zprice'   => $price,
                     'zcountry' => $country,
                     'zstatus'  => $status,
+                    'zcat'     => $cat,
+                    'zmember'  => $member,
                     ));                                
 
                     // Echo Success Message

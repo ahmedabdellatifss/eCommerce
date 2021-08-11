@@ -11,7 +11,7 @@
 
 /* SelectBoxIt container */
 .selectboxit-container {
-  width: 100%;
+  width: 100% !important;
   position: relative;
   display: inline-block;
   vertical-align: top;

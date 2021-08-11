@@ -4,11 +4,12 @@ $(function () {
     'use strict' ;
 
     // Trigger the Selectbox # 62
-    $("select").selectBoxIT({
+    $("select").selectBoxIt({
 
-        autoWidth: false
+		autoWidth: false
 
-    });
+	});
+
 
     // Hide Placeholder On Form Focus
     $('[placeholder]').focus(function (){
