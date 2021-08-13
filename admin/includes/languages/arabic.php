@@ -39,7 +39,8 @@ function lang($phrase) {
       'STATUS'         => 'الحاله',      
       'STATUS'         => 'التقييم',      
       'MEMBER'         => 'العضو', 
-      'CATEGORY'       => 'الفئه',     
+      'CATEGORY'       => 'الفئه',
+      'MANAGE_ITEMS'   => 'أدارة العناصر',     
 
 
       );

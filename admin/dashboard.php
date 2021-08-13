@@ -34,15 +34,21 @@
                     <div class="col-md-3">
                         <div class="stat st-pending">
                             pending Members
-                            <span><a href="members.php?do=Manage&page=pending">
-                                <?php echo checkItem("RegStatus" , "users" , 0) ?>
-                            </a></span>
+                            <span>
+                                <a href="members.php?do=Manage&page=pending">
+                                    <?php echo checkItem("RegStatus" , "users" , 0) ?>
+                                </a>
+                            </span>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="stat st-item">
                             Total Items
-                            <span>1500</span>
+                            <span>
+                                <a href="items.php">
+                                    <?php echo countItems('item_ID' , 'items') ?>
+                                </a>
+                            </span>
                         </div>
                     </div>
                     <div class="col-md-3">

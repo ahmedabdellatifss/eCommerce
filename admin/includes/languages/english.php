@@ -41,6 +41,7 @@ function lang($phrase) {
         'RATING'         => 'Rating',
         'MEMBER'         => 'Member',
         'CATEGORY'       => 'Category',
+        'MANAGE_ITEMS'   => 'Manage Items',
         
 
       );
