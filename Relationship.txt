@@ -12,3 +12,14 @@ FOREIGN KEY(cat_ID)
 REFERENCES categories(ID)
 ON UPDATE CASCADE
 ON DELETE CASCADE;
+
+Join
+
+SELECT items.*, categories.Name FROM items
+INNER JOIN categories on categories.ID = items.Cat_ID
+
+SELECT items.*, categories.Name AS category_name, users.Username AS item_user FROM items
+
+INNER JOIN categories on categories.ID = items.Cat_ID
+
+INNER JOIN users ON users.UserID = items.Member_ID

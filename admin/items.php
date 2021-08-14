@@ -13,7 +13,7 @@
     $pageTitle = 'Items';
     
     if(isset($_SESSION['Username'])) {
-      
+    
         include 'init.php';
 
         $do = isset($_GET['do']) ? $_GET['do'] : $do = 'Manage' ;
@@ -22,8 +22,21 @@
 
         if ($do == 'Manage') {  // Mange page 
 
-    
-       $stmt = $con->prepare("SELECT * FROM items");
+                                        // Episod #68
+        $stmt = $con->prepare("SELECT    
+                                    items.*,
+                                    categories.Name AS category_name,
+                                    users.Username 
+                                FROM 
+                                    items
+                                INNER JOIN 
+                                    categories 
+                                ON 
+                                    categories.ID = items.Cat_ID
+                                INNER JOIN
+                                    users 
+                                ON 
+                                    users.UserID = items.Member_ID");
 
        // Execute the Statement
 
@@ -44,6 +57,8 @@
                         <td>Description</td>
                         <td>Price</td>
                         <td>Adding Date</td>
+                        <td>Category</td>
+                        <td>Username</td>
                         <td>Control</td>
                     </tr>
 
@@ -57,6 +72,8 @@
                                 echo "<td>" . $item['Description'] . "</td>";   
                                 echo "<td>" . $item['Price'] . "</td>";
                                 echo "<td>" . $item['Add_Date'] . "</td>";
+                                echo "<td>" . $item['category_name'] . "</td>";
+                                echo "<td>" . $item['Username'] . "</td>";
                                 echo "<td> 
                                         <a href='items.php?do=Edit&itemid=" . $item['Item_ID'] ."' class='btn btn-success'><i class='fa fa-edit'></i>Edit</a> 
                                         <a href='items.php?do=Delete&itemid=" . $item['Item_ID'] ."' class='btn btn-danger confirm'><i class='fa fa-close'></i>Delete</a> ";                                       
