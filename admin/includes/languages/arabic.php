@@ -40,7 +40,9 @@ function lang($phrase) {
       'STATUS'         => 'التقييم',      
       'MEMBER'         => 'العضو', 
       'CATEGORY'       => 'الفئه',
-      'MANAGE_ITEMS'   => 'أدارة العناصر',     
+      'MANAGE_ITEMS'   => 'أدارة العناصر',
+      'EDIT_ITEM'      => 'تعديل العنصر',
+      'SAVE_ITEM'      => 'حفط',     
 
 
       );

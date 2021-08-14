@@ -42,6 +42,8 @@ function lang($phrase) {
         'MEMBER'         => 'Member',
         'CATEGORY'       => 'Category',
         'MANAGE_ITEMS'   => 'Manage Items',
+        'EDIT_ITEM'      => 'Edit Items',
+        'SAVE_ITEM'      => 'Save Item', 
         
 
       );
