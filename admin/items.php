@@ -333,9 +333,10 @@
         // If there is such id disply the form
         if ($count > 0) {  ?>
 
-<h1 class="text-center"><?php echo lang('EDIT_ITEM') ?></h1>
+        <h1 class="text-center"><?php echo lang('EDIT_ITEM') ?></h1>
             <div class="container">
                 <form action="?do=Insert" class="form-horizontal" method="POST">
+                <input type="hidden" name="itemid" value="<?php echo $itemid ?>"> <!-- to send the value of itemid without show it in form-->
                     <!-- Start Name Field -->
                     <div class="form-group form-group-lg">
                         <label for="" class='col-sm-2 control-label'><?php echo lang('NAME') ?></label>
@@ -397,7 +398,6 @@
                         <label for="" class='col-sm-2 control-label'><?php echo lang('STATUS') ?></label>
                         <div class="col-sm-10 col-md-6">
                             <select name="status">
-                                <option value="0">...</option>
                                 <option value="1" <?php if($item['Status'] == 1) { echo 'selected'; }?>>New</option>
                                 <option value="2" <?php if($item['Status'] == 2) { echo 'selected'; }?>>Like New</option>
                                 <option value="3" <?php if($item['Status'] == 3) { echo 'selected'; }?>>Used</option>
@@ -412,7 +412,6 @@
                         <label for="" class='col-sm-2 control-label'><?php echo lang('MEMBER') ?></label>
                         <div class="col-sm-10 col-md-6">
                             <select name="member">
-                                <option value="0">...</option>
                                 <?php 
 
                                     $stmt = $con->prepare("SELECT * FROM users");
@@ -437,7 +436,6 @@
                         <label for="" class='col-sm-2 control-label'><?php echo lang('CATEGORY') ?></label>
                         <div class="col-sm-10 col-md-6">
                             <select name="category">
-                                <option value="0">...</option>
                                 <?php 
 
                                     $stmt2 = $con->prepare("SELECT * FROM categories");
@@ -482,6 +480,93 @@
 
         }elseif ($do == 'Update') {
 
+            echo "<h1 class ='text-center'>Update Item</h1>";
+            echo "<div class='container'>";
+    
+            if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    
+                // Get variables from  the Form
+    
+                $id        = $_POST['itemid'];
+                $name      = $_POST['name'];
+                $desc      = $_POST['description'];
+                $price     = $_POST['price'];
+                $country   = $_POST['country'];
+                $status    = $_POST['status'];
+                $cat       = $_POST['category'];
+                $member    = $_POST['member'];
+                
+    
+    
+                // Validate The Form 
+    
+                $formErrors = array();
+    
+                if (empty($name)) {
+                    $formErrors[] = 'Name can\'t be  <strorng>Empty</strong>';
+                }
+                if (empty($desc)) {
+                    $formErrors[] = 'Description can\'t be  <strorng>Empty</strong>';
+                }
+    
+                if (empty($price)) {
+                    $formErrors[] = 'Price can\'t be  <strorng>Empty</strong>';
+                }
+                if (empty($country)) {
+                    $formErrors[] = 'Country can\'t be  <strorng>Empty</strong>';
+                }
+                if ( $status == 0 ) {
+                    $formErrors[] = 'You Must Be Choose The Status <strorng>Status</strong>';
+                }
+                if ( $member == 0 ) {
+                    $formErrors[] = 'You Must Be Choose The Status <strorng>Member</strong>';
+                }
+                if ( $cat == 0 ) {
+                    $formErrors[] = 'You Must Be Choose The Status <strorng>Category</strong>';
+                }
+    
+                // Loop INTO Errors Array And Echo it 
+                foreach($formErrors as $error){
+                    echo '<div class="alert alert-danger">' . $error . '</div>';
+                }
+    
+                // Check if ther's no error proceed the upadate operation 
+                if (empty($formErrors)) {
+    
+                    // Update the database with this info
+    
+                    $stmt = $con->prepare("UPDATE
+                                                items 
+                                            SET 
+                                                Name = ?,
+                                                Description = ?,
+                                                Price = ?,
+                                                Country_Made = ?,
+                                                Status = ?,
+                                                Cat_ID = ?,
+                                                Member_ID = ?
+                                            WHERE 
+                                                Item_ID = ?");
+
+                    $stmt->execute(array($name , $desc , $price , $country , $status , $cat , $member ,  $id));
+    
+                    // Echo Success Message
+                    $theMsg = "<div class='alert alert-success'>" .  $stmt->rowCount() . ' - Record Updated </div>';
+    
+                    redirectHome( $theMsg , 'back' , 4);
+    
+                }
+    
+            }else{
+    
+                $theMsg = "<div class='alert alert-danger'>Sorry You Cant Browse this page Directly </div>";
+    
+                redirectHome($theMsg , 'back');
+    
+            }
+    
+            echo '</div>';
+    
     
         }elseif ($do == 'Delete') {
 
