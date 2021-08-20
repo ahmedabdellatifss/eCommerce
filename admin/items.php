@@ -76,7 +76,14 @@
                                 echo "<td>" . $item['Username'] . "</td>";
                                 echo "<td> 
                                         <a href='items.php?do=Edit&itemid=" . $item['Item_ID'] ."' class='btn btn-success'><i class='fa fa-edit'></i>Edit</a> 
-                                        <a href='items.php?do=Delete&itemid=" . $item['Item_ID'] ."' class='btn btn-danger confirm'><i class='fa fa-close'></i>Delete</a> ";                                       
+                                        <a href='items.php?do=Delete&itemid=" . $item['Item_ID'] ."' class='btn btn-danger confirm'><i class='fa fa-close'></i>Delete</a> "; 
+                                        if ($item['Approve'] == 0) {
+                                            echo "<a 
+                                                href='items.php?do=Approve&itemid=" . $item['Item_ID'] ."' 
+                                                class='btn btn-info activate'>
+                                                <i class='fa fa-check'></i>Approve </a> ";
+                                            
+                                        }                                      
                                 echo  "</td>";
                                 
                             echo "</tr>";
@@ -333,9 +340,9 @@
         // If there is such id disply the form
         if ($count > 0) {  ?>
 
-        <h1 class="text-center"><?php echo lang('EDIT_ITEM') ?></h1>
+    <h1 class="text-center"><?php echo lang('EDIT_ITEM') ?></h1>
             <div class="container">
-                <form action="?do=Insert" class="form-horizontal" method="POST">
+            <form class="form-horizontal" action="?do=Update" method="POST">
                 <input type="hidden" name="itemid" value="<?php echo $itemid ?>"> <!-- to send the value of itemid without show it in form-->
                     <!-- Start Name Field -->
                     <div class="form-group form-group-lg">
@@ -478,15 +485,15 @@
 
             }
 
-        }elseif ($do == 'Update') {
+        } elseif ($do == 'Update') {
 
-            echo "<h1 class ='text-center'>Update Item</h1>";
-            echo "<div class='container'>";
-    
-            if($_SERVER['REQUEST_METHOD'] == 'POST') {
-    
-                // Get variables from  the Form
-    
+            echo "<h1 class='text-center'>Update Item</h1>";
+			echo "<div class='container'>";
+
+			if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+				// Get Variables From The Form
+
                 $id        = $_POST['itemid'];
                 $name      = $_POST['name'];
                 $desc      = $_POST['description'];
@@ -495,20 +502,20 @@
                 $status    = $_POST['status'];
                 $cat       = $_POST['category'];
                 $member    = $_POST['member'];
-                
-    
-    
+
+
+
                 // Validate The Form 
-    
+
                 $formErrors = array();
-    
+
                 if (empty($name)) {
                     $formErrors[] = 'Name can\'t be  <strorng>Empty</strong>';
                 }
                 if (empty($desc)) {
                     $formErrors[] = 'Description can\'t be  <strorng>Empty</strong>';
                 }
-    
+
                 if (empty($price)) {
                     $formErrors[] = 'Price can\'t be  <strorng>Empty</strong>';
                 }
@@ -524,17 +531,17 @@
                 if ( $cat == 0 ) {
                     $formErrors[] = 'You Must Be Choose The Status <strorng>Category</strong>';
                 }
-    
+
                 // Loop INTO Errors Array And Echo it 
                 foreach($formErrors as $error){
                     echo '<div class="alert alert-danger">' . $error . '</div>';
                 }
-    
+
                 // Check if ther's no error proceed the upadate operation 
                 if (empty($formErrors)) {
-    
+
                     // Update the database with this info
-    
+
                     $stmt = $con->prepare("UPDATE
                                                 items 
                                             SET 
@@ -549,30 +556,100 @@
                                                 Item_ID = ?");
 
                     $stmt->execute(array($name , $desc , $price , $country , $status , $cat , $member ,  $id));
-    
+
                     // Echo Success Message
                     $theMsg = "<div class='alert alert-success'>" .  $stmt->rowCount() . ' - Record Updated </div>';
-    
+
                     redirectHome( $theMsg , 'back' , 4);
-    
+
                 }
-    
+
             }else{
-    
+
                 $theMsg = "<div class='alert alert-danger'>Sorry You Cant Browse this page Directly </div>";
-    
+
                 redirectHome($theMsg , 'back');
-    
+
             }
-    
+
             echo '</div>';
+
+
     
     
         }elseif ($do == 'Delete') {
 
+            echo "<h1 class='text-center'>Delete Item</h1>";
+			echo "<div class='container'>";
+
+				// Check If Get Request Item ID Is Numeric & Get The Integer Value Of It
+
+				$itemid = isset($_GET['itemid']) && is_numeric($_GET['itemid']) ? intval($_GET['itemid']) : 0;
+
+				// Select All Data Depend On This ID
+
+				$check = checkItem('Item_ID', 'items', $itemid);
+
+				// If There's Such ID Show The Form
+
+				if ($check > 0) {
+
+					$stmt = $con->prepare("DELETE FROM items WHERE Item_ID = :zid");
+
+					$stmt->bindParam(":zid", $itemid);
+
+					$stmt->execute();
+
+					$theMsg = "<div class='alert alert-success'>" . $stmt->rowCount() . ' Record Deleted</div>';
+
+					redirectHome($theMsg, 'back');
+
+				} else {
+
+					$theMsg = '<div class="alert alert-danger">This ID is Not Exist</div>';
+
+					redirectHome($theMsg);
+
+				}
+
+			echo '</div>';
 
         }elseif ($do == 'Approve' ) {
 
+            echo "<h1 class ='text-center'>Approve Item</h1>";
+            echo "<div class='container'>";
+    
+                // Check if Get Request itemid is Numeric & Get the integer value of it
+                // Detect the Item Id is number
+                $itemid = isset($_GET['itemid']) && is_numeric($_GET['itemid']) ? intval($_GET['itemid']) : 0 ;    // intval = intger value dh rkom el3do
+            
+                // Select All Data Depend on this ID
+                                                        
+                $check = checkItem('Item_ID' , 'items' , $itemid);  // this is function from function.php file
+    
+                // If there is such id disply the form
+                if ($check > 0) {  
+    
+                    $stmt = $con->prepare('UPDATE items SET Approve =1  WHERE Item_ID = ?');
+    
+                    $stmt->execute(array($itemid));
+    
+                    // Echo Success Message
+                    $theMsg = "<div class='alert alert-success'>" .  $stmt->rowCount() . ' - Record Activated </div>';
+    
+                    redirectHome($theMsg , 'back');
+    
+    
+                }else{
+    
+                    $theMsg = "<div class='alert alert-danger'>This Id is not Exist </div>";
+    
+                    redirectHome($theMsg);
+    
+                }   
+    
+            echo '</div>';
+    
 
         }
 
