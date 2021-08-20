@@ -42,7 +42,8 @@ function lang($phrase) {
       'CATEGORY'       => 'الفئه',
       'MANAGE_ITEMS'   => 'أدارة العناصر',
       'EDIT_ITEM'      => 'تعديل العنصر',
-      'SAVE_ITEM'      => 'حفط',     
+      'SAVE_ITEM'      => 'حفط',
+      'COMMENTS'        => 'التعليقات',     
 
 
       );
