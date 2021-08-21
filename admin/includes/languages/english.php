@@ -44,7 +44,9 @@ function lang($phrase) {
         'MANAGE_ITEMS'   => 'Manage Items',
         'EDIT_ITEM'      => 'Edit Items',
         'SAVE_ITEM'      => 'Save Item', 
-        'COMMENTS'        => 'Comments', 
+        'COMMENTS'        => 'Comments',
+        'MANAGE_COMMENTS' => 'Manage Comments',
+
         
 
       );

@@ -43,7 +43,8 @@ function lang($phrase) {
       'MANAGE_ITEMS'   => 'أدارة العناصر',
       'EDIT_ITEM'      => 'تعديل العنصر',
       'SAVE_ITEM'      => 'حفط',
-      'COMMENTS'        => 'التعليقات',     
+      'COMMENTS'        => 'التعليقات',
+      'MANAGE_COMMENTS' => ' أدارة التعليقات',     
 
 
       );

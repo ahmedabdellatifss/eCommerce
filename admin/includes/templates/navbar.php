@@ -16,7 +16,7 @@
         <li><a href="categories.php"><?php echo lang('Sections') ?></a></li>
         <li><a href="items.php"><?php echo lang('ITEMS') ?></a></li>
         <li><a href="members.php"><?php echo lang('MEMBERS') ?></a></li>
-        <li><a href="#"><?php echo lang('COMMENTS') ?></a></li>
+        <li><a href="comments.php"><?php echo lang('COMMENTS') ?></a></li>
         <li><a href="#"><?php echo lang('STATISTICS') ?></a></li>
         <li><a href="#"><?php echo lang('LOGS') ?></a></li>
         
