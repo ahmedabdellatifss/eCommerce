@@ -44,7 +44,9 @@ function lang($phrase) {
       'EDIT_ITEM'      => 'تعديل العنصر',
       'SAVE_ITEM'      => 'حفط',
       'COMMENTS'        => 'التعليقات',
-      'MANAGE_COMMENTS' => ' أدارة التعليقات',     
+      'MANAGE_COMMENTS' => 'أدارة التعليقات',
+      'EDIT_COMMENT'    => 'تعديل',
+      'COMMENT'          => 'التعليقات',   
 
 
       );
