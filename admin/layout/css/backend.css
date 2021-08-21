@@ -1,294 +1,301 @@
-
 /*Start  Main Rules */
 
 body {
-    background-color:  #F4f4f4;
-    font-size: 16px;
+  background-color: #f4f4f4;
+  font-size: 16px;
 }
-.asterisk{
-    font-size: 30px;
-    position : absolute;
-    right: 28px;
-    top :8px;
-    color: red;
+.asterisk {
+  font-size: 30px;
+  position: absolute;
+  right: 28px;
+  top: 8px;
+  color: red;
 }
 /*End  Main Rules */
 
 /* Start login Form  */
 
 .login {
-    width:300px;
-    margin: 100px auto;
+  width: 300px;
+  margin: 100px auto;
 }
 .login h4 {
-    color: #888
+  color: #888;
 }
 .login input {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 .login .form-control {
-    background-color: #EAEAEA;
+  background-color: #eaeaea;
 }
 .login .btn {
-    background-color: #008dde;
+  background-color: #008dde;
 }
 /* End login Form  */
 
 /* Start Bootstrap Edits */
 
 .navbar {
-    border-radius: 0;
-    margin-bottom: 0;
+  border-radius: 0;
+  margin-bottom: 0;
 }
-.nav>li>a,
+.nav > li > a,
 .navbar-brand {
-    padding: 15px 12px;
+  padding: 15px 12px;
 }
 
 .navbar-brand {
-    font-size: 1em;
+  font-size: 1em;
 }
 
- .navbar-inverse .navbar-nav>  .open>a,
- .navbar-inverse .navbar-nav>  .open>a:focus,
- .navbar-inverse .navbar-nav>  .open>a:hover,
- .dropdown-menu {
-    background-color: #4398db;
- }
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:focus,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.dropdown-menu {
+  background-color: #4398db;
+}
 
- .dropdown-menu {
-    min-width: 180px;
-    padding: 0;
-    font-size: 1em;
-    border: none;
-    border-radius:0;
- }
- .dropdown-menu > li > a {
-     color:#FFF;
-     padding: 10px 15px;
- }
+.dropdown-menu {
+  min-width: 180px;
+  padding: 0;
+  font-size: 1em;
+  border: none;
+  border-radius: 0;
+}
+.dropdown-menu > li > a {
+  color: #fff;
+  padding: 10px 15px;
+}
 
- .dropdown-menu > li > a:focus,
- .dropdown-menu > li > a:hover {
-     color: #FFF;
-     background-color: #8e44ad;
- }
+.dropdown-menu > li > a:focus,
+.dropdown-menu > li > a:hover {
+  color: #fff;
+  background-color: #8e44ad;
+}
 .form-control {
-    position : relative;
+  position: relative;
 }
-  /* End Bootstrap Edits */
+/* End Bootstrap Edits */
 
-  /* Start Dashboard Page */
-  .home-stats .stat{
-      background-color: #EEE;
-      border-radius: 9px;
-      padding: 20px;
-      font-size: 15px;
-      color: white;
-  }
+/* Start Dashboard Page */
+.home-stats .stat {
+  background-color: #eee;
+  border-radius: 9px;
+  padding: 20px;
+  font-size: 15px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+.home-stats .stat i {
+    position:absolute;
+    font-size: 80px;
+    top: 35px;
+    left: 30px;
+}
+.home-stats .stat .info {
+    float: right;
+}
+.home-stats .stat a {
+  color: white;
+}
+.home-stats .stat a:hover {
+  text-decoration: none;
+}
+.home-stats .stat span {
+  display: block;
+  font-size: 60px;
+}
 
-  .home-stats .stat a {
-      color: white;
-  }
-  .home-stats .stat a:hover {
-      text-decoration: none;
-  }
-  .home-stats .stat span {
-      display: block;
-      font-size: 60px;
-  }
+.home-stats .st-members {
+  background-color: #2980b9;
+}
 
-  .home-stats .st-members {
-      background-color: #2980b9;
-  }
-
-  .home-stats .st-pending {
-    background-color: #EE5A24;
- }
- .home-stats .st-item {
-    background-color: #d35400;
+.home-stats .st-pending {
+  background-color: #ee5a24;
+}
+.home-stats .st-item {
+  background-color: #d35400;
 }
 .home-stats .st-comments {
-    background-color: #9b59b6;
+  background-color: #9b59b6;
 }
-  .latest {
-      margin-top: 30px;
-  }
-
-  .latest-users {
-    margin-bottom:0;
-
-  }
-  .latest-users li {
-      padding: 10px;
-      overflow: hidden;
-  }
-  .latest-users li:nth-child(odd) {
-      background-color: #EEE;
-  }
-  .latest-users .btn-success,
-  .latest-users .btn-info {
-      padding: 2px 8px;
-  }
-  .latest-users .btn-info {
-      margin-right: 5px;
-  }
-  /* End   Dashboard Page */
-
-  /* Start Members page  */
-
-  h1 {
-      font-size: 55px;
-      margin: 40px 0;
-      font-weight: bold;
-      color: #666;
-  }
-
-  .show-pass{
-      position: absolute;
-      top: 6px;
-      right: -30px;
-  }
-
-  .main-table {
-      -webkit-box-shadow: 0 3px 10px #ccc;
-      -moz-box-shadow: 0 3px 10px #ccc;
-      box-shadow: 0 3px 10px #ccc;
-
-  }
-
-  .main-table td {
-      background-color: #fff;
-      vertical-align: middle !important;
-  }
-
-  .main-table tr:first-child td { /* You Can use T-head */
-      background-color: #333;
-      color: #FFF;
-      
-  }
-
-  .main-table .btn {
-      padding: 3px 10px;
-
-  }
-
-  .activate {
-      margin-left: 5px ;
-  }
-  /* End Members page  */
-
-
-  /* Start Categories page  */
-
-  .categories .panel-heading {
-      color: #959595;
-      font-weight: bold;
-  }
-
-  .categories .panel-heading i {
-    position: relative;
-    top: 1px;
-    left: -3px;
+.latest {
+  margin-top: 30px;
 }
-
-  .categories .panel-body {
-    padding: 0;
+.latest .toggle-info {
+    color: #999;
 }
-
-  .categories .option a {
-      color: #888;
-      text-decoration: none;
-  }
-  .categories .option span {
-    color: #888;
+.latest .toggle-info:hover {
+    color: #444;
     cursor: pointer;
+}
+.latest-users {
+  margin-bottom: 0;
+}
+.latest-users li {
+  padding: 10px;
+  overflow: hidden;
+}
+.latest-users li:nth-child(odd) {
+  background-color: #eee;
+}
+.latest-users .btn-success,
+.latest-users .btn-info {
+  padding: 2px 8px;
+}
+.latest-users .btn-info {
+  margin-right: 5px;
+}
+/* End   Dashboard Page */
 
+/* Start Members page  */
+
+h1 {
+  font-size: 55px;
+  margin: 40px 0;
+  font-weight: bold;
+  color: #666;
 }
 
-  .categories .option .active {
-    color: #f00;
-    
+.show-pass {
+  position: absolute;
+  top: 6px;
+  right: -30px;
+}
+
+.main-table {
+  -webkit-box-shadow: 0 3px 10px #ccc;
+  -moz-box-shadow: 0 3px 10px #ccc;
+  box-shadow: 0 3px 10px #ccc;
+}
+
+.main-table td {
+  background-color: #fff;
+  vertical-align: middle !important;
+}
+
+.main-table tr:first-child td {
+  /* You Can use T-head */
+  background-color: #333;
+  color: #fff;
+}
+
+.main-table .btn {
+  padding: 3px 10px;
+}
+
+.activate {
+  margin-left: 5px;
+}
+/* End Members page  */
+
+/* Start Categories page  */
+
+.categories .panel-heading {
+  color: #959595;
+  font-weight: bold;
+}
+
+.categories .panel-heading i {
+  position: relative;
+  top: 1px;
+  left: -3px;
+}
+
+.categories .panel-body {
+  padding: 0;
+}
+
+.categories .option a {
+  color: #888;
+  text-decoration: none;
+}
+.categories .option span {
+  color: #888;
+  cursor: pointer;
+}
+
+.categories .option .active {
+  color: #f00;
 }
 
 .categories hr {
-    margin-top: 0;
-    margin-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
-  .categories .cat  {
-      padding:15px;
-      position: relative;
-      overflow: hidden;
-  }
-
-  .categories .cat:hover {
-      background-color: #EEE;
-  }
-
-  .categories .cat:hover .hidden-buttons {
-    right: 15px;
+.categories .cat {
+  padding: 15px;
+  position: relative;
+  overflow: hidden;
 }
 
-  .categories .cat .hidden-buttons {
-    -webkit-transition: all .5s ease-in-out;  
-    -moz-transition: all .5s ease-in-out;  
-    transition: all .5s ease-in-out;  
-    position: absolute;
-    top: 15px;
-    right: -120px;
+.categories .cat:hover {
+  background-color: #eee;
 }
 
-  .categories .cat .hidden-buttons a {
-      margin-right: 5px;
-  }
+.categories .cat:hover .hidden-buttons {
+  right: 15px;
+}
 
-  .categories .cat:last-of-type ~ hr {
-      display: none;
-  }
+.categories .cat .hidden-buttons {
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  position: absolute;
+  top: 15px;
+  right: -120px;
+}
 
-  .categories .cat h3 {
-      margin: 0;
-      font-weight: bold;
-      color: #6a6a6a;
-      cursor: pointer;
-  }
+.categories .cat .hidden-buttons a {
+  margin-right: 5px;
+}
 
-  .categories .cat .full-view p {
-      margin: 10px 0;
-      color:#707070;
-  }
+.categories .cat:last-of-type ~ hr {
+  display: none;
+}
 
-  .categories  .cat .visibility {
-      background-color: #f39c12;
-      color: #FFF;
-      padding: 4px 6px;
-      margin-right: 6px;
-      border-radius: 6px;
-  }
+.categories .cat h3 {
+  margin: 0;
+  font-weight: bold;
+  color: #6a6a6a;
+  cursor: pointer;
+}
 
-  .categories  .cat .commenting{
-    background-color: #d35400;
-    color: #FFF;
-    padding: 4px 6px;
-    margin-right: 6px;
-    border-radius: 6px;
-  }
-  .categories  .cat .advertises{
-    background-color: #c0392b;
-    color: #FFF;
-    padding: 4px 6px;
-    margin-right: 6px;
-    border-radius: 6px;
-  }
+.categories .cat .full-view p {
+  margin: 10px 0;
+  color: #707070;
+}
 
-  .categories .add-category {
-    margin-top: -10px;
-    margin-bottom: 30px;
-      
-  }
-  /* End Categories page  */
+.categories .cat .visibility {
+  background-color: #f39c12;
+  color: #fff;
+  padding: 4px 6px;
+  margin-right: 6px;
+  border-radius: 6px;
+}
 
-  /* Starat Items page  */
+.categories .cat .commenting {
+  background-color: #d35400;
+  color: #fff;
+  padding: 4px 6px;
+  margin-right: 6px;
+  border-radius: 6px;
+}
+.categories .cat .advertises {
+  background-color: #c0392b;
+  color: #fff;
+  padding: 4px 6px;
+  margin-right: 6px;
+  border-radius: 6px;
+}
 
+.categories .add-category {
+  margin-top: -10px;
+  margin-bottom: 30px;
+}
+/* End Categories page  */
 
-  /* End Items page  */
+/* Starat Items page  */
+
+/* End Items page  */
