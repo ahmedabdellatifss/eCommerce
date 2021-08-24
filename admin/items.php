@@ -472,7 +472,71 @@
                     </div>
                     <!-- End submit Field -->
                 </form>
-            </div>    
+
+
+                <?php 
+                $stmt = $con->prepare("SELECT
+                                    comments.* , users.Username AS Member
+                                FROM 
+                                    comments
+                                INNER JOIN 
+                                    users
+                                ON 
+                                    users.UserID = comments.user_id 
+                                WHERE 
+                                    item_id = ? ");
+                $stmt->execute(array($itemid));
+
+                // Assign to Variable 
+                $rows = $stmt->fetchAll();
+
+                if (! empty($row)){
+                
+                    ?>
+                    <h1 class="text-center">Manage [ <?php echo $item['Name']?> ] Comments</h1>
+                        <div class="table-responsive">
+                        <table class="main-table text-center table table-bordered">
+                                <tr>
+                                    <td>Comment</td>
+                                    <td>User Name</td>
+                                    <td>ADD Date</td>
+                                    <td>Control</td>
+                                </tr>
+
+                    <?php 
+
+                    foreach($rows as $row) {
+
+                        echo "<tr>";
+                            echo "<td>" . $row['comment'] . "</td>";
+                            echo "<td>" . $row['Member'] . "</td>";
+                            echo "<td>" . $row['comment_date'] . "</td>";
+                            echo "<td> 
+                                <a href='comments.php?do=Edit&comid=" . $row['c_id'] ."' class='btn btn-success'><i class='fa fa-edit'></i>Edit</a> 
+                                <a href='comments.php?do=Delete&comid=" . $row['c_id'] ."' class='btn btn-danger confirm'><i class='fa fa-close'></i>Delete</a> ";
+
+                                if ($row['status'] == 0) {
+                                    echo "<a 
+                                        href='comments.php?do=Approve&comid=
+                                        " . $row['c_id'] ."' 
+                                        class='btn btn-info activate'>
+                                        <i class='fa fa-check'></i>Approve</a> ";
+                                }
+
+                            echo  "</td>";
+                            
+                        echo "</tr>";
+                    }
+
+                    ?>
+
+                </table>
+            
+                </div>
+
+        <?php }   ?>
+
+        </div>    
         
         <?php
 

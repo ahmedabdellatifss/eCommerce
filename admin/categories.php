@@ -373,9 +373,9 @@
                 $desc      = $_POST['description'];
                 $order     = $_POST['ordering'];
                 
-                $visibl   = $_POST['visibility'];
-                $comment     = $_POST['commenting'];
-                $ads     = $_POST['ads'];
+                $visibl    = $_POST['visibility'];
+                $comment   = $_POST['commenting'];
+                $ads       = $_POST['ads'];
 
                 // Update the database with this info
 
