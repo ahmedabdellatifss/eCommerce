@@ -36,6 +36,8 @@
 
        // Assign to Variable 
        $rows = $stmt->fetchAll();
+
+       if (!empty($rows)){
        
        ?>
 
@@ -80,10 +82,19 @@
 
                     ?>
 
-               </table>
-               </div>
-               <a href="members.php?do=Add" class="btn btn-primary"> <i class="fa fa-plus" ></i> New Member</a>
+            </table>
+            </div>
+            <a href="members.php?do=Add" class="btn btn-primary"> 
+                <i class="fa fa-plus" ></i> New Member
+            </a>
         </div>
+
+        <?php }else{
+            echo '<div class="container">';
+                echo '<div class="nice-message">There\'s No Members To Show</div>';
+                echo '<a href="members.php?do=Add" class="btn btn-primary"> <i class="fa fa-plus" ></i> New Member</a>';
+            echo '</div>';
+        } ?> 
 
   <?php }elseif($do == 'Add'){  // Add Members Page ?>
 
@@ -415,7 +426,7 @@
                     // Echo Success Message
                     $theMsg = "<div class='alert alert-success'>" .  $stmt->rowCount() . ' - Record Deleted </div>';
 
-                    redirectHome($theMsg);
+                    redirectHome($theMsg , 'back');
 
 
                 }else{

@@ -44,6 +44,8 @@
 
        // Assign to Variable 
         $items = $stmt->fetchAll();
+
+        if (!empty($items)) {
         
         ?>
 
@@ -91,10 +93,20 @@
 
                     ?>
 
-               </table>
-               </div>
-               <a href="items.php?do=Add" class="btn btn-sm btn-primary"> <i class="fa fa-plus" ></i> New Item</a>
+            </table>
+            </div>
+            <a href="items.php?do=Add" class="btn btn-sm btn-primary">
+                <i class="fa fa-plus" ></i> New Item
+            </a>
         </div>
+        <?php }else{
+            echo '<div class="container">';
+                echo '<div class="nice-message">There\'s No Items To Show</div>';
+                echo '<a href="items.php?do=Add" class="btn btn-sm btn-primary">
+                        <i class="fa fa-plus" ></i> New Item
+                        </a>';
+            echo '</div>';
+        } ?>
     <?php  
 
         }elseif ($do == 'Add') { ?>

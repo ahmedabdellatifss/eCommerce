@@ -69,7 +69,11 @@
                             <i class="fa fa-comments"></i>
                             <div class="info">
                                 Total Comments
-                                <span>0 </span>
+                                <span>
+                                    <a href="comments.php">
+                                        <?php echo countItems('c_id' , 'comments') ?>
+                                    </a>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -90,19 +94,23 @@
                             </div>
                             <div class="panel-body">
                                 <ul class="list-unstyled latest-users">
-                                    <?php                            
-                                        foreach ($latestUsers as $user) { 
-                                            echo '<li>' ;
-                                                echo $user['Username'] ;
-                                                echo '<a href="members.php?do=Edit&userid=' . $user['UserID'] . '">';
-                                                    echo '<span class="btn btn-success pull-right">' ;
-                                                        echo '<i class="fa fa-edit"></i> Edit';
-                                                            if ($user['RegStatus'] == 0) {
-                                                                echo "<a href='members.php?do=Activate&userid=" . $user['UserID'] ."' class='btn btn-info activate pull-right'><i class='fa fa-check'></i>Activate</a> ";
-                                                            }
-                                                    echo '</span>';
-                                                echo '</a>';
-                                            echo '</li>';
+                                    <?php
+                                        if (! empty($latestUsers)) {                         
+                                            foreach ($latestUsers as $user) { 
+                                                echo '<li>' ;
+                                                    echo $user['Username'] ;
+                                                    echo '<a href="members.php?do=Edit&userid=' . $user['UserID'] . '">';
+                                                        echo '<span class="btn btn-success pull-right">' ;
+                                                            echo '<i class="fa fa-edit"></i> Edit';
+                                                                if ($user['RegStatus'] == 0) {
+                                                                    echo "<a href='members.php?do=Activate&userid=" . $user['UserID'] ."' class='btn btn-info activate pull-right'><i class='fa fa-check'></i>Activate</a> ";
+                                                                }
+                                                        echo '</span>';
+                                                    echo '</a>';
+                                                echo '</li>';
+                                            }
+                                        }else{
+                                            echo 'There\'s No Members To Show';
                                         }
                                     ?>
                                 </ul>
@@ -119,19 +127,23 @@
                             </div>
                             <div class="panel-body">
                             <ul class="list-unstyled latest-users">
-                                    <?php                            
-                                        foreach ($latestItems as $item) { 
-                                            echo '<li>' ;
-                                                echo $item['Name'] ;
-                                                echo '<a href="items.php?do=Edit&itemid=' . $item['Item_ID'] . '">';
-                                                    echo '<span class="btn btn-success pull-right">' ;
-                                                        echo '<i class="fa fa-edit"></i> Edit';
-                                                            if ($item['Approve'] == 0) {
-                                                                echo "<a href='items.php?do=Approve&itemid=" . $item['Item_ID'] ."' class='btn btn-info activate pull-right'><i class='fa fa-check'></i>Activate</a> ";
-                                                            }
-                                                    echo '</span>';
-                                                echo '</a>';
-                                            echo '</li>';
+                                    <?php
+                                        if (! empty($latestItems)) {                            
+                                            foreach ($latestItems as $item) { 
+                                                echo '<li>' ;
+                                                    echo $item['Name'] ;
+                                                    echo '<a href="items.php?do=Edit&itemid=' . $item['Item_ID'] . '">';
+                                                        echo '<span class="btn btn-success pull-right">' ;
+                                                            echo '<i class="fa fa-edit"></i> Edit';
+                                                                if ($item['Approve'] == 0) {
+                                                                    echo "<a href='items.php?do=Approve&itemid=" . $item['Item_ID'] ."' class='btn btn-info activate pull-right'><i class='fa fa-check'></i>Activate</a> ";
+                                                                }
+                                                        echo '</span>';
+                                                    echo '</a>';
+                                                echo '</li>';
+                                            }
+                                        }else{
+                                            echo 'There\'s No Items To Show';
                                         }
                                     ?>
                                 </ul>
@@ -164,13 +176,17 @@
                                 $stmt->execute();
                                 
                                 $comments = $stmt->fetchAll();
+                                if (! empty($comments)) {
+                                    foreach ($comments as $comment) {
+                                        echo '<div class="comment-box">';
+                                            echo '<span class="member-n"><a href="members.php?do=Edit&userid=' . $comment['user_id'] . '">
+                                            ' . $comment['Member'] . '</a></span>';
+                                            echo '<p class="member-c">' . $comment['comment'] . '</p>';
 
-                                foreach ($comments as $comment) {
-                                    echo '<div class="comment-box">';
-                                        echo '<span class="member-n">' . $comment['Member'] . '</span>';
-                                        echo '<p class="member-c">' . $comment['comment'] . '</p>';
-
-                                    echo '</div>';
+                                        echo '</div>';
+                                    }
+                                }else{
+                                    echo 'There\'s No Comments To Show';
                                 }
                             ?>
 

@@ -11,6 +11,14 @@ body {
   top: 8px;
   color: red;
 }
+
+.nice-message {
+  padding: 10px;
+  background-color: #FFF;
+  margin: 10px 0;
+  border-left: 5px solid #080;
+}
+
 /*End  Main Rules */
 
 /* Start login Form  */
@@ -163,6 +171,7 @@ body {
   margin-right: 20px;
   position: relative;
   top: 10px;
+
 }
 .latest .comment-box .member-c {
   width: calc(100% - 100px);
