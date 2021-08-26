@@ -393,8 +393,8 @@
 
                 if ($count == 1) {
 
-                    echo 'Sorry This User Is Exist';
                     $theMsg = "<div class='alert alert-danger'>Sorry This User Is Exist </div>";
+                    
                     redirectHome( $theMsg , 'back');
 
                 } else {
