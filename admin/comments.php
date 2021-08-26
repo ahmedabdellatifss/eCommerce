@@ -35,7 +35,10 @@
                                 INNER JOIN 
                                     users
                                 ON 
-                                    users.UserID = comments.user_id ");
+                                    users.UserID = comments.user_id
+                                ORDER BY 
+                                    c_id DESC
+                                ");
        $stmt->execute();
 
        // Assign to Variable 

@@ -22,6 +22,8 @@
 
         $latestItems = getLatest("*" , "items" , "Item_ID" , $numItems); // Latest Items Array
 
+        $numComments = 4;  // Number of Comments
+
 
         ?>
         
@@ -157,7 +159,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <i class="fa fa-comments-o"></i>
-                                    LatestComments 
+                                    Latest <?php echo $numComments ?> Comments 
                                 <span class="pull-right toggle-info">
                                     <i class="fa fa-plus fa-lg"></i>
                                 </span>
@@ -171,7 +173,9 @@
                                                         INNER JOIN 
                                                             users
                                                         ON 
-                                                            users.UserID = comments.user_id 
+                                                            users.UserID = comments.user_id
+                                                        ORDER BY c_id DESC    
+                                                        LIMIT $numComments     
                                                         ");
                                 $stmt->execute();
                                 

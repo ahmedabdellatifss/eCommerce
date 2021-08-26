@@ -36,7 +36,11 @@
                                 INNER JOIN
                                     users 
                                 ON 
-                                    users.UserID = items.Member_ID");
+                                    users.UserID = items.Member_ID
+                                ORDER BY 
+                                    Item_ID DESC
+
+                                    ");
 
        // Execute the Statement
 

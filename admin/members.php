@@ -31,7 +31,7 @@
 
             }
        // Select All Users Except Admin
-       $stmt = $con->prepare("SELECT * FROM users WHERE GroupID != 1 $query");
+       $stmt = $con->prepare("SELECT * FROM users WHERE GroupID != 1 $query ORDER BY UserID DESC");
        $stmt->execute();
 
        // Assign to Variable 
@@ -378,15 +378,38 @@
             // Check if ther's no error proceed the upadate operation 
             if (empty($formErrors)) {
 
-                // Update the database with this info
 
-                $stmt = $con->prepare("UPDATE users SET Username = ? , Email = ? , FullName = ? , Password = ? WHERE UserID = ?");
-                $stmt->execute(array($user , $email , $name , $pass , $id));
+                $stmt2 = $con->prepare("SELECT 
+                                            *
+                                        FROM
+                                            users
+                                        WHERE 
+                                            Username = ? 
+                                        AND 
+                                            UserID != ? ");
+                $stmt2->execute(array($user, $id)); 
+                
+                $count = $stmt2->rowCount();
 
-                // Echo Success Message
-                $theMsg = "<div class='alert alert-success'>" .  $stmt->rowCount() . ' - Record Updated </div>';
+                if ($count == 1) {
 
-                redirectHome( $theMsg , 'back' , 4);
+                    echo 'Sorry This User Is Exist';
+                    $theMsg = "<div class='alert alert-danger'>Sorry This User Is Exist </div>";
+                    redirectHome( $theMsg , 'back');
+
+                } else {
+
+                    // Update the database with this info
+                    $stmt = $con->prepare("UPDATE users SET Username = ? , Email = ? , FullName = ? , Password = ? WHERE UserID = ?");
+
+                    $stmt->execute(array($user , $email , $name , $pass , $id));
+
+                    // Echo Success Message
+                    $theMsg = "<div class='alert alert-success'>" .  $stmt->rowCount() . ' - Record Updated </div>';
+
+                    redirectHome( $theMsg , 'back' , 4);
+
+                }
 
             }
 
