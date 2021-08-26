@@ -1,6 +1,32 @@
 <?php 
-   
-   /**
+
+
+
+        /**
+         ** Get Records Function v1.0
+         ** Function To Get Categories From Database 
+         ** 
+         */
+
+        function getCat() {  //#82
+
+            global $con ;
+
+            $getCat = $con->prepare("SELECT * FROM categories ORDER BY ID DESC");
+
+            $getCat->execute();
+
+            $cats = $getCat->fetchAll();
+
+            return $cats;
+
+        }
+
+
+
+
+
+    /**
     *  Title Function v1.0
     * Title Function That Echo The Page Title In case the page  
     * Has the variable $pageTitle And Echo Defualt title for other pages

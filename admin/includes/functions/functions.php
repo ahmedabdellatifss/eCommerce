@@ -1,6 +1,6 @@
 <?php 
-   
-   /**
+
+    /**
     *  Title Function v1.0
     * Title Function That Echo The Page Title In case the page  
     * Has the variable $pageTitle And Echo Defualt title for other pages
@@ -126,7 +126,7 @@
          ** ASC  = tsa3odian
          */
 
-         function getLatest($select , $table , $order , $limit = 5 ) {
+        function getLatest($select , $table , $order , $limit = 5 ) {
 
             global $con ;
 
@@ -138,4 +138,4 @@
 
             return $rows;
 
-         }
+        }
