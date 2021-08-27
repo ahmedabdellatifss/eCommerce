@@ -3,7 +3,7 @@
 
 
         /**
-         ** Get Records Function v1.0
+         ** Get Categories Function v1.0
          ** Function To Get Categories From Database 
          ** 
          */
@@ -12,7 +12,7 @@
 
             global $con ;
 
-            $getCat = $con->prepare("SELECT * FROM categories ORDER BY ID DESC");
+            $getCat = $con->prepare("SELECT * FROM categories ORDER BY ID ASC");
 
             $getCat->execute();
 
@@ -22,7 +22,25 @@
 
         }
 
+        /**
+         ** Get Items Function v1.0
+         ** Function To Get Items From Database 
+         ** 
+         */
 
+        function getItems($CatID) {  //#82
+
+            global $con ;
+
+            $getItems = $con->prepare("SELECT * FROM items WHERE Cat_ID = ? ORDER BY Item_ID DESC");
+
+            $getItems->execute(array($CatID));
+
+            $items = $getItems->fetchAll();
+
+            return $items;
+
+        }
 
 
 

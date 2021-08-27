@@ -1,12 +1,17 @@
-<?php
-
-    include 'init.php';
-
-    echo 'Welcome you are in categories page';
-
-    echo 'Your page Id is => ' . $_GET['pageid'];
 
 
-    include  $tpl . 'footer.php';
+<?php  include 'init.php';  ?>
 
-?>
+<div class="container">
+    <h1 class="text-center"><?php echo str_replace('-' , ' ' , $_GET['pagename'])  ?></h1>
+    <?php 
+
+        foreach (getItems($_GET['pageid']) as $item) { //#83
+            echo $item['Name'];
+        }
+
+    ?>
+</div>
+
+<?php  include  $tpl . 'footer.php'; ?>
+
