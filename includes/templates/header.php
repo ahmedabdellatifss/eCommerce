@@ -8,12 +8,16 @@
     <link rel="stylesheet" href="<?php echo $css; ?>font-awesome.min.css" />
     <link rel="stylesheet" href="<?php echo $css; ?>jquery-ui.css" />
     <link rel="stylesheet" href="<?php echo $css; ?>jquery.selectBoxIt.css" />
-    <link rel="stylesheet" href="<?php echo $css; ?>backend.css" />
+    <link rel="stylesheet" href="<?php echo $css; ?>front.css" />
 </head>
 
 <body>
     <div class="upper-bar">
-        Upper bar
+        <div class="container">
+            <a href="login.php">
+                <span class="pull-right">Login/signup</span>
+            </a>
+        </div>
     </div>
     <nav class="navbar navbar-inverse">
         <div class="container">

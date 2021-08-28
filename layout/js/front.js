@@ -3,22 +3,17 @@ $(function () {
 
     'use strict' ;
 
-    // Dashboard #74
-    $('.toggle-info').click(function () {
+    // Switch Bettween Login & Signup
 
-        $(this).toggleClass('selected').parent().next('.panel-body').fadeToggle(100);
+    $('.login-page h1 span').click(function () {
 
-        if($(this).hasClass('.selected')){
+        $(this).addClass('selected').siblings() .removeClass('selected');
 
-            $(this).html('<i class="fa fa-minus fa-lg"></i>');
+        $('.login-page form').hide();
 
-        }else{
-
-            $(this).html('<i class="fa fa-plus fa-lg"></i>');
-
-        }
-
+        $( '.' + $(this).data('class')).fadeIn(100);
     });
+
 
     // Trigger the Selectbox # 62
     $("select").selectBoxIt({
@@ -50,19 +45,6 @@ $(function () {
         }
     }); 
 
-    // Convert Password field to text field on hover
-
-    var passField = $('.password');
-
-    $('.show-pass').hover(function () {
-
-        passField.attr('type', 'text');
-
-    }, function () {
-    
-        passField.attr('type', 'password');
-
-    });
 
     // confirmation Message on Button delete in Member page
 
@@ -71,28 +53,6 @@ $(function () {
         return confirm('Are you sure?');
     });
 
-    // Category view Option
 
-    $('.cat h3').click(function () {
-
-        $(this).next('.full-view').fadeToggle(200);
-
-    });
-
-    $('.option span').click(function () {
-
-        $(this).addClass('active').siblings('span').removeClass('active');
-
-        if ($(this).data('view') === 'full') {
-
-            $('.cat .full-view').fadeIn(200);
-
-        }else {
-
-            $('.cat .full-view').fadeOut(200);
-
-        }
-
-    });
 
 }); 
