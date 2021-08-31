@@ -107,6 +107,14 @@ h1 {
   color: #B22020;
 }
 
+.login-page [data-class="login"] .selected {
+  color : #337ab7;
+}
+
+.login-page [data-class="signup"] .selected {
+  color : #337ab7;
+}
+
 .login-page h1 {
     color: #c0c0c0;
 }
