@@ -1,8 +1,14 @@
 <?php
-
     session_start();
     $pageTitle = 'Profile';
     include 'init.php';
+    if (isset($_SESSION['user']) ) {
+
+    $getUser = $con->prepare("SELECT * FROM  users WHERE Username = ?") ; #91
+
+    $getUser->execute(array($sessionUser));
+
+    $info = $getUser->fetch();
 
 
 ?>
@@ -13,7 +19,11 @@
         <div class="panel panel-primary">
             <div class="panel-heading">Main Information</div>
             <div class="panel-body">
-                Name: Ahemd
+                Name: <?php echo $info['Username'] ?> <br />
+                Email: <?php echo $info['Email'] ?> <br />
+                Full Name: <?php echo $info['FullName'] ?> <br />
+                Register Date: <?php echo $info['Date'] ?> <br />
+                Favourite Category:
             </div>
         </div>
     </div>
@@ -42,7 +52,9 @@
 </div>
 
 <?php
-    
+    } else {
+        header('Location: login.php');
+        exit();
+    }    
     include  $tpl . 'footer.php';
-
 ?>
