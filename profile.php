@@ -1,9 +1,7 @@
 <?php
 
     session_start();
-
     $pageTitle = 'Profile';
-
     include 'init.php';
 
 

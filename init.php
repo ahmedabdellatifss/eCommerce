@@ -1,6 +1,16 @@
 <?php 
 
+      // Error Reporting # 90
+
+      ini_set('display_errors', 'On');
+      error_reporting(E_ALL);
+
       include 'admin/connect.php';
+
+      $sessionUser = '';
+      if (isset($_SESSION['user'])) {   #90
+            $sessionUser = $_SESSION['user'] ;
+      }
 
       // Routes
 
