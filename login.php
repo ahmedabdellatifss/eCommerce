@@ -48,7 +48,24 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         }
 
     } else {
-        $test = $_POST['username'];
+        
+        $formErrors = array();
+
+        if (isset($_POST['username'])) {
+            $filterdUser = filter_var($_POST['username'] , FILTER_SANITIZE_STRING);
+            if (strlen($filterdUser) < 4 ) {
+                $formErrors[] = 'Username Must be larger than 4 characters';
+            }
+        }
+        if (isset($_POST['password']) && isset($_POST['password2'])) {
+            $pass1 = sha1($_POST['password']);
+            $pass2 = sha1($_POST['password2']);
+
+            if ($pass1 !== $pass2) {
+                $formErrors[] = ' Sorry password is not Match';
+            }
+
+        }
     }
 }
 ?>
@@ -138,7 +155,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     </form>
     <!-- End Signup  Form -->
     <div class="the-errors text-center">
-        <?php echo $test; ?>
+        <?php
+
+            if (!empty($formErrors)) {
+                foreach ($formErrors as $error) {
+                    echo $error . '<br>';
+                }
+            }
+
+        ?>
+
     </div>
 </div>
 
