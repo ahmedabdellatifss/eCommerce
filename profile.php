@@ -5,9 +5,7 @@
     if (isset($_SESSION['user']) ) {
 
     $getUser = $con->prepare("SELECT * FROM  users WHERE Username = ?") ; #91
-
     $getUser->execute(array($sessionUser));
-
     $info = $getUser->fetch();
 
 
@@ -34,7 +32,22 @@
         <div class="panel panel-primary">
             <div class="panel-heading">My Ads</div>
             <div class="panel-body">
-                Test : Ads
+                <div class="row">
+                    <?php 
+                        foreach (getItems( 'Member_ID' , $info['UserID']) as $item) { //#83
+                            echo '<div class="col-sm-6 col-md-3">';
+                                echo'<div class="thumbnail item-box">';
+                                    echo '<span class="price-tag">' . $item['Price']. '</span>';
+                                    echo '<img class="img-responsive" src="img.png" alt="" />';
+                                    echo '<div class="caption">';
+                                        echo '<h3>' . $item['Name']. '</h3>';
+                                        echo '<p>' . $item['Description']. '</p>';
+                                    echo '</div>';
+                                echo '</div>';
+                            echo '</div>';    
+                        }
+                    ?>
+                </div>
             </div>
         </div>
     </div>
@@ -45,7 +58,25 @@
         <div class="panel panel-primary">
             <div class="panel-heading">Latest Comments</div>
             <div class="panel-body">
-                Latest: Comments
+                
+                <?php 
+                    $stmt = $con->prepare(" SELECT comment FROM comments WHERE user_id = ? ");
+                    // Execute the Statement
+                    $stmt->execute(array($info['UserID']));
+                    // Assign to Variable 
+                    $comments = $stmt->fetchAll();
+
+                    if (! empty($comments) ) {
+
+                        foreach ($comments as $comment ) 
+
+                            echo '<p>' . $comment['comment'] . '</p>';
+
+                    } else {
+
+                        echo 'There\'s No Comments to show '; 
+                    }
+                ?>    
             </div>
         </div>
     </div>

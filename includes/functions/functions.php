@@ -28,13 +28,13 @@
          ** 
          */
 
-        function getItems($CatID) {  //#82
+        function getItems($where , $value) {  //#82
 
             global $con ;
 
-            $getItems = $con->prepare("SELECT * FROM items WHERE Cat_ID = ? ORDER BY Item_ID DESC");
+            $getItems = $con->prepare("SELECT * FROM items WHERE $where = ? ORDER BY Item_ID DESC");
 
-            $getItems->execute(array($CatID));
+            $getItems->execute(array($value));
 
             $items = $getItems->fetchAll();
 
@@ -51,7 +51,7 @@
     function checkUserStatus($user) {
 
     global $con ;
-    
+
     $stmtx = $con->prepare("SELECT
                                 Username , RegStatus
                             FROM 

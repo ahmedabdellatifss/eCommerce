@@ -489,8 +489,8 @@
                     <!-- End submit Field -->
                 </form>
 
-
                 <?php 
+                // Select All users Except admin
                 $stmt = $con->prepare("SELECT
                                     comments.* , users.Username AS Member
                                 FROM 
