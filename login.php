@@ -1,4 +1,5 @@
 <?php
+    ob_start();
     session_start();
     $pageTitle = 'Login';
 
@@ -11,37 +12,43 @@
     // Check if the user coming from HTTP Post Requst
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-    $user = $_POST['username'];
-    $pass = $_POST['password'];
-    $hashePass = sha1($pass);
+    if (isset($_POST['login'])) {
 
-    // check if the User Exist in Database
+        $user = $_POST['username'];
+        $pass = $_POST['password'];
+        $hashePass = sha1($pass);
 
-    $stmt = $con->prepare("SELECT
-                                Username , Password
-                            FROM 
-                                users 
-                            WHERE 
-                                Username = ?  
-                            AND
-                                Password  = ?                          
-                            ");
+        // check if the User Exist in Database
 
-    $stmt->execute(array($user , $hashePass));
+        $stmt = $con->prepare("SELECT
+                                    Username , Password
+                                FROM 
+                                    users 
+                                WHERE 
+                                    Username = ?  
+                                AND
+                                    Password  = ?                          
+                                ");
 
-    $count = $stmt->rowCount(); // rowCount it's count how many rows he is find 
+        $stmt->execute(array($user , $hashePass));
 
-    // If $count > 0 this mean the Database Contain Record About this Username
+        $count = $stmt->rowCount(); // rowCount it's count how many rows he is find 
 
-    if ($count > 0) {
+        // If $count > 0 this mean the Database Contain Record About this Username
 
-      $_SESSION['user'] = $user;      // Register Session Name 
+        if ($count > 0) {
+
+            $_SESSION['user'] = $user;      // Register Session Name 
 
 
-      header('location: index.php');      // Redirect To Dashboard Page
+            header('location: index.php');      // Redirect To Dashboard Page
 
-    exit();
+            exit();
 
+        }
+
+    } else {
+        $test = $_POST['username'];
     }
 }
 ?>
@@ -78,6 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             type="submit" 
             class = "btn btn-primary btn-block" 
             value="Login"
+            name="login"
         >
     </form>
 
@@ -85,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     <!-- Start Signup  Form -->
 
-    <form class="signup" action="">
+    <form class="signup" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" >
         <div class="input-container">
             <input 
                 type="text" 
@@ -125,13 +133,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             type="submit" 
             class = "btn btn-success btn-block" 
             value="Signup"
+            name="signup"
         >
     </form>
     <!-- End Signup  Form -->
+    <div class="the-errors text-center">
+        <?php echo $test; ?>
+    </div>
 </div>
 
 <?php
 
     include $tpl . 'footer.php';
-
+    ob_end_flush();
 ?>
