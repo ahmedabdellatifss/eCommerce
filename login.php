@@ -58,6 +58,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             }
         }
         if (isset($_POST['password']) && isset($_POST['password2'])) {
+            if (empty($_POST['password'])) {
+                $formErrors[] = 'Sorry Password Cant Be Empty';
+            }
             $pass1 = sha1($_POST['password']);
             $pass2 = sha1($_POST['password2']);
 
@@ -65,6 +68,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $formErrors[] = ' Sorry password is not Match';
             }
 
+        }
+        if (isset($_POST['email'])) {
+            $filterdEmail = filter_var($_POST['email'] , FILTER_SANITIZE_EMAIL);
+            if (filter_var($filterdEmail , FILTER_VALIDATE_EMAIL ) != true ) {
+                $formErrors[] = 'This Email Is Not Valid';
+            
+            }
         }
     }
 }
@@ -80,7 +90,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     <form class="login" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
         <div class="input-container">
-            <input 
+            <input
+                pattern=".{4,8}" 
+                title="UserName Must be 4 & 8 characters"
                 type="text" 
                 class = "form-control"
                 name="username" 
@@ -90,12 +102,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             />
         </div>
         <div class="input-container">
-            <input 
+            <input
+                minlength="4"
                 type="password" 
                 class = "form-control" 
                 name="password"  
                 autocomplete="new-password" 
                 placeholder="Type your Password"
+                required
             />
         </div>
         <input 
@@ -113,6 +127,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <form class="signup" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" >
         <div class="input-container">
             <input 
+                pattern=".{4,12}" 
+                title="UserName Must be 4 & 12 characters"
+                required
                 type="text" 
                 class = "form-control" 
                 name="username" 
@@ -122,20 +139,24 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </div>
         <div class="input-container">
             <input 
+            minlength="4"
                 type="password" 
                 class = "form-control" 
                 name="password"  
                 autocomplete="new-password" 
                 placeholder="Type a Complex Password"
+                required
             />
         </div>
         <div class="input-container">
-            <input 
+            <input
+                minlength="4" 
                 type="password" 
                 class = "form-control" 
                 name="password2"  
                 autocomplete="new-password" 
                 placeholder="Type a password again"
+                required
             />
         </div>
         <div class="input-container">
