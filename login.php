@@ -51,30 +51,73 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         
         $formErrors = array();
 
-        if (isset($_POST['username'])) {
-            $filterdUser = filter_var($_POST['username'] , FILTER_SANITIZE_STRING);
+        $username   = $_POST['username'];
+        $password   = $_POST['password'];
+        $password2  = $_POST['password2'];
+        $email      = $_POST['email'];
+
+        if (isset($username)) {
+            $filterdUser = filter_var($username , FILTER_SANITIZE_STRING);
             if (strlen($filterdUser) < 4 ) {
                 $formErrors[] = 'Username Must be larger than 4 characters';
             }
         }
-        if (isset($_POST['password']) && isset($_POST['password2'])) {
-            if (empty($_POST['password'])) {
+        if (isset($password) && isset($password2)) {
+            if (empty($password)) {
                 $formErrors[] = 'Sorry Password Cant Be Empty';
             }
-            $pass1 = sha1($_POST['password']);
-            $pass2 = sha1($_POST['password2']);
+            $pass1 = sha1($password);
+            $pass2 = sha1($password2);
 
             if ($pass1 !== $pass2) {
                 $formErrors[] = ' Sorry password is not Match';
             }
 
         }
-        if (isset($_POST['email'])) {
-            $filterdEmail = filter_var($_POST['email'] , FILTER_SANITIZE_EMAIL);
+        if (isset($email)) {
+            $filterdEmail = filter_var($email , FILTER_SANITIZE_EMAIL);
             if (filter_var($filterdEmail , FILTER_VALIDATE_EMAIL ) != true ) {
                 $formErrors[] = 'This Email Is Not Valid';
             
             }
+        }
+
+          // Check if ther's no error proceed the user Add  
+        if (empty($formErrors)) {
+
+            // Check if user Exist in Database
+
+            $check = checkItem("Username" , "users" , $username);
+
+            if ($check == 1){
+
+                $formErrors[] = 'Sorry This User Is Exists';
+
+
+            }else{
+
+            
+                // Insert User Info in  the database 
+
+                $stmt = $con->prepare("INSERT INTO 
+                                            users( Username , Password , Email  , RegStatus , Date ) 
+                                        VALUES(:zuser   , :zpass ,  :zmail , 0 ,now()) "); // this values to send to database
+                $stmt->execute(array(
+                // Key  => value
+                'zuser' => $username,
+                'zpass' =>sha1($password),
+                'zmail' => $email,
+
+                ));                                
+
+                // Echo Success Message
+
+                $succesMsg = 'Congrats You Are Now Registered user';
+
+            
+
+            }
+
         }
     }
 }
@@ -176,17 +219,26 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     </form>
     <!-- End Signup  Form -->
     <div class="the-errors text-center">
-        <?php
+		<?php 
 
-            if (!empty($formErrors)) {
-                foreach ($formErrors as $error) {
-                    echo $error . '<br>';
-                }
-            }
+			if (!empty($formErrors)) {
 
-        ?>
+				foreach ($formErrors as $error) {
 
-    </div>
+					echo '<div class="msg error">' . $error . '</div>';
+
+				}
+
+			}
+
+			if (isset($succesMsg)) {
+
+				echo '<div class="msg success">' . $succesMsg . '</div>';
+
+			}
+            
+		?>
+	</div>
 </div>
 
 <?php

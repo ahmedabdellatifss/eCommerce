@@ -94,7 +94,8 @@ h1 {
 
 /* Start Login page */
 
-.login-page form {
+.login-page form,
+.the-errors       {
   max-width : 380px;
   margin : auto;
 }
@@ -127,6 +128,21 @@ h1 {
   display: none;
 }
 
+.the-errors .msg {
+  padding: 10px;
+  text-align: left;
+  border-left: 5px solid #cd6858;
+  background-color: #fff;
+  margin-bottom: 8px;
+  border-right: 1px solid #e0e0e0;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  color: #919191;
+}
+
+.the-errors .error {
+  border-left: 5px solid #cd6858;
+}
 /* End Login page */
 
 /* Start Categories Page */
