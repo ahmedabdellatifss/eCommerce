@@ -21,6 +21,13 @@ h1 {
   top: 7px;
   color: red;
 }
+.main-form .asterisk {
+  font-size: 30px;
+  position: absolute;
+  right: 30px;
+  top: 8px;
+  color: red;
+}
 
 .nice-message {
   padding: 10px;

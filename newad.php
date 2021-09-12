@@ -4,61 +4,70 @@
     include 'init.php';
     if (isset($_SESSION['user']) ) {
 
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        echo $_POST['name'] . '<br>' ;
+        echo $_POST['description'] . '<br>' ;
+    }    
+
 
 ?>
-<h1 class="text-center">Create New Ad</h1>
+<h1 class="text-center"><?php echo $pageTitle ?></h1>
 
 <div class="create-ad block">
     <div class="container">
         <div class="panel panel-primary">
-            <div class="panel-heading">Create New Ad</div>
+            <div class="panel-heading"><?php echo $pageTitle ?></div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-8">
 
-                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="form-horizontal" method="POST">
+                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="form-horizontal main-form" method="POST">
                     <!-- Start Name Field -->
                     <div class="form-group form-group-lg">
-                        <label for="" class='col-sm-2 control-label'><?php echo lang('NAME') ?></label>
+                        <label for="" class='col-sm-3 control-label'><?php echo lang('NAME') ?></label>
                         <div class="col-sm-10 col-md-9">
                             <input type="text"
-                                class="form-control live-name"
+                                class="form-control live"
                                 name='name'
                                 required='required'
-                                    placeholder="Name of the Item" />
+                                placeholder="Name of the Item" 
+                                data-class=".live-title"/>
                         </div>
                     </div>
                     <!-- End Name Field -->
 
                     <!-- Start Description Field -->
                     <div class="form-group form-group-lg">
-                        <label for="" class='col-sm-2 control-label'><?php echo lang('DESCRIPTION') ?></label>
+                        <label for="" class='col-sm-3 control-label'><?php echo lang('DESCRIPTION') ?></label>
                         <div class="col-sm-10 col-md-9">
                             <input type="text"
-                                class="form-control live-desc"
+                                class="form-control live"
                                 name='description'
                                 required='required'
-                                placeholder="Description of the Item" />
+                                placeholder="Description of the Item" 
+                                data-class=".live-desc"/>
                         </div>
                     </div>
                     <!-- End Description Field -->
 
                     <!-- Start Price Field -->
                     <div class="form-group form-group-lg">
-                        <label for="" class='col-sm-2 control-label'><?php echo lang('PRICE') ?></label>
+                        <label for="" class='col-sm-3 control-label'><?php echo lang('PRICE') ?></label>
                         <div class="col-sm-10 col-md-9">
                             <input type="text"
-                                class="form-control live-price"
+                                class="form-control live"
                                 name='price'
                                 required='required'
-                                placeholder="Price of the Item" />
+                                placeholder="Price of the Item" 
+                                data-class=".live-price"/>
                         </div>
                     </div>
                     <!-- End Price Field -->
 
                     <!-- Start Country Field -->
                     <div class="form-group form-group-lg">
-                        <label for="" class='col-sm-2 control-label'><?php echo lang('COUNTRY') ?></label>
+                        <label for="" class='col-sm-3 control-label'><?php echo lang('COUNTRY') ?></label>
                         <div class="col-sm-10 col-md-9">
                             <input type="text"
                                 class="form-control"
@@ -71,7 +80,7 @@
 
                     <!-- Start Status Field -->
                     <div class="form-group form-group-lg">
-                        <label for="" class='col-sm-2 control-label'><?php echo lang('STATUS') ?></label>
+                        <label for="" class='col-sm-3 control-label'><?php echo lang('STATUS') ?></label>
                         <div class="col-sm-10 col-md-9">
                             <select name="status">
                                 <option value="0">...</option>
@@ -86,7 +95,7 @@
 
                     <!-- Start Categories Field -->
                     <div class="form-group form-group-lg">
-                        <label for="" class='col-sm-2 control-label'><?php echo lang('CATEGORY') ?></label>
+                        <label for="" class='col-sm-3 control-label'><?php echo lang('CATEGORY') ?></label>
                         <div class="col-sm-10 col-md-9">
                             <select name="category">
                                 <option value="0">...</option>
@@ -109,7 +118,7 @@
 
                     <!-- Start submit Field -->
                     <div class="form-group form-group-lg">
-                        <div class="col-sm-offset-2 col-sm-10">
+                        <div class="col-sm-offset-3 col-sm-9">
                             <input type="submit"
                                 class="btn btn-primary btn-sm"
                                 value="<?php echo lang('ADD_BUTTON') ?>" />
@@ -120,11 +129,13 @@
                     </div>
                     <div class="col-md-4">
                         <div class="thumbnail item-box live-preview">
-                            <span class="price-tag"> 0 </span>
+                            <span class="price-tag"> 
+                                $<span class="live-price"></span>
+                            </span>
                             <img class="img-responsive" src="img.png" alt="" />
                             <div class="caption">
-                                <h3>Title</h3>
-                                <p>Description </p>
+                                <h3 class="live-title">Title</h3>
+                                <p class="live-desc">Description </p>
                             </div>
                         </div>
                     </div>
