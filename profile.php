@@ -49,22 +49,26 @@
         <div class="panel panel-primary">
             <div class="panel-heading">My Ads</div>
             <div class="panel-body">
-                <div class="row">
-                    <?php 
-                        foreach (getItems( 'Member_ID' , $info['UserID']) as $item) { //#83
-                            echo '<div class="col-sm-6 col-md-3">';
-                                echo'<div class="thumbnail item-box">';
-                                    echo '<span class="price-tag">' . $item['Price']. '</span>';
-                                    echo '<img class="img-responsive" src="img.png" alt="" />';
-                                    echo '<div class="caption">';
-                                        echo '<h3>' . $item['Name']. '</h3>';
-                                        echo '<p>' . $item['Description']. '</p>';
+                    <?php
+                        if (! empty(getItems( 'Member_ID' , $info['UserID'] ) ) ) {
+                            echo '<div class="row">';
+                            foreach (getItems( 'Member_ID' , $info['UserID']) as $item) { //#83
+                                echo '<div class="col-sm-6 col-md-3">';
+                                    echo'<div class="thumbnail item-box">';
+                                        echo '<span class="price-tag">' . $item['Price']. '</span>';
+                                        echo '<img class="img-responsive" src="img.png" alt="" />';
+                                        echo '<div class="caption">';
+                                            echo '<h3>' . $item['Name']. '</h3>';
+                                            echo '<p>' . $item['Description']. '</p>';
+                                        echo '</div>';
                                     echo '</div>';
-                                echo '</div>';
-                            echo '</div>';    
+                                echo '</div>'; 
+                            }  
+                            echo '</div>';                         
+                        }else {
+                            echo 'Sorry There\' No Ads to show Create <a href="newad.php"> New Ad</a>';
                         }
                     ?>
-                </div>
             </div>
         </div>
     </div>
