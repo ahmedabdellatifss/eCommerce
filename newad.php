@@ -6,8 +6,14 @@
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        echo $_POST['name'] . '<br>' ;
-        echo $_POST['description'] . '<br>' ;
+        $formErrors = array();
+
+        $name     = $_POST['name'];
+        $desc     = $_POST['description'];
+        $price    = $_POST['price'];
+        $country  = $_POST['country'];
+        $status   = $_POST['status'];
+        $category = $_POST['category'];
     }    
 
 
@@ -140,6 +146,16 @@
                         </div>
                     </div>
                 </div>
+                <!-- Satrt Looping  in Errors -->
+                <?php
+
+                    if (! empty($formErrors)) {
+                        foreach ($formErrors as $error) {
+                            echo '<div class ="alert alert-danger">' . $error . '</div>';
+                        }
+                    }
+
+                ?>
             </div>
         </div>
     </div>
