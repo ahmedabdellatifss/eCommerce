@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // check if the User Exist in Database
 
         $stmt = $con->prepare("SELECT
-                                    Username , Password
+                                    UserID , Username , Password
                                 FROM 
                                     users 
                                 WHERE 
@@ -32,6 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         $stmt->execute(array($user , $hashePass));
 
+        $get = $stmt->fetch();
+
         $count = $stmt->rowCount(); // rowCount it's count how many rows he is find 
 
         // If $count > 0 this mean the Database Contain Record About this Username
@@ -40,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             $_SESSION['user'] = $user;      // Register Session Name 
 
+            $_SESSION['uid'] = $get['UserID']; // Register User ID in Session
 
             header('location: index.php');      // Redirect To Dashboard Page
 

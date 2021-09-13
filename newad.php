@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $pageTitle = 'Create New Ad';
+    $pageTitle = 'Create New Item';
     include 'init.php';
     if (isset($_SESSION['user']) ) {
 
@@ -8,12 +8,61 @@
 
         $formErrors = array();
 
-        $name     = $_POST['name'];
-        $desc     = $_POST['description'];
-        $price    = $_POST['price'];
-        $country  = $_POST['country'];
-        $status   = $_POST['status'];
-        $category = $_POST['category'];
+        $name     =  filter_var($_POST['name'], FILTER_SANITIZE_STRING );
+        $desc     =  filter_var($_POST['description'] ,FILTER_SANITIZE_STRING );
+        $price    =  filter_var($_POST['price'] , FILTER_SANITIZE_NUMBER_INT );
+        $country  =  filter_var($_POST['country'], FILTER_SANITIZE_STRING );
+        $status   =  filter_var($_POST['status'] , FILTER_SANITIZE_NUMBER_INT );
+        $category =  filter_var($_POST['category'] , FILTER_SANITIZE_NUMBER_INT );
+
+        if (strlen($name) < 4 ) {
+            $formErrors[] = 'Item Title Must Be At least 4 Characters';
+        }
+        if (strlen($desc) < 10 ) {
+            $formErrors[] = 'Item Description  Must Be At least 10 Characters';
+        }
+        if (strlen($country) < 2 ) {
+            $formErrors[] = 'Item Country Must Be At least 2 Characters';
+        }
+        if (empty($price) ) {
+            $formErrors[] = 'Item price Must Be Not Empty';
+        }
+        if (empty($status) ) {
+            $formErrors[] = 'Item status Must Be Not Empty';
+        }
+        if (empty($category) ) {
+            $formErrors[] = 'Item category Must Be Not Empty';
+        }
+
+        
+        // Check if ther's no error proceed the upadate operation 
+        if (empty($formErrors)) {
+
+            // Insert Items Info in  the database 
+
+            $stmt = $con->prepare("INSERT INTO 
+            items( Name , Description , Price ,  Country_Made , Status , Add_Date , Cat_ID , Member_ID ) 
+            VALUES(:zname   , :zdesc ,    :zprice , :zcountry , :zstatus ,now() , :zcat , :zmember )"); // this values to send to database
+                                                                                    // now() Not need to bind becuose it is by default in mysql 
+            $stmt->execute(array(
+            // Key  => value
+            'zname'    => $name,
+            'zdesc'    => $desc,
+            'zprice'   => $price,
+            'zcountry' => $country,
+            'zstatus'  => $status,
+            'zcat'     => $category,
+            'zmember'  => $_SESSION['uid'],
+            ));                                
+
+            // Echo Success Message
+            if ($stmt) {
+                echo 'Item Added';
+            }
+            
+        }
+
+        
     }    
 
 

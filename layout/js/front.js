@@ -54,7 +54,7 @@ $(function () {
     });
 
 
-    $('.live').keyup(function () {
+    $('.live').keyup(function () { // #99
 
         $($(this).data('class')).text($(this).val());
 
