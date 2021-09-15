@@ -190,5 +190,11 @@ h1 {
   display: inline-block;
   width: 120px;
 }
+
+.thumbnail .date {
+  text-align: right;
+  font-size: #AAA;
+  font-weight: bold;
+}
 /* End Profile Page */
 
