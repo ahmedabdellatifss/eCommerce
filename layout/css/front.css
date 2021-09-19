@@ -3,6 +3,7 @@
 body {
   background-color: #f4f4f4;
   font-size: 16px;
+  height: 3000px;
 }
 
 h1 {
@@ -218,6 +219,17 @@ h1 {
 .item-info ul li span {
   display: inline-block;
   width: 120px;
+}
+.add-comment h3 {
+  margin: 0 0 10px;
+}
+
+.add-comment textarea {
+  display: block;
+  margin-bottom: 10px;
+  width: 500px;
+  height: 120px;
+
 }
 /* End Show Item Page  */
 
