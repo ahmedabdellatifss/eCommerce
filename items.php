@@ -82,11 +82,10 @@
                     <textarea name='comment'></textarea>
                     <input class="btn btn-primary" type="submit" value="Add Comment">
                 </form>
-                <?php
+                <?php 
+					if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                        
-                        $comment 	= filter_var($_POST['comment'], FILTER_SANITIZE_STRING);
+						$comment 	= filter_var($_POST['comment'], FILTER_SANITIZE_STRING);
 						$itemid 	= $item['Item_ID'];
 						$userid 	= $_SESSION['uid'];
 
@@ -115,9 +114,9 @@
 							echo '<div class="alert alert-danger">You Must Add Comment</div>';
 
 						}
-                    }
 
-                ?>
+					}
+				?>
             </div>
         </div>
     </div>
@@ -129,14 +128,39 @@
     <!-- Start Add Comment  -->
 
     <hr class="custom-hr">
-    <div class="row">
-        <div class="col-md-3">
-            user Image
-        </div>
-        <div class="col-md-9">
-            User Comment
-        </div>
-    </div>
+    <?php 
+            // Select All Users Except Admin
+            $stmt = $con->prepare("SELECT
+                                        comments.* , users.Username   AS Member
+                                    FROM 
+                                        comments
+                                    INNER JOIN 
+                                        users
+                                    ON 
+                                        users.UserID = comments.user_id
+                                    WHERE
+                                        item_id = ?
+                                    AND
+                                        status = 1        
+                                    ORDER BY 
+                                        c_id DESC
+                                ");
+            $stmt->execute(array($item['Item_ID']));
+
+            // Assign to Variable 
+            $comments = $stmt->fetchAll();
+
+
+        ?> 
+
+    <?php    
+        foreach ($comments as $comment) {
+            echo '<div class="row">';
+                echo '<div class="col-md-3">' . $comment['Member'] . '</div>';
+                echo '<div class="col-md-9">' . $comment['comment'] . '</div>';
+            echo '</div>';
+        }
+        ?>     
 </div>
 
 <?php
