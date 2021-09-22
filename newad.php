@@ -30,7 +30,7 @@
         if (empty($status) ) {
             $formErrors[] = 'Item status Must Be Not Empty';
         }
-        if (empty($category) ) {
+        if (empty ($category) ) {
             $formErrors[] = 'Item category Must Be Not Empty';
         }
 

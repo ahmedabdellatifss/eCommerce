@@ -153,14 +153,20 @@
 
         ?> 
 
-    <?php    
-        foreach ($comments as $comment) {
-            echo '<div class="row">';
-                echo '<div class="col-md-3">' . $comment['Member'] . '</div>';
-                echo '<div class="col-md-9">' . $comment['comment'] . '</div>';
-            echo '</div>';
-        }
-        ?>     
+    <?php foreach ($comments as $comment) { ?>
+        <div class="comment-box">
+            <div class="row">
+                <div class="col-sm-2 text-center">
+                    <img class="img-responsive img-thumbnail img-circle center-block" src="img.png" alt="" />
+                    <?php echo $comment['Member'] ?>
+                </div>
+                <div class="col-sm-10">
+                    <p class="lead"><?php echo $comment['comment'] ?></p>
+                </div>
+            </div>
+        </div>
+        <hr class="custom-hr" >
+    <?php  } ?>     
 </div>
 
 <?php
