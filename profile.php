@@ -53,7 +53,7 @@
                     <?php
                         if (! empty(getItems( 'Member_ID' , $info['UserID'] ) ) ) {
                             echo '<div class="row">';
-                            foreach (getItems( 'Member_ID' , $info['UserID']) as $item) { //#83
+                            foreach (getItems( 'Member_ID' , $info['UserID'] , 1) as $item) { //#83
                                 echo '<div class="col-sm-6 col-md-3">';
                                     echo'<div class="thumbnail item-box">';
                                         echo '<span class="price-tag">$' . $item['Price']. '</span>';
