@@ -82,7 +82,10 @@
                     <div class="form-group form-group-lg">
                         <label for="" class='col-sm-3 control-label'><?php echo lang('NAME') ?></label>
                         <div class="col-sm-10 col-md-9">
-                            <input type="text"
+                            <input
+                                pattern=".{4,}"
+                                title="This Field Require At Least 4 Characters"
+                                type="text"
                                 class="form-control live"
                                 name='name'
                                 required='required'
@@ -96,7 +99,10 @@
                     <div class="form-group form-group-lg">
                         <label for="" class='col-sm-3 control-label'><?php echo lang('DESCRIPTION') ?></label>
                         <div class="col-sm-10 col-md-9">
-                            <input type="text"
+                            <input
+                                pattern=".{10,}"
+                                title="This Field Require At Least 10 Characters"
+                                type="text"
                                 class="form-control live"
                                 name='description'
                                 required='required'
@@ -110,7 +116,8 @@
                     <div class="form-group form-group-lg">
                         <label for="" class='col-sm-3 control-label'><?php echo lang('PRICE') ?></label>
                         <div class="col-sm-10 col-md-9">
-                            <input type="text"
+                            <input 
+                                type="text"
                                 class="form-control live"
                                 name='price'
                                 required='required'
@@ -124,7 +131,8 @@
                     <div class="form-group form-group-lg">
                         <label for="" class='col-sm-3 control-label'><?php echo lang('COUNTRY') ?></label>
                         <div class="col-sm-10 col-md-9">
-                            <input type="text"
+                            <input 
+                                type="text"
                                 class="form-control"
                                 name='country'
                                 required='required'
@@ -137,8 +145,8 @@
                     <div class="form-group form-group-lg">
                         <label for="" class='col-sm-3 control-label'><?php echo lang('STATUS') ?></label>
                         <div class="col-sm-10 col-md-9">
-                            <select name="status">
-                                <option value="0">...</option>
+                            <select name="status" required>
+                                <option value="">...</option>
                                 <option value="1">New</option>
                                 <option value="2">Like New</option>
                                 <option value="3">Used</option>
@@ -152,8 +160,8 @@
                     <div class="form-group form-group-lg">
                         <label for="" class='col-sm-3 control-label'><?php echo lang('CATEGORY') ?></label>
                         <div class="col-sm-10 col-md-9">
-                            <select name="category">
-                                <option value="0">...</option>
+                            <select name="category" required>
+                                <option value="">...</option>
                                 <?php 
 
                                     $stmt2 = $con->prepare("SELECT * FROM categories");
@@ -174,7 +182,8 @@
                     <!-- Start submit Field -->
                     <div class="form-group form-group-lg">
                         <div class="col-sm-offset-3 col-sm-9">
-                            <input type="submit"
+                            <input 
+                                type="submit"
                                 class="btn btn-primary btn-sm"
                                 value="<?php echo lang('ADD_BUTTON') ?>" />
                         </div>
