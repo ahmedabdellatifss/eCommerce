@@ -45,10 +45,10 @@
     </div>
 </div>
 
-<div class="my-ads block">
+<div id="my-ads" class="my-ads block">
     <div class="container">
         <div class="panel panel-primary">
-            <div class="panel-heading">My Ads</div>
+            <div class="panel-heading">My Items</div>
             <div class="panel-body">
                     <?php
                         if (! empty(getItems( 'Member_ID' , $info['UserID'] ) ) ) {

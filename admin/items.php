@@ -55,8 +55,8 @@
 
         <h1 class="text-center"><?php echo lang('MANAGE_ITEMS') ?></h1>
         <div class="container">
-               <div class="table-responsive">
-               <table class="main-table text-center table table-bordered">
+                <div class="table-responsive">
+                <table class="main-table text-center table table-bordered">
                     <tr>
                         <td>#ID</td>
                         <td>Name</td>
