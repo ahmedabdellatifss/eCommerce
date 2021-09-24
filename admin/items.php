@@ -80,18 +80,16 @@
                                 echo "<td>" . $item['Add_Date'] . "</td>";
                                 echo "<td>" . $item['category_name'] . "</td>";
                                 echo "<td>" . $item['Username'] . "</td>";
-                                echo "<td> 
-                                        <a href='items.php?do=Edit&itemid=" . $item['Item_ID'] ."' class='btn btn-success'><i class='fa fa-edit'></i>Edit</a> 
-                                        <a href='items.php?do=Delete&itemid=" . $item['Item_ID'] ."' class='btn btn-danger confirm'><i class='fa fa-close'></i>Delete</a> "; 
-                                        if ($item['Approve'] == 0) {
-                                            echo "<a 
-                                                href='items.php?do=Approve&itemid=" . $item['Item_ID'] ."' 
-                                                class='btn btn-info activate'>
-                                                <i class='fa fa-check'></i>Approve </a> ";
-                                            
-                                        }                                      
-                                echo  "</td>";
-                                
+                                echo "<td>
+										<a href='items.php?do=Edit&itemid=" . $item['Item_ID'] . "' class='btn btn-success'><i class='fa fa-edit'></i> Edit</a>
+										<a href='items.php?do=Delete&itemid=" . $item['Item_ID'] . "' class='btn btn-danger confirm'><i class='fa fa-close'></i> Delete </a>";
+										if ($item['Approve'] == 0) {
+											echo "<a 
+													href='items.php?do=Approve&itemid=" . $item['Item_ID'] . "' 
+													class='btn btn-info activate'>
+													<i class='fa fa-check'></i> Approve</a>";
+										}
+									echo "</td>";
                             echo "</tr>";
                         }
 

@@ -168,7 +168,14 @@ h1 {
   font-weight: bold;
   color: #FFF;
 }
-
+.item-box .approve-status {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background-color: #b85a5a;
+  color: #FFF;
+  padding: 3px 5px;
+}
 /* End Categories Page */
 
 

@@ -25,7 +25,10 @@
                             ON 
                                 users.UserID = items.Member_ID      
                             WHERE  
-                                item_ID = ? "); 
+                                item_ID = ? 
+                            AND 
+                                Approve = 1
+                            "); 
 
     // Execute Query
     $stmt->execute(array($itemid));
@@ -172,7 +175,9 @@
 <?php
 
     } else {
-        echo 'There\'s no such Id';
+        echo '<div class="container">';
+            echo '<div class="alert alert-danger">There\'s no such Id Or this Item is waiting for approval</div>';
+        echo '</div>' ;   
     }
 
     include  $tpl . 'footer.php';

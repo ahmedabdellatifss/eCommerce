@@ -56,6 +56,9 @@
                             foreach (getItems( 'Member_ID' , $info['UserID'] , 1) as $item) { //#83
                                 echo '<div class="col-sm-6 col-md-3">';
                                     echo'<div class="thumbnail item-box">';
+                                        if ($item['Approve'] == 0 ) { 
+                                            echo '<span class="approve-status">Waiting Approval </span>'; 
+                                        }
                                         echo '<span class="price-tag">$' . $item['Price']. '</span>';
                                         echo '<img class="img-responsive" src="img.png" alt="" />';
                                         echo '<div class="caption">';
