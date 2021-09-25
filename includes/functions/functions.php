@@ -1,5 +1,24 @@
 <?php 
 
+    /**
+     ** Get All Function v1.0
+        ** Function To Get All Records From Any Database Table 
+        ** 
+        */
+
+    function getAllFrom($tableName , $orderBy = NULL) {  //#82
+
+        global $con ;
+
+        $getAll = $con->prepare("SELECT * FROM $tableName ORDER BY $orderBy DESC");
+
+        $getAll->execute();
+
+        $all = $getAll->fetchAll();
+
+        return $all;
+
+    }
 
 
         /**

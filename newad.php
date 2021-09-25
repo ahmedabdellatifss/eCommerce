@@ -57,7 +57,7 @@
 
             // Echo Success Message
             if ($stmt) {
-                echo 'Item Added';
+                $succesMsg = 'Item Has Been Added';
             }
             
         }
@@ -163,12 +163,8 @@
                             <select name="category" required>
                                 <option value="">...</option>
                                 <?php 
-
-                                    $stmt2 = $con->prepare("SELECT * FROM categories");
-                                    $stmt2->execute();
-                                    $cats = $stmt2->fetchAll();
-                                    foreach ($cats as $cat) {
-                                    
+                                    $cats = getAllFrom('categories' , 'ID'); // #113
+                                    foreach ($cats as $cat) {    
                                         echo "<option value='" . $cat['ID'] . "'>" . $cat['Name'] . "</option>";
                                     
                                     }
@@ -212,8 +208,12 @@
                             echo '<div class ="alert alert-danger">' . $error . '</div>';
                         }
                     }
+                    if (isset($succesMsg)) {
+                        echo '<div class="alert alert-success">' . $succesMsg . '</div>';
+                    }
 
                 ?>
+                <!-- End Looping  in Errors -->
             </div>
         </div>
     </div>

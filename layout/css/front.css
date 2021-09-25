@@ -207,6 +207,10 @@ h1 {
   font-size: #AAA;
   font-weight: bold;
 }
+
+.information .btn {
+  margin-top: 10px;
+}
 /* End Profile Page */
 
 /* Start Show Item Page  */

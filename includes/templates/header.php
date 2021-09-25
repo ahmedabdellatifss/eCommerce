@@ -29,7 +29,7 @@
                 <ul class="dropdown-menu">
                     <li><a href="profile.php"> My Profile</a></li>
                     <li><a href="newad.php">New Item</a></li>
-                    <li><a href="profile.php#my-ads">My Info</a></li> <!--#111 -->
+                    <li><a href="profile.php#my-ads">My Items</a></li> <!--#111 -->
                     <li><a href="logout.php">Logout</a></li>
                 </ul> 
             </div>

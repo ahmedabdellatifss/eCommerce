@@ -40,6 +40,7 @@
                         <span>Favourite Category :</span>
                     </li>
                 </ul>
+                <a href="#" class="btn btn-default">Edit Information</a>
             </div>
         </div>
     </div>
