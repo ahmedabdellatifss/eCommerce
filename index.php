@@ -9,11 +9,11 @@
 <div class="container">
     <div class="row">
         <?php
-            $allItems = getAllFrom('items');
+            $allItems = getAllFrom('items' , 'Item_ID' , 'where Approve = 1');
             foreach ($allItems as $item) { //#83
                 echo '<div class="col-sm-6 col-md-3">';
                     echo'<div class="thumbnail item-box">';
-                        echo '<span class="price-tag">' . $item['Price']. '</span>';
+                        echo '<span class="price-tag">$' . $item['Price']. '</span>';
                         echo '<img class="img-responsive" src="img.png" alt="" />';
                         echo '<div class="caption">';
                             echo '<h3><a href="items.php?itemid='. $item['Item_ID'] .'">' . $item['Name']. '</a></h3>';

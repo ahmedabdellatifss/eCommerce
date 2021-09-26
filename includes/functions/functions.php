@@ -6,11 +6,13 @@
         ** 
         */
 
-    function getAllFrom($tableName , $orderBy = NULL) {  //#82
+    function getAllFrom($tableName , $orderBy , $where = NULL) {  
 
         global $con ;
 
-        $getAll = $con->prepare("SELECT * FROM $tableName ORDER BY $orderBy DESC");
+        $sql = $where == NULL ? '' : $where;  //#114
+
+        $getAll = $con->prepare("SELECT * FROM $tableName $sql ORDER BY $orderBy DESC");
 
         $getAll->execute();
 
