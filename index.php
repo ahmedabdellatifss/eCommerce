@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row">
         <?php
-            $allItems = getAllFrom('items' , 'Item_ID' , 'where Approve = 1');
+            $allItems = getAllFrom('*' , 'items' , 'where Approve = 1' , '' , 'Item_ID' , 'ASC' );
             foreach ($allItems as $item) { //#83
                 echo '<div class="col-sm-6 col-md-3">';
                     echo'<div class="thumbnail item-box">';

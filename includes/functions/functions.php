@@ -1,18 +1,17 @@
 <?php 
 
     /**
-     ** Get All Function v1.0
+     ** Get All Function v2.0
         ** Function To Get All Records From Any Database Table 
         ** 
         */
 
-    function getAllFrom($tableName , $orderBy , $where = NULL) {  
+    function getAllFrom($field , $table , $where = NULL , $and = NULL , $orderfield , $ordering = 'DESC') {  
 
         global $con ;
 
-        $sql = $where == NULL ? '' : $where;  //#114
 
-        $getAll = $con->prepare("SELECT * FROM $tableName $sql ORDER BY $orderBy DESC");
+        $getAll = $con->prepare("SELECT $field FROM $table $where $and ORDER BY $orderfield $ordering");
 
         $getAll->execute();
 

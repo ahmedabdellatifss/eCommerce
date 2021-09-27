@@ -163,7 +163,7 @@
                             <select name="category" required>
                                 <option value="">...</option>
                                 <?php 
-                                    $cats = getAllFrom('categories' , 'ID'); // #113
+                                    $cats = getAllFrom( '*' , 'categories' , '' , '','ID'); // #113
                                     foreach ($cats as $cat) {    
                                         echo "<option value='" . $cat['ID'] . "'>" . $cat['Name'] . "</option>";
                                     

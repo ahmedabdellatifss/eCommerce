@@ -5,8 +5,9 @@
 <div class="container">
     <h1 class="text-center">Show Category</h1>
     <div class="row">
-        <?php 
-            foreach (getItems( 'Cat_ID' , $_GET['pageid']) as $item) { //#83
+        <?php
+            $allItems = getAllFrom("*" , "items" , "where Cat_ID = {$_GET['pageid']}" , "AND Approve = 1" , "Item_ID" );  //115
+            foreach ($allItems as $item) { //#83
                 echo '<div class="col-sm-6 col-md-3">';
                     echo'<div class="thumbnail item-box">';
                         echo '<span class="price-tag">' . $item['Price']. '</span>';
