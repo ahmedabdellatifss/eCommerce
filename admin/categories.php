@@ -120,6 +120,24 @@
                         </div>
                         <!-- End Ordering Field -->
 
+                        <!--Start Category Type  -->
+                        <div class="form-group form-group-lg">
+                            <label for="" class='col-sm-2 control-label'>Parent?</label>
+                            <div class="col-sm-10 col-md-6">
+                                <select name= "parent">
+                                    <option value="0">None</option>
+                                    <?php
+                                        $allCats = getAllFrom("*" , "categories" , "WHERE parent = 0" , "" , "ID" , "ASC");
+                                        foreach($allCats as $cat ) {
+                                            echo "<option value=' ". $cat['ID'] ." '>" . $cat['Name'] . "</option>";
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <!--End Category Type  -->
+
+
                         <!-- Start Visible Field -->
                         <div class="form-group form-group-lg">
                             <label for="" class='col-sm-2 control-label'><?php echo lang('VISIBLE') ?></label>
@@ -191,6 +209,7 @@
 
                     $name      = $_POST['name'];
                     $desc      = $_POST['description'];
+                    $parent    = $_POST['parent'];
                     $order     = $_POST['ordering'];
                     $visible   = $_POST['visibility'];
                     $comment   = $_POST['commenting'];
@@ -212,18 +231,19 @@
 
                         $stmt = $con->prepare("INSERT INTO 
 
-                                        categories( Name , Description , Ordering ,  Visibility , Allow_Comment , Allow_Ads ) 
+                                        categories( Name , Description , parent ,  Ordering ,  Visibility , Allow_Comment , Allow_Ads ) 
 
-                        VALUES(:zname   , :zdesc , :zorder , :zvisible , :zcomment , :zads) "); // this values to send to database
+                        VALUES(:zname   , :zdesc , :parent , :zorder , :zvisible , :zcomment , :zads) "); // this values to send to database
 
                         $stmt->execute(array(
                         // Key  => value
-                        'zname' => $name,
-                        'zdesc' => $desc,
-                        'zorder' => $order,
+                        'zname'   => $name,
+                        'zdesc'   => $desc,
+                        'parent'  => $parent,
+                        'zorder'    => $order,
                         'zvisible' => $visible,
                         'zcomment' => $comment,
-                        'zads' => $ads,
+                        'zads'    => $ads,
                         ));                                
 
                         // Echo Success Message

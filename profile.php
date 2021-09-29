@@ -8,6 +8,7 @@
     $getUser = $con->prepare("SELECT * FROM  users WHERE Username = ?") ; #91
     $getUser->execute(array($sessionUser));
     $info = $getUser->fetch();
+    $userid = $info['UserID'];
 
 
 ?>
@@ -52,9 +53,10 @@
             <div class="panel-heading">My Items</div>
             <div class="panel-body">
                     <?php
-                        if (! empty(getItems( 'Member_ID' , $info['UserID'] ) ) ) {
+                        $myItems = getAllFrom( "*" ,  "items" , "where Member_ID = $userid", "" , "Item_ID");
+                        if (! empty( $myItems) ) {
                             echo '<div class="row">';
-                            foreach (getItems( 'Member_ID' , $info['UserID'] , 1) as $item) { //#83
+                            foreach ( $myItems as $item) { //#83
                                 echo '<div class="col-sm-6 col-md-3">';
                                     echo'<div class="thumbnail item-box">';
                                         if ($item['Approve'] == 0 ) { 
@@ -87,15 +89,12 @@
             <div class="panel-body">
                 
                 <?php 
-                    $stmt = $con->prepare(" SELECT comment FROM comments WHERE user_id = ? ");
-                    // Execute the Statement
-                    $stmt->execute(array($info['UserID']));
-                    // Assign to Variable 
-                    $comments = $stmt->fetchAll();
 
-                    if (! empty($comments) ) {
-
-                        foreach ($comments as $comment ) 
+                    $myComments = getAllFrom( "comment" , "comments", "where user_id = $userid", "" , "c_id");
+                    
+                    if (! empty($myComments) ) {
+                    
+                        foreach ($myComments  as $comment ) 
 
                             echo '<p>' . $comment['comment'] . '</p>';
 
