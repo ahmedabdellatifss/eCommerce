@@ -13,7 +13,7 @@
     $pageTitle = 'Categories';
     
     if(isset($_SESSION['Username'])) {
-      
+    
         include 'init.php';
 
         $do = isset($_GET['do']) ? $_GET['do'] : $do = 'Manage' ;
@@ -32,7 +32,7 @@
 
             }
 
-            $stmt = $con->prepare("SELECT * FROM categories ORDER BY Ordering $sort");
+            $stmt = $con->prepare("SELECT * FROM categories WHERE parent = 0 ORDER BY Ordering $sort");
 
             $stmt->execute();
 
@@ -71,6 +71,22 @@
                                                 if($cat['Allow_Comment'] == 1 ){ echo '<span class="commenting"><i class ="fa fa-close"></i>Comment Disabled</span>'; }
                                                 if($cat['Allow_Ads'] == 1 ){ echo '<span class="advertises"><i class ="fa fa-close"></i>Ads Disabled</span>'; }
                                             echo "</div>";    
+
+                                        // Get Chiled Categories
+
+                                        $childCats = getAllFrom("*" , "categories" ,"where parent = {$cat['ID']}", "" , "ID" , "ASC");
+                                            if (! empty($childCats)) {
+                                                echo "<h4 class='child-head'>Child Categories</h4>";
+                                                echo "<ul class='list-unstyled child-cats'>";
+                                            foreach ($childCats as $c) {
+                                                echo "<li class='child-link'>
+                                                    <a href='categories.php?do=Edit&catid=" . $c['ID'] . "'>" . $c['Name'] . "</a>
+                                                    <a href='categories.php?do=Delete&catid=" . $c['ID'] . "' class='show-delete confirm'> Delete</a>
+                                                </li>";
+                                            }
+                                            echo "</ul>";
+                                            
+                                        }
                                         echo "</div>";
                                         echo "<hr />";
                                     }

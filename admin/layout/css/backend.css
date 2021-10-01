@@ -341,8 +341,23 @@ h1 {
   margin-top: -10px;
   margin-bottom: 30px;
 }
+
+.categories .child-head {
+  margin: 0 0 10px 40px;
+  font-weight: bold;
+  color: #22ab79;
+}
+.categories .child-cats {
+  margin: 0 0 10px 40px;
+
+}
+.categories .child-cats li {
+  margin-left: 20px;
+
+}
+.categories .child-cats li:before {
+  content: "- ";
+
+}
 /* End Categories page  */
 
-/* Starat Items page  */
-
-/* End Items page  */
