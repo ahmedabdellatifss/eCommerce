@@ -73,7 +73,6 @@
                                             echo "</div>";    
 
                                         // Get Chiled Categories
-
                                         $childCats = getAllFrom("*" , "categories" ,"where parent = {$cat['ID']}", "" , "ID" , "ASC");
                                             if (! empty($childCats)) {
                                                 echo "<h4 class='child-head'>Child Categories</h4>";

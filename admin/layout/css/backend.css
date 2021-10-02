@@ -343,21 +343,25 @@ h1 {
 }
 
 .categories .child-head {
-  margin: 0 0 10px 40px;
+  margin: 15px 0 10px ;
+  font-size: 16px;
   font-weight: bold;
   color: #22ab79;
 }
 .categories .child-cats {
-  margin: 0 0 10px 40px;
-
+  margin: 0;
 }
 .categories .child-cats li {
-  margin-left: 20px;
+  margin-left: 15px;
 
 }
 .categories .child-cats li:before {
   content: "- ";
 
+}
+.categories .show-delete {
+  color: #F00;
+  display: none;
 }
 /* End Categories page  */
 

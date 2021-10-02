@@ -95,4 +95,14 @@ $(function () {
 
     });
 
+    //show Delete Button On child Cats # 119
+    $('.child-link').hover(function () {
+
+        $(this).find('.show-delete').fadeIn(400);
+
+    }, function () {
+
+        $(this).find('.show-delete').fadeOut(400);
+
+    });
 }); 
