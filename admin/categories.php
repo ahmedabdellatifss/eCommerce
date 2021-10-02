@@ -79,7 +79,7 @@
                                                 echo "<ul class='list-unstyled child-cats'>";
                                             foreach ($childCats as $c) {
                                                 echo "<li class='child-link'>
-                                                    <a href='categories.php?do=Edit&catid=" . $c['ID'] . "'>" . $c['Name'] . "</a>
+                                                    <a href='categories.php?do=Edit&catId=" . $c['ID'] . "'>" . $c['Name'] . "</a>
                                                     <a href='categories.php?do=Delete&catid=" . $c['ID'] . "' class='show-delete confirm'> Delete</a>
                                                 </li>";
                                             }
@@ -333,6 +333,25 @@
                         </div>
                         <!-- End Ordering Field -->
 
+                        <!--Start Category Type  -->
+                        <div class="form-group form-group-lg">
+                            <label for="" class='col-sm-2 control-label'>Parent?</label>
+                            <div class="col-sm-10 col-md-6">
+                                <select name= "parent">
+                                    <option value="0">None</option>
+                                    <?php
+                                        $allCats = getAllFrom("*" , "categories" , "WHERE parent = 0" , "" , "ID" , "ASC");
+                                        foreach($allCats as $c ) {
+                                            echo "<option value=' ". $c['ID'] ."'";
+                                            if ($cat['parent'] == $c['ID']) { echo 'selected';}
+                                            echo ">" . $c['Name'] . "</option>";
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <!--End Category Type  -->
+
                         <!-- Start Visible Field -->
                         <div class="form-group form-group-lg">
                             <label for="" class='col-sm-2 control-label'><?php echo lang('VISIBLE') ?></label>
@@ -416,6 +435,7 @@
                 $name      = $_POST['name'];
                 $desc      = $_POST['description'];
                 $order     = $_POST['ordering'];
+                $parent     = $_POST['parent'];
                 
                 $visibl    = $_POST['visibility'];
                 $comment   = $_POST['commenting'];
@@ -429,13 +449,14 @@
                                             Name = ?, 
                                             Description = ?,
                                             Ordering = ?, 
+                                            parent = ?, 
                                             Visibility = ?,
                                             Allow_Comment =?,
                                             Allow_Ads = ?
                                         WHERE 
                                             ID = ?");
 
-                $stmt->execute(array($name , $desc , $order , $visibl , $comment ,$ads , $id));
+                $stmt->execute(array($name , $desc , $order , $parent , $visibl , $comment ,$ads , $id));
 
                 // Echo Success Message
                 $theMsg = "<div class='alert alert-success'>" .  $stmt->rowCount() . ' - Record Updated </div>';
@@ -451,7 +472,7 @@
             }
     
             echo '</div>';
-       
+
     
         }elseif ($do == 'Delete') {
             echo "<h1 class ='text-center'>Delete Categories</h1>";
