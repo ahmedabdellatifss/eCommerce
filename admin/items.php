@@ -190,11 +190,9 @@
                             <select name="member">
                                 <option value="0">...</option>
                                 <?php 
+                                    $allMembers = getAllFrom("*" , "users" , "" , "" , "UserID");
 
-                                    $stmt = $con->prepare("SELECT * FROM users");
-                                    $stmt->execute();
-                                    $users = $stmt->fetchAll();
-                                    foreach ($users as $user) {
+                                    foreach ($allMembers as $user) {
                                     
                                         echo "<option value='" . $user['UserID'] . "'>" . $user['Username'] . "</option>";
                                     
@@ -213,21 +211,32 @@
                             <select name="category">
                                 <option value="0">...</option>
                                 <?php 
-
-                                    $stmt2 = $con->prepare("SELECT * FROM categories");
-                                    $stmt2->execute();
-                                    $cats = $stmt2->fetchAll();
-                                    foreach ($cats as $cat) {
-                                    
+                                    $allCats = getAllFrom("*" , "categories" , "where parent = 0" , "" , "ID");
+                                    foreach ($allCats as $cat) {
                                         echo "<option value='" . $cat['ID'] . "'>" . $cat['Name'] . "</option>";
+                                        $childCats = getAllFrom("*" , "categories" , "where parent = {$cat['ID']}" , "" , "ID");
+                                        foreach($childCats as $child ) {
+                                            echo "<option value='" . $child['ID'] . "'>--- " . $child['Name'] . "</option>";
+                                        }
                                     
                                     }
-
                                 ?>
                             </select>
                         </div>
                     </div>
-                    <!-- End Status Field -->
+                    <!-- End Categories Field -->
+
+                    <!-- Start Tags Field -->
+                    <div class="form-group form-group-lg">
+                        <label for="" class='col-sm-2 control-label'>Tags</label>
+                        <div class="col-sm-10 col-md-6">
+                            <input type="text"
+                                class="form-control"
+                                name='tags'
+                                placeholder="Separate Tags with Comma (,)" />
+                        </div>
+                    </div>
+                    <!-- End Tags Field -->
 
                     <!-- Start submit Field -->
                     <div class="form-group form-group-lg">
@@ -262,6 +271,7 @@
             $status   = $_POST['status'];
             $member   = $_POST['member'];
             $cat      = $_POST['category'];
+            $tags      = $_POST['tags'];
 
             // Validate The Form 
 
@@ -301,8 +311,8 @@
                     // Insert Items Info in  the database 
 
                     $stmt = $con->prepare("INSERT INTO 
-                    items( Name , Description , Price ,  Country_Made , Status , Add_Date , Cat_ID , Member_ID ) 
-                    VALUES(:zname   , :zdesc ,    :zprice , :zcountry , :zstatus ,now() , :zcat , :zmember )"); // this values to send to database
+                    items( Name , Description , Price ,  Country_Made , Status , Add_Date , Cat_ID , Member_ID , tags) 
+                    VALUES(:zname   , :zdesc ,    :zprice , :zcountry , :zstatus ,now() , :zcat , :zmember , :ztags)"); // this values to send to database
                                                                                             // now() Not need to bind becuose it is by default in mysql 
                     $stmt->execute(array(
                     // Key  => value
@@ -313,6 +323,7 @@
                     'zstatus'  => $status,
                     'zcat'     => $cat,
                     'zmember'  => $member,
+                    'ztags'    => $tags,
                     ));                                
 
                     // Echo Success Message
@@ -474,7 +485,20 @@
                             </select>
                         </div>
                     </div>
-                    <!-- End Status Field -->
+                    <!-- End Categories Field -->
+
+                    <!-- Start Tags Field -->
+                    <div class="form-group form-group-lg">
+                        <label for="" class='col-sm-2 control-label'>Tags</label>
+                        <div class="col-sm-10 col-md-6">
+                            <input type="text"
+                                class="form-control"
+                                name='tags'
+                                placeholder="Separate Tags with Comma (,)"
+                                value ="<?php echo $item['tags']?>"/>
+                        </div>
+                    </div>
+                    <!-- End Tags Field -->
 
                     <!-- Start submit Field -->
                     <div class="form-group form-group-lg">
@@ -580,6 +604,7 @@
                 $status    = $_POST['status'];
                 $cat       = $_POST['category'];
                 $member    = $_POST['member'];
+                $tags      = $_POST['tags'];
 
 
 
@@ -629,11 +654,12 @@
                                                 Country_Made = ?,
                                                 Status = ?,
                                                 Cat_ID = ?,
-                                                Member_ID = ?
+                                                Member_ID = ?,
+                                                tags = ?
                                             WHERE 
                                                 Item_ID = ?");
 
-                    $stmt->execute(array($name , $desc , $price , $country , $status , $cat , $member ,  $id));
+                    $stmt->execute(array($name , $desc , $price , $country , $status , $cat , $member , $tags ,  $id));
 
                     // Echo Success Message
                     $theMsg = "<div class='alert alert-success'>" .  $stmt->rowCount() . ' - Record Updated </div>';
