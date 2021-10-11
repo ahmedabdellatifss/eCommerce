@@ -14,6 +14,7 @@
         $country  =  filter_var($_POST['country'], FILTER_SANITIZE_STRING );
         $status   =  filter_var($_POST['status'] , FILTER_SANITIZE_NUMBER_INT );
         $category =  filter_var($_POST['category'] , FILTER_SANITIZE_NUMBER_INT );
+        $tags     =  filter_var($_POST['tags'] , FILTER_SANITIZE_STRING );
 
         if (strlen($name) < 4 ) {
             $formErrors[] = 'Item Title Must Be At least 4 Characters';
@@ -41,8 +42,8 @@
             // Insert Items Info in  the database 
 
             $stmt = $con->prepare("INSERT INTO 
-            items( Name , Description , Price ,  Country_Made , Status , Add_Date , Cat_ID , Member_ID ) 
-            VALUES(:zname   , :zdesc ,    :zprice , :zcountry , :zstatus ,now() , :zcat , :zmember )"); // this values to send to database
+            items( Name , Description , Price ,  Country_Made , Status , Add_Date , Cat_ID , Member_ID , tags ) 
+            VALUES(:zname   , :zdesc ,    :zprice , :zcountry , :zstatus ,now() , :zcat , :zmember , :ztags )"); // this values to send to database
                                                                                     // now() Not need to bind becuose it is by default in mysql 
             $stmt->execute(array(
             // Key  => value
@@ -53,6 +54,7 @@
             'zstatus'  => $status,
             'zcat'     => $category,
             'zmember'  => $_SESSION['uid'],
+            'ztags'    => $tags,
             ));                                
 
             // Echo Success Message
@@ -173,7 +175,19 @@
                             </select>
                         </div>
                     </div>
-                    <!-- End Status Field -->
+                    <!-- End Categories Field -->
+
+                    <!-- Start Tags Field -->
+                    <div class="form-group form-group-lg">
+                        <label for="" class='col-sm-3 control-label'>Tags</label>
+                        <div class="col-sm-10 col-md-9">
+                            <input type="text"
+                                class="form-control"
+                                name='tags'
+                                placeholder="Separate Tags with Comma (,)" />
+                        </div>
+                    </div>
+                    <!-- End Tags Field -->
 
                     <!-- Start submit Field -->
                     <div class="form-group form-group-lg">

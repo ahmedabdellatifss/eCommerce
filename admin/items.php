@@ -191,13 +191,11 @@
                                 <option value="0">...</option>
                                 <?php 
                                     $allMembers = getAllFrom("*" , "users" , "" , "" , "UserID");
-
                                     foreach ($allMembers as $user) {
                                     
                                         echo "<option value='" . $user['UserID'] . "'>" . $user['Username'] . "</option>";
                                     
                                     }
-
                                 ?>
                             </select>
                         </div>
@@ -214,6 +212,7 @@
                                     $allCats = getAllFrom("*" , "categories" , "where parent = 0" , "" , "ID");
                                     foreach ($allCats as $cat) {
                                         echo "<option value='" . $cat['ID'] . "'>" . $cat['Name'] . "</option>";
+
                                         $childCats = getAllFrom("*" , "categories" , "where parent = {$cat['ID']}" , "" , "ID");
                                         foreach($childCats as $child ) {
                                             echo "<option value='" . $child['ID'] . "'>--- " . $child['Name'] . "</option>";
