@@ -100,7 +100,7 @@
 
            <h1 class="text-center"><?php echo lang('ADD_MEMBER') ?></h1>
                 <div class="container">
-                    <form action="?do=Insert" class="form-horizontal" method="POST">
+                    <form action="?do=Insert" class="form-horizontal" method="POST" enctype="multipart/form-data"><!--#124 -->
                         <!-- Start UserName Field -->
                         <div class="form-group form-group-lg">
                             <label for="" class='col-sm-2 control-label'><?php echo lang('USERNAME') ?></label>
@@ -137,6 +137,15 @@
                             </div>
                         </div>
                         <!-- End Full Name Field -->
+
+                        <!-- Start Avatar Field -->
+                        <div class="form-group form-group-lg">
+                            <label for="" class='col-sm-2 control-label'>User Avatar</label>
+                            <div class="col-sm-10 col-md-6">
+                                <input type="file" class="form-control" name='avatar' required='required'  />
+                            </div>
+                        </div>
+                        <!-- End Avatar Field -->
 
                         <!-- Start submit Field -->
                         <div class="form-group form-group-lg">
