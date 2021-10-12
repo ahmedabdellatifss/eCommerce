@@ -9,9 +9,9 @@
             if (isset($_GET['name'])) {
                 $tag = $_GET['name'];
                 echo "<h1 class='text-center'>" . $tag . "</h1>";
-                /*
-                $allItems = getAllFrom("*" , "items" , "where Cat_ID = {$category}" , "AND Approve = 1" , "Item_ID" );  //115
-                foreach ($allItems as $item) { //#83
+
+                $tagItems = getAllFrom("*" , "items" , "where tags LIKE '%$tag%' " , "AND Approve = 1" , "Item_ID" );  //115
+                foreach ($tagItems as $item) { //#83
                     echo '<div class="col-sm-6 col-md-3">';
                         echo'<div class="thumbnail item-box">';
                             echo '<span class="price-tag">' . $item['Price']. '</span>';
@@ -24,7 +24,7 @@
                         echo '</div>';
                     echo '</div>';    
                 }
-                */
+    
         } else {
             echo 'You Must Enter Tag Name ';
         }
