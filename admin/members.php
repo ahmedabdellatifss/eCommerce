@@ -98,7 +98,7 @@
 
   <?php }elseif($do == 'Add'){  // Add Members Page ?>
 
-           <h1 class="text-center"><?php echo lang('ADD_MEMBER') ?></h1>
+            <h1 class="text-center"><?php echo lang('ADD_MEMBER') ?></h1>
                 <div class="container">
                     <form action="?do=Insert" class="form-horizontal" method="POST" enctype="multipart/form-data"><!--#124 -->
                         <!-- Start UserName Field -->
@@ -158,9 +158,9 @@
                 </div>
 
 
-       <?php 
-       
-       }elseif ($do == 'Insert'){
+    <?php 
+    
+    }elseif ($do == 'Insert'){
 
         // Insert Member Page 
         // the data will come from Add page to insert page to insert it in the database
@@ -169,6 +169,24 @@
 
                 echo "<h1 class ='text-center'>Insert Member</h1>";
                 echo "<div class='container'>";
+
+                // Upload Variables
+
+                $avatarName = $_FILES['avatar']['name'];      // #125
+                $avatarSize = $_FILES['avatar']['size'];
+                $avatarTmp = $_FILES['avatar']['tmp_name'];
+                $avatarType = $_FILES['avatar']['type'];
+
+                // List Of Allowed File Type to Upload 
+
+                $avatarAllowedExtension = array("jpeg" , "jpg" , "png" , 'gif');
+
+                // Get Avatar  Extension 
+
+                $tmp = explode('.', $avatarName);
+                $avatarExtension = strtolower(end($tmp));  #126
+
+                
 
                 // Get variables from  the Form
 
@@ -202,15 +220,29 @@
                 if (empty($email)) {
                     $formErrors[] = 'Email Cant be<strorng>Empty</strong>' ;
                 }
+                if (! empty($avatarName) && ! in_array($avatarExtension , $avatarAllowedExtension )) {  #126
+                    $formErrors[] = 'This Extension In Not <strorng>Allowed</strong>' ;
+                }
+                if (empty($avatarName) ) {  #126
+                    $formErrors[] = 'Avatar Is  <strorng>Required</strong>' ;
+                }
+                if ($avatarSize > 15194304 ) {  #127
+                    $formErrors[] = 'Avatar Cant Be Larger Than   <strorng>15MB</strong>' ;
+                }
 
                 // Loop INTO Errors Array And Echo it 
                 foreach($formErrors as $error){
                     echo '<div class="alert alert-danger">' . $error . '</div>';
                 }
-
+                
                 // Check if ther's no error proceed the upadate operation 
                 if (empty($formErrors)) {
 
+                    echo 'Good ';
+                    $avatar = rand(0 ,1000000 ) . '_' . $avatarName;
+
+                    move_uploaded_file($avatarTmp , "uploads\avatars\\" .$avatar );
+                    
                     // Check if user Exist in Database
 
                     $check = checkItem("Username" , "users" , $user);
@@ -226,14 +258,16 @@
                         // Insert User Info in  the database 
 
                         $stmt = $con->prepare("INSERT INTO 
-                        users( Username , Password , Email ,  FullName , RegStatus , Date ) 
-                        VALUES(:zuser   , :zpass ,    :zmail , :zname , 1 ,now()) "); // this values to send to database
+                                                users( Username , Password , Email ,  FullName , RegStatus , Date , avatar ) 
+                                                VALUES(:zuser   , :zpass ,    :zmail , :zname , 1 ,now() , :zavatar) 
+                                            "); // this values to send to database
                         $stmt->execute(array(
                         // Key  => value
-                        'zuser' => $user,
-                        'zpass' => $hashPass,
-                        'zmail' => $email,
-                        'zname' => $name,
+                        'zuser'     => $user,
+                        'zpass'     => $hashPass,
+                        'zmail'     => $email,
+                        'zname'     => $name,
+                        ':zavatar'  => $avatar
                         ));                                
 
                         // Echo Success Message
@@ -245,6 +279,7 @@
                     }
 
                 }
+                
 
             }else{
 
