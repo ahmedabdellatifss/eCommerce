@@ -30,23 +30,24 @@
                 $query = 'AND RegStatus = 0';
 
             }
-       // Select All Users Except Admin
-       $stmt = $con->prepare("SELECT * FROM users WHERE GroupID != 1 $query ORDER BY UserID DESC");
-       $stmt->execute();
+         // Select All Users Except Admin
+        $stmt = $con->prepare("SELECT * FROM users WHERE GroupID != 1 $query ORDER BY UserID DESC");
+        $stmt->execute();
 
-       // Assign to Variable 
-       $rows = $stmt->fetchAll();
+        // Assign to Variable 
+        $rows = $stmt->fetchAll();
 
-       if (!empty($rows)){
-       
-       ?>
+        if (!empty($rows)){
+        
+    ?>
 
         <h1 class="text-center"><?php echo lang('Manage_Member') ?></h1>
         <div class="container">
-               <div class="table-responsive">
-               <table class="main-table text-center table table-bordered">
+            <div class="table-responsive">
+            <table class="main-table manage-members text-center table table-bordered">
                     <tr>
                         <td>#ID</td>
+                        <td>Avatar</td>
                         <td>Username</td>
                         <td>Email</td>
                         <td>Full Name</td>
@@ -60,6 +61,13 @@
 
                             echo "<tr>";
                                 echo "<td>" . $row['UserID'] . "</td>";
+                                echo "<td>";
+                                    if(empty($row['avatar'])){
+                                        echo "<img src='uploads/avatars/img.png' alt= '' /> ";
+                                    }else{
+                                        echo "<img src='uploads/avatars/" . $row['avatar'] ."' alt= '' /> ";
+                                    }
+                                echo "</td>";
                                 echo "<td>" . $row['Username'] . "</td>";
                                 echo "<td>" . $row['Email'] . "</td>";   
                                 echo "<td>" . $row['FullName'] . "</td>";
